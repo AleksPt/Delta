@@ -12,6 +12,7 @@ struct AccountGroupCardView: View {
     @Environment(Router.self) private var router
     
     let accountsGroup: GroupOfAccounts
+    let onSelect: () -> Void
     
     @State private var isExpanded = false
     
@@ -62,6 +63,7 @@ struct AccountGroupCardView: View {
                     .onTapGesture {
                         withAnimation(.spring()) {
                             isExpanded.toggle()
+                            onSelect()
                         }
                     }
             }
@@ -78,5 +80,5 @@ struct AccountGroupCardView: View {
 #Preview {
     let group = DataManager.shared.getCategories(with: .groupOfAccounts).first as? GroupOfAccounts
     
-    return AccountGroupCardView(accountsGroup: group!)
+    return AccountGroupCardView(accountsGroup: group!, onSelect: {})
 }

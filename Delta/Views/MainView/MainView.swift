@@ -26,8 +26,7 @@ struct MainView: View {
             InfoMainView()
             Spacer()
             
-            HeaderMainView(text: "Accounts", action: {})
-            CategoriesScrollView(categories: accounts)
+            AccountsAndGroupsScrollView(categories: accounts)
                 .safeAreaPadding(.horizontal)
             Spacer()
             
@@ -35,14 +34,30 @@ struct MainView: View {
                 .safeAreaPadding(.horizontal)
             Spacer()
             
-            ForEach(categoryTypes, id: \.self) { category in
-                if category == activeTab {
-                    HeaderMainView(text: category.rawValue, action: {})
-                    CategoriesScrollView(categories: categoryService.getCategories(with: category))
-                        .frame(height: Constants.heightTwo)
-                        .safeAreaPadding(.horizontal)
-                }
+            switch activeTab {
+            case .expense:
+                ExpenseScrollView(categories: categoryService.getCategories(with: .expense))
+            case .account:
+                EmptyView()
+            case .groupOfAccounts:
+                EmptyView()
+            case .income:
+                IncomeScrollView(categories: categoryService.getCategories(with: .income))
             }
+            
+//            if activeTab == .income {
+//                IncomeScrollView(categories: categoryService.getCategories(with: .income))
+//                    .safeAreaPadding(.horizontal)
+//                
+//                ForEach(categoryTypes, id: \.self) { category in
+//                    if category == activeTab {
+//                        HeaderMainView(text: category.rawValue, action: {})
+//                        CategoriesScrollView(categories: categoryService.getCategories(with: category))
+//                            .frame(height: Constants.heightTwo)
+//                            .safeAreaPadding(.horizontal)
+//                    }
+//                }
+//            }
         }
         .padding(.vertical)
         .background(AppGradient.appBackground.value)
@@ -55,4 +70,6 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environment(CategoryService())
+        .environment(Router())
 }

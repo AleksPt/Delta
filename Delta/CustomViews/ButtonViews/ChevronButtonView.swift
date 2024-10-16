@@ -11,7 +11,7 @@ struct ChevronButtonView: View {
     let action: () -> Void
     
     var body: some View {
-        Button(action: {}) {
+        Button(action: action) {
         Label("See all", systemImage: "chevron.right.circle.fill")
             .font(.bodyText2())
             .labelStyle(IconTrailingLabelStyle())

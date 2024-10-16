@@ -8,107 +8,73 @@
 import SwiftUI
 import UISystem
 
-struct CategoriesScrollView: View { 
-    @Environment(CategoryService.self) private var categoryService
+struct CategoriesScrollView<T: Category>: View {
     @Environment(Router.self) private var router
-    
-    let categories: [Category]
-    
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 16) {
-                ForEach(categories) { category in
-                    switch category.categoryType {
-                    case .account:
-                        if let account = category as? Account {
-                            AccountCardView(
-                                account: account,
-                                size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
-                            )
-                        }
-                    case .groupOfAccounts:
-                        if let group = category as? GroupOfAccounts {
-                            AccountGroupCardView(accountsGroup: group)
-                        }
-                    case .income:
-                        if let income = category as? Income {
+        
+        let categories: [T]
+        let title: String
+        let settingsRoute: Route
+        let categoryRoute: Route
+        
+        var body: some View {
+            VStack(alignment: .leading, spacing: 8) {
+                HeaderMainView(text: title, action: {
+                    router.navigateTo(categoryRoute)
+                })
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(categories) { category in
                             BaseCategoryCardView(
-                                title: income.title,
+                                title: category.title,
                                 subtitle: "",
-                                icon: "",
-                                currentAmount: 0,
-                                plannedAmount: 0,
-                                currency: .rub
+                                icon: getCategoryIcon(for: category),
+                                currentAmount: getCurrentAmount(for: category),
+                                plannedAmount: getPlannedAmount(for: category),
+                                currency: category.currency
                             )
+                            .frame(height: Constants.heightTwo)
                         }
-                    case .expense:
-                        if let expense = category as? Expense {
-                            BaseCategoryCardView(
-                                title: expense.title,
-                                subtitle: "",
-                                icon: expense.image,
-                                currentAmount: expense.amount,
-                                plannedAmount: expense.plannedAmount,
-                                currency: expense.currency
-                            )
-                        }
-                    case .goal:
-                        if let goal = category as? Goal {
-                            BaseCategoryCardView(
-                                title: goal.title,
-                                subtitle: "",
-                                icon: "",
-                                currentAmount: 0,
-                                plannedAmount: 0,
-                                currency: .rub
-                            )
-                        }
-                    case .loan:
-                        if let loan = category as? Loan {
-                            BaseCategoryCardView(
-                                title: loan.title,
-                                subtitle: "",
-                                icon: "",
-                                currentAmount: 0,
-                                plannedAmount: 0,
-                                currency: .rub
-                            )
-                        }
-                    case .credit:
-                        if let credit = category as? Credit {
-                            BaseCategoryCardView(
-                                title: credit.title,
-                                subtitle: "",
-                                icon: "",
-                                currentAmount: 0,
-                                plannedAmount: 0,
-                                currency: .rub
-                            )
-                        }
-                    case .investment:
-                        if let investment = category as? Investment {
-                            BaseCategoryCardView(
-                                title: investment.title,
-                                subtitle: "",
-                                icon: "",
-                                currentAmount: 0,
-                                plannedAmount: 0,
-                                currency: .rub
-                            )
+                        
+                        PlusButtonView {
+                            router.navigateTo(settingsRoute)
                         }
                     }
                 }
-                
-                PlusButtonView {
-                    router.navigateTo(.expenseSettings)
-                }
+                .shadow()
             }
+            .safeAreaPadding(.horizontal)
         }
-        .shadow()
+
+    private func getCategoryIcon(for category: T) -> String {
+        if let income = category as? Income {
+            return income.image
+        } else if let expense = category as? Expense {
+            return expense.image
+        }
+        return ""
+    }
+    
+    private func getCurrentAmount(for category: T) -> Double {
+        if let income = category as? Income {
+            return income.amount
+        } else if let expense = category as? Expense {
+            return expense.amount
+        }
+        return 0
+    }
+    
+    private func getPlannedAmount(for category: T) -> Double {
+        if let income = category as? Income {
+            return income.plannedAmount
+        } else if let expense = category as? Expense {
+            return expense.plannedAmount
+        }
+        return 0
     }
 }
-
+      
 #Preview {
-    let group = DataManager.shared.getAccountsAndGroup()
-    return CategoriesScrollView(categories: group)
+    let income = DataManager.shared.getCategories(with: .income)
+    CategoriesScrollView(categories: income, title: "Income", settingsRoute: .incomeSettings, categoryRoute: .incomes)
+        .environment(Router())
 }
