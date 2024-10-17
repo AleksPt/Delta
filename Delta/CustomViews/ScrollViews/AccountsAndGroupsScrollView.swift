@@ -12,7 +12,7 @@ struct AccountsAndGroupsScrollView: View {
     
     @State private var selectedGroup: GroupOfAccounts?
     @State private var isExpanded = false
-    
+        
     let categories: [Category]
     
     var body: some View {
@@ -27,7 +27,7 @@ struct AccountsAndGroupsScrollView: View {
                             if let account = category as? Account {
                                 AccountCardView(
                                     account: account,
-                                    size: CGSize(width: Constants.widthTwo, height: Constants.heightThree))
+                                    size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)) 
                             } else if let group = category as? GroupOfAccounts {
                                 AccountGroupCardView(accountsGroup: group, onSelect: {
                                     selectedGroup = nil

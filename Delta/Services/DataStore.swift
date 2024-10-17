@@ -73,16 +73,14 @@ final class DataStore {
             id: UUID(),
             photo: "person1",
             name: "Tim",
-            age: 30,
-            accounts: [alfabank, basic, currency]
+            age: 30
         )
         
         let person2 = Person(
             id: UUID(),
             photo: "person2",
             name: "Bob",
-            age: 25,
-            accounts: [cash]
+            age: 25
         )
 
         alfabank.users = [person1]

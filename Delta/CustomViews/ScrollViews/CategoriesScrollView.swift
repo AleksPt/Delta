@@ -33,6 +33,20 @@ struct CategoriesScrollView: View {
                             currency: category.currency
                         )
                         .frame(height: Constants.heightTwo)
+                        .onTapGesture {
+                            router.navigateTo(settingsRoute)
+                        }
+                        
+                        // TODO: - drag and drop
+                        
+                        .draggable(category)
+                        
+                        .dropDestination(for: Category.self) { droppedCategories, location in
+                            router.navigateTo(.incomes)
+                            return true
+                        } isTargeted: { isTargeted in
+                            // change appearance
+                        }
                     }
                     
                     PlusButtonView {

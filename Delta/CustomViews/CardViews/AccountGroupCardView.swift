@@ -15,6 +15,7 @@ struct AccountGroupCardView: View {
     let onSelect: () -> Void
     
     @State private var isExpanded = false
+    @State private var isDragging: Bool = false
     
     var countOfAccounts: Int {
         accountsGroup.accounts.count
@@ -74,6 +75,20 @@ struct AccountGroupCardView: View {
         .background(isExpanded ? backgroundColor : nil)
         .cornerRadius(isExpanded ? 24 : 16)
         .animation(.spring(), value: isExpanded)
+        
+        // TODO: - drag and drop
+        
+        .dropDestination(for: Category.self) { droppedCategories, location in
+            isExpanded.toggle()
+            return true
+        } isTargeted: { isTargeted in
+            isDragging = isTargeted
+        }
+        .onChange(of: isDragging) { _, isDragging in
+            if isDragging {
+                isExpanded = true
+            }
+        }
     }
 }
 
