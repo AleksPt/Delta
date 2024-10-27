@@ -220,6 +220,7 @@ struct ShoppingListView: View {
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
     @State private var heightKeyboard: CGFloat = 0
+    @State private var isPresentedSwapCategories: Bool = false
     
     @FocusState private var textFieldFocus: Field?
     
@@ -301,7 +302,7 @@ struct ShoppingListView: View {
                         Label("Add category", systemImage: "plus")
                     }
                     Button(action: {
-                        
+                        isPresentedSwapCategories = true
                     }) {
                         Label("Swap categories", systemImage: "filemenu.and.selection")
                     }
@@ -355,6 +356,9 @@ struct ShoppingListView: View {
         }
         .onAppear {
             keyboardHeightObserver()
+        }
+        .sheet(isPresented: $isPresentedSwapCategories) {
+            SwapCategoriesView(categories: $shoppingListModel.categories)
         }
     }
     
