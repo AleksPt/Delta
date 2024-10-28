@@ -36,13 +36,13 @@ struct MainView: View {
             
             switch activeTab {
             case .expense:
-                CategoriesScrollView(categories: categoryService.getCategories(with: .expense), title: "Expenses", settingsRoute: .expenseSettings, categoryRoute: .incomes)
+                CategoriesScrollView(categories: categoryService.getCategories(with: .expense), title: "Expenses", settingsRoute: .expenseCreate, categoryRoute: .incomes)
             case .account:
                 EmptyView()
             case .groupOfAccounts:
                 EmptyView()
             case .income:
-                CategoriesScrollView(categories: categoryService.getCategories(with: .income), title: "Incomes", settingsRoute: .incomeSettings, categoryRoute: .incomes)
+                CategoriesScrollView(categories: categoryService.getCategories(with: .income), title: "Incomes", settingsRoute: .incomeCreate, categoryRoute: .incomes)
             }
             
 //            if activeTab == .income {

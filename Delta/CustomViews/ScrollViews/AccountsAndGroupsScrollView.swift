@@ -46,17 +46,8 @@ struct AccountsAndGroupsScrollView: View {
                         }
                         
                         PlusButtonView {
-                            let account = Account(
-                                id: UUID(),
-                                title: "",
-                                currency: .rub,
-                                image: "",
-                                color: "",
-                                users: [],
-                                transactions: [],
-                                categoryType: .account
-                            )
-                            router.navigateTo(.accountSettings(account: account))
+                            
+                            router.navigateTo(.accountCreate)
                         }
                     }
                 }
@@ -68,5 +59,5 @@ struct AccountsAndGroupsScrollView: View {
 
 #Preview {
     let group = DataManager.shared.getAccountsAndGroup()
-    return AccountsAndGroupsScrollView(categories: group).environment(Router())
+    return AccountsAndGroupsScrollView(categories: group).environment(Router.shared)
 }

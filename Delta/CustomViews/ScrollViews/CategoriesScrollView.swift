@@ -34,7 +34,7 @@ struct CategoriesScrollView: View {
                         )
                         .frame(height: Constants.heightTwo)
                         .onTapGesture {
-                            router.navigateTo(.expenseCreate(expense: category as! Expense))
+                            router.navigateTo(.expenseCreate)
                         }
                         
                         // TODO: - drag and drop
@@ -89,6 +89,6 @@ struct CategoriesScrollView: View {
 
 #Preview {
     let income = DataManager.shared.getCategories(with: .income)
-    CategoriesScrollView(categories: income, title: "Income", settingsRoute: .incomeSettings, categoryRoute: .incomes)
-        .environment(Router())
+    CategoriesScrollView(categories: income, title: "Income", settingsRoute: .incomeCreate, categoryRoute: .incomes)
+        .environment(Router.shared)
 }
