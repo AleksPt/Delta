@@ -9,20 +9,32 @@ import SwiftUI
 import UISystem
 
 struct AccountSettingsView: View {
+    @Environment(CategoryService.self) private var categoryService
     @Environment(Router.self) private var router
+    @Environment(\.dismiss) private var dismiss
     
     @State private var name: String
     @State private var currency: Currency
-    @State private var balance: String
+    @State private var balance: String //TODO: - add in model?
     @State private var selectedIcon: Icon
     @State private var selectedColor: AppGradient
-    @State private var selectedUser: Person
-    @State private var selectedGroup: GroupOfAccounts = DataStore.shared.groupsOfAccounts.first!
+    @State private var selectedUser: Person //TODO: - add multiple choising
+    @State private var selectedGroup: GroupOfAccounts
     
-    let account: Account
     let dataStore = DataStore.shared
+    var account: Account?
     
-    init(account: Account) {
+    init(account: Account = Account(
+            id: UUID(),
+            title: "",
+            currency: .usd,
+            image: "dollar",
+            color: "blueGradient",
+            users: DataStore.shared.people,
+            transactions: [],
+            categoryType: .account,
+            groupOfAccounts: "Main"
+        )) {
         self.account = account
         _name = State(initialValue: account.title)
         _currency = State(initialValue: account.currency)
@@ -30,7 +42,7 @@ struct AccountSettingsView: View {
         _selectedIcon = State(initialValue: Icon.getIcon(from: account.image) ?? .dollar)
         _selectedColor = State(initialValue: AppGradient.getColor(from: account.color) ?? .blueGradient)
         _selectedUser = State(initialValue: account.users.first ?? DataStore.shared.people.first!)
-        
+        _selectedGroup = State(initialValue: CategoryService().getGroupOfAccounts(from: account.groupOfAccounts)!)
     }
     
     var body: some View {
@@ -45,27 +57,30 @@ struct AccountSettingsView: View {
             )
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 14, trailing: 0))
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 0))
             
             Section {
                 TextFieldRowView(
                     inputValue: $name,
                     title: "Account name",
                     keyboardType: .default, 
-                    placeholder: account.title
+                    placeholder: "Your account"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
                     title: "Currency"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 TextFieldRowView(
                     inputValue: $balance,
                     title: "Account balance",
                     keyboardType: .decimalPad, 
-                    placeholder: String(account.amount)
+                    placeholder: "0.0"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
                 Text("Account settings")
                     .font(.subheading1())
@@ -118,7 +133,7 @@ struct AccountSettingsView: View {
                     title: "History",
                     buttonTitle: "Show",
                     action: {
-                        // router.navigateTo(.history)
+                        //TODO: - router.navigateTo(.history)
                     },
                     size: CGSize(width: Constants.widthFive, height: Constants.heightFive)
                 )
@@ -126,22 +141,56 @@ struct AccountSettingsView: View {
                 .listRowBackground(Color.clear)
             }
             
-            RoundedButtonView(title: "Delete account", action: {})
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets())
-                .padding(.top, 8)
+            RoundedButtonView(title: "Delete account") {
+                if categoryService.isAccountExist(account!.id) {
+                    categoryService.removeAccount(by: account!.id)
+                }
+                
+                dismiss()
+                
+                categoryService.accounts.forEach { account in
+                    print(account.title)
+                }
+            }
+            .buttonStyle(.borderless)
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets())
+            .padding(.top, 8)
         }
         .buttonStyle(.borderless)
         .listSectionSpacing(.compact)
-        .navigationTitle(account.title)
-        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
-                    //сохраняем изменения
+                    account?.title = name
+                    account?.currency = currency
+                    account?.color = selectedColor.name
+                    account?.image = selectedIcon.name
+                    account?.groupOfAccounts = selectedGroup.title
+                    
+                    if !categoryService.isAccountExist(account!.id) {
+                        categoryService.createAccount(account ?? Account(
+                            id: UUID(),
+                            title: "",
+                            currency: .usd,
+                            image: "dollar",
+                            color: "blueGradient",
+                            users: DataStore.shared.people,
+                            transactions: [],
+                            categoryType: .account,
+                            groupOfAccounts: "Main"
+                        ))
+                    }
+                    
+                    dismiss()
+                    
+                    categoryService.accounts.forEach { account in
+                        print(account.title)
+                    }
                 }
             }
         }
+        .scrollContentBackground(.hidden)
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()
@@ -161,8 +210,10 @@ struct AccountSettingsView: View {
             color: AppGradient.redGradient.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Main"
         )
     )
     .environment(Router())
+    .environment(CategoryService())
 }

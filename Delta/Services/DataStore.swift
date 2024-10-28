@@ -33,7 +33,8 @@ final class DataStore {
             color: AppGradient.appRed.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Main"
         )
         
         let cash = Account(
@@ -44,7 +45,8 @@ final class DataStore {
             color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Main"
         )
         
         let basic = Account(
@@ -55,7 +57,8 @@ final class DataStore {
             color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Sber bank"
         )
         
         let currency = Account(
@@ -66,7 +69,8 @@ final class DataStore {
             color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Sber bank"
         )
         
         let person1 = Person(

@@ -921,6 +921,7 @@ final class Account: Category {
     var color: String = ""
     var users: [Person] = []
     var transactions: [Transaction] = []
+    var groupOfAccounts: String = ""
     
     var incomingTransactions: [Transaction] {
         transactions.filter { $0.destinationID == self.id }
@@ -943,12 +944,14 @@ final class Account: Category {
         color: String,
         users: [Person],
         transactions: [Transaction],
-        categoryType: CategoryType
+        categoryType: CategoryType,
+        groupOfAccounts: String
     ) {
         self.image = image
         self.color = color
         self.users = users
         self.transactions = transactions
+        self.groupOfAccounts = groupOfAccounts
         super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
     

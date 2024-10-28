@@ -114,11 +114,13 @@ struct RandomIncomesView: View {
                     keyboardType: .default, 
                     placeholder: "New income"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
                     title: "Currency"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 TextFieldRowView(
                     inputValue: $amount,
@@ -126,6 +128,7 @@ struct RandomIncomesView: View {
                     keyboardType: .decimalPad, 
                     placeholder: "0.0"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
                 Text("Income main info")
                     .font(.bodyText1())
@@ -141,7 +144,8 @@ struct RandomIncomesView: View {
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
         }
-        .buttonStyle(BorderlessButtonStyle())
+        .buttonStyle(.borderless)
+        .scrollContentBackground(.hidden)
         .listSectionSpacing(.compact)
     }
 }
@@ -161,11 +165,13 @@ struct CertainIncomesView: View {
                     keyboardType: .default,
                     placeholder: "New Income"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
                     title: "Currency"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
                 Text("Income main info")
                     .font(.bodyText1())
@@ -198,7 +204,8 @@ struct CertainIncomesView: View {
             .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
             
         }
-        .buttonStyle(BorderlessButtonStyle())
+        .buttonStyle(.borderless)
+        .scrollContentBackground(.hidden)
         .listSectionSpacing(.compact)
         .onAppear {
             if categoryService.subCategories.isEmpty {
@@ -222,6 +229,7 @@ struct CertainIncomeSettingsView: View {
                 keyboardType: .default,
                 placeholder: "New income"
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             
             TextFieldRowView(
                 inputValue: $amount,
@@ -229,6 +237,7 @@ struct CertainIncomeSettingsView: View {
                 keyboardType: .decimalPad,
                 placeholder: String(certainIncome.amount)
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             .onChange(of: amount) { _, newValue in
                 certainIncome.amount = Double(newValue) ?? 0
             }
@@ -237,21 +246,25 @@ struct CertainIncomeSettingsView: View {
                 date: $certainIncome.date,
                 title: "Choose date"
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             
             NotificationRowView(
                 notificationIsOn: $certainIncome.notification,
                 title: "Notifications"
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             
             NotificationRowView(
                 notificationIsOn: $certainIncome.autoTransaction,
                 title: "Autotransaction"
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             
             if certainIncome.autoTransaction == true {
                 TransactionRowView(action: {
                     //show modal
                 }, title: "Transaction")
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             }
         }
     }

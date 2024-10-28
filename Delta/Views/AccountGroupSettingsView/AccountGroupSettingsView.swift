@@ -9,26 +9,36 @@ import SwiftUI
 import UISystem
 
 struct AccountGroupSettingsView: View {
+    @Environment(CategoryService.self) private var categoryService
     @Environment(Router.self) private var router
+    @Environment(\.dismiss) private var dismiss
     
     @State private var name: String
     @State private var currency: Currency
     @State private var balance: String
     @State private var selectedIcon: Icon
     @State private var selectedColor: AppGradient
-    @State private var accounts: [Category] = []
+    @State private var accounts: [Category] = [] //TODO: - adding/deleting accounts
     
-    let groupOfAccounts: GroupOfAccounts
     let dataManager = DataManager.shared
+    var groupOfAccounts: GroupOfAccounts?
     
-    init(groupOfAccounts: GroupOfAccounts) {
+    init(groupOfAccounts: GroupOfAccounts = GroupOfAccounts(
+        id: UUID(),
+        title: "Alfa bank",
+        currency: .usd,
+        image: "dollarsign.circle",
+        color: AppGradient.blueGradient.name,
+        accounts: DataStore.shared.accounts,
+        categoryType: .groupOfAccounts
+    )) {
         self.groupOfAccounts = groupOfAccounts
         _name = State(initialValue: groupOfAccounts.title)
         _currency = State(initialValue: groupOfAccounts.currency)
         _balance = State(initialValue: String(groupOfAccounts.amount))
         _selectedIcon = State(initialValue: Icon.getIcon(from: groupOfAccounts.image) ?? .dollar)
         _selectedColor = State(initialValue: AppGradient.getColor(from: groupOfAccounts.color) ?? .blueGradient)
-        _accounts = State(initialValue: dataManager.getAccounts())
+        _accounts = State(initialValue: groupOfAccounts.accounts)
     }
     
     var body: some View {
@@ -61,13 +71,15 @@ struct AccountGroupSettingsView: View {
                     inputValue: $name,
                     title: "Account name",
                     keyboardType: .default, 
-                    placeholder: groupOfAccounts.title
+                    placeholder: "Your title"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
                     title: "Currency"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
                 Text("Account settings")
                     .font(.subheading1())
@@ -94,22 +106,54 @@ struct AccountGroupSettingsView: View {
             }
             .padding(.vertical, 8)
             
-            RoundedButtonView(title: "Delete group", action: {})
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets())
-                .padding(.top, 8)
+            RoundedButtonView(title: "Delete group") {
+                if categoryService.isGroupOfAccountsExist(groupOfAccounts!.id) {
+                    categoryService.removeGroupOfAccounts(by: groupOfAccounts!.id)
+                }
+                
+                dismiss()
+                
+                categoryService.groupsOfAccounts.forEach { groupOfAccounts in
+                    print(groupOfAccounts.title)
+                }
+            }
+            .buttonStyle(.borderless)
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets())
+            .padding(.top, 8)
         }
         .buttonStyle(.borderless)
         .listSectionSpacing(.compact)
-        .navigationTitle(groupOfAccounts.title)
-        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
-                    //сохраняем изменения
+                    groupOfAccounts?.title = name
+                    groupOfAccounts?.currency = currency
+                    groupOfAccounts?.image = selectedIcon.name
+                    groupOfAccounts?.color = selectedColor.name
+                    groupOfAccounts?.accounts = categoryService.getAccounts(from: accounts)
+                    
+                    if !categoryService.isGroupOfAccountsExist(groupOfAccounts!.id) {
+                        categoryService.createGroupOfAccounts(groupOfAccounts ?? GroupOfAccounts(
+                            id: UUID(),
+                            title: "Alfa bank",
+                            currency: .usd,
+                            image: "dollarsign.circle",
+                            color: AppGradient.blueGradient.name,
+                            accounts: categoryService.accounts,
+                            categoryType: .groupOfAccounts
+                        ))
+                    }
+                    
+                    dismiss()
+                    
+                    categoryService.groupsOfAccounts.forEach { groupOfAccounts in
+                        print(groupOfAccounts.title)
+                    }
                 }
             }
         }
+        .scrollContentBackground(.hidden)
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()
@@ -130,4 +174,5 @@ struct AccountGroupSettingsView: View {
         )
     )
     .environment(Router())
+    .environment(CategoryService())
 }

@@ -22,17 +22,6 @@ struct DataManager {
         dataStore.categories.filter { $0.categoryType == categoryType }
     }
     
-    func getGroupsOfAccount() -> [Category] {
-        dataStore.categories.filter { $0.categoryType == .groupOfAccounts }
-    }
-    
-    func getAccounts() -> [Category] {
-        dataStore.categories.filter { $0.categoryType == .account }
-    }
-    
-    
-    
-    
     static func filterTransactions(
         _ transactions: [Transaction],
         sourceID: UUID? = nil,
