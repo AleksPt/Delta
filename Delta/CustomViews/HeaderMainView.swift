@@ -19,7 +19,6 @@ struct HeaderMainView: View {
             Spacer()
             ChevronButtonView(action: action)
         }
-        .padding(.horizontal)
     }
 }
 

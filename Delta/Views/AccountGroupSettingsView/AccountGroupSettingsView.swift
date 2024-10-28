@@ -56,7 +56,7 @@ struct AccountGroupSettingsView: View {
             .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 14, trailing: 0))
             
             Section(header: headerView) {
-                CategoriesScrollView(categories: accounts)
+                AccountsScrollView(categories: accounts)
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
             }

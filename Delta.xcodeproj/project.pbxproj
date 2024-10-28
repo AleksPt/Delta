@@ -53,6 +53,8 @@
 		649FF69D2C3C58520081BC63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */; };
 		64BA80F62CA71C86003AE566 /* ShoppingListAmountRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA80F52CA71C86003AE566 /* ShoppingListAmountRowView.swift */; };
 		64D4F49D2C8F66C7002C18BF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4F49C2C8F66C7002C18BF /* DataManager.swift */; };
+		64D644D52CC01C71003A42FD /* AccountsAndGroupsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D644D42CC01C71003A42FD /* AccountsAndGroupsScrollView.swift */; };
+		64D644DB2CC0434E003A42FD /* AccountsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D644DA2CC0434E003A42FD /* AccountsScrollView.swift */; };
 		64DF62FF2CB0149C001D7E12 /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DF62FE2CB0149C001D7E12 /* GroupCardView.swift */; };
 		64E00AF02CA45915000092CB /* AccountCapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E00AEF2CA45915000092CB /* AccountCapsuleView.swift */; };
 		64E00AF22CA599B7000092CB /* AccountGroupCapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E00AF12CA599B7000092CB /* AccountGroupCapsuleView.swift */; };
@@ -124,6 +126,9 @@
 		649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		64BA80F52CA71C86003AE566 /* ShoppingListAmountRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListAmountRowView.swift; sourceTree = "<group>"; };
 		64D4F49C2C8F66C7002C18BF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		64D644D42CC01C71003A42FD /* AccountsAndGroupsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsAndGroupsScrollView.swift; sourceTree = "<group>"; };
+		64D644DA2CC0434E003A42FD /* AccountsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsScrollView.swift; sourceTree = "<group>"; };
+		64D644DC2CC1435B003A42FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGroupCardView.swift; sourceTree = "<group>"; };
 		64DF62FE2CB0149C001D7E12 /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
 		64E00AEF2CA45915000092CB /* AccountCapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCapsuleView.swift; sourceTree = "<group>"; };
@@ -220,13 +225,13 @@
 		64251ED42C4191ED0014D18A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				64D644D32CC01C00003A42FD /* ScrollViews */,
 				64D71CBF2C86883A009B5CC5 /* CardViews */,
 				1A2A337E2C85F93E008F6414 /* RowViews */,
 				64D71CC02C86886B009B5CC5 /* ButtonViews */,
 				648E09272C8DB91200ECA13D /* Constants.swift */,
 				648E09292C8EBBE900ECA13D /* InfoMainView.swift */,
 				648E092B2C8F004F00ECA13D /* HeaderMainView.swift */,
-				648E092D2C8F027000ECA13D /* CategoriesScrollView.swift */,
 				648E092F2C8F04A700ECA13D /* ButtonsScrollView.swift */,
 				1A2A33912C9300A0008F6414 /* IconPickerView.swift */,
 				64445A8C2C8FA63600D35F1A /* CircularProgressView.swift */,
@@ -416,6 +421,7 @@
 		649FF6942C3C58520081BC63 /* Delta */ = {
 			isa = PBXGroup;
 			children = (
+				64D644DC2CC1435B003A42FD /* Info.plist */,
 				1A2A33812C860422008F6414 /* Extensions */,
 				640F9F4A2C7D3EC7007C7E7E /* Modifiers */,
 				64251EE02C4193F50014D18A /* Views */,
@@ -436,6 +442,16 @@
 				649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		64D644D32CC01C00003A42FD /* ScrollViews */ = {
+			isa = PBXGroup;
+			children = (
+				648E092D2C8F027000ECA13D /* CategoriesScrollView.swift */,
+				64D644D42CC01C71003A42FD /* AccountsAndGroupsScrollView.swift */,
+				64D644DA2CC0434E003A42FD /* AccountsScrollView.swift */,
+			);
+			path = ScrollViews;
 			sourceTree = "<group>";
 		};
 		64D71CBF2C86883A009B5CC5 /* CardViews */ = {
@@ -560,12 +576,14 @@
 				64FB5C452C4BF4B100BBADB1 /* ShoppingListView.swift in Sources */,
 				64E00AF02CA45915000092CB /* AccountCapsuleView.swift in Sources */,
 				648E09302C8F04A700ECA13D /* ButtonsScrollView.swift in Sources */,
+				64D644D52CC01C71003A42FD /* AccountsAndGroupsScrollView.swift in Sources */,
 				648E092A2C8EBBE900ECA13D /* InfoMainView.swift in Sources */,
 				640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */,
 				647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */,
 				647A6F402C8123E100927749 /* ChevronButtonView.swift in Sources */,
 				64FB5C4B2C4BF4CC00BBADB1 /* AppDesignSettingsView.swift in Sources */,
 				64FB5C4F2C4BF4ED00BBADB1 /* AccountGroupSettingsView.swift in Sources */,
+				64D644DB2CC0434E003A42FD /* AccountsScrollView.swift in Sources */,
 				1A2A337D2C80F61F008F6414 /* ContentView.swift in Sources */,
 				64FB5C3F2C4BF48600BBADB1 /* OnboardingView.swift in Sources */,
 				640F9F4F2C7D3F53007C7E7E /* AccountCardView.swift in Sources */,
@@ -738,6 +756,7 @@
 				DEVELOPMENT_TEAM = KJ5ADFMG28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Delta/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -768,6 +787,7 @@
 				DEVELOPMENT_TEAM = KJ5ADFMG28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Delta/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

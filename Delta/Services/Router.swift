@@ -104,8 +104,9 @@ final class Router {
             IncomeSettingsView()
         case .expenseCreate:
             ExpenseSettingsView()
+        case .expenseCreate(let expense):
+            ExpenseSettingsView(expense: expense)
         }
-            
     }
     
     @ViewBuilder func modalView(for modalRoute: ModalRoute) -> some View {
