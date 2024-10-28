@@ -34,7 +34,7 @@ struct CategoriesScrollView: View {
                         )
                         .frame(height: Constants.heightTwo)
                         .onTapGesture {
-                            router.navigateTo(settingsRoute)
+                            router.navigateTo(.expenseCreate(expense: category as! Expense))
                         }
                         
                         // TODO: - drag and drop

@@ -20,6 +20,7 @@ enum Route: Hashable {
     case incomes
     case incomeSettings
     case expenseSettings
+    case expenseCreate(expense: Expense)
 }
 
 enum TabRoute: Hashable {
@@ -71,8 +72,9 @@ final class Router {
             IncomeSettingsView()
         case .expenseSettings:
             ExpenseSettingsView()
+        case .expenseCreate(let expense):
+            ExpenseSettingsView(expense: expense)
         }
-            
     }
     
     func navigateTo(_ appRoute: Route) {
