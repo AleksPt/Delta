@@ -57,7 +57,7 @@ struct AccountSettingsView: View {
             )
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 0))
+            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 14, trailing: 0))
             
             Section {
                 TextFieldRowView(
@@ -85,6 +85,7 @@ struct AccountSettingsView: View {
                 Text("Account settings")
                     .font(.subheading1())
                     .padding(.leading, -18)
+                    .padding(.bottom, 8)
                     .foregroundStyle(AppGradient.appBlack.value)
             }
             
@@ -192,6 +193,7 @@ struct AccountSettingsView: View {
         }
         .scrollContentBackground(.hidden)
         .background(.appBackground)
+        .padding(.top, -20)
         .onTapGesture {
             hideKeyboard()
         }
@@ -214,6 +216,6 @@ struct AccountSettingsView: View {
             groupOfAccounts: "Main"
         )
     )
-    .environment(Router())
+    .environment(Router.shared)
     .environment(CategoryService())
 }

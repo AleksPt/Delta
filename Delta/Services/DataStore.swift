@@ -30,7 +30,7 @@ final class DataStore {
             title: "Alfa bank",
             currency: .rub,
             image: Icon.creditcard.name,
-            color: AppGradient.appRed.name,
+            color: AppGradient.redGradient.name,
             users: [],
             transactions: [],
             categoryType: .account,
@@ -42,7 +42,7 @@ final class DataStore {
             title: "Cash",
             currency: .rub,
             image: Icon.dollar.name,
-            color: AppGradient.appBlack.name,
+            color: AppGradient.blueGradient.name,
             users: [],
             transactions: [],
             categoryType: .account,
@@ -66,7 +66,7 @@ final class DataStore {
             title: "Currency",
             currency: .usd,
             image: Icon.dollar.name,
-            color: AppGradient.appBlack.name,
+            color: AppGradient.purpleGradient.name,
             users: [],
             transactions: [],
             categoryType: .account,
@@ -123,6 +123,8 @@ final class DataStore {
         groupsOfAccounts.append(group2)
         accounts.append(alfabank)
         accounts.append(cash)
+        accounts.append(basic)
+        accounts.append(currency)
         
         let taxi = Expense(
             amount: 200,

@@ -54,6 +54,10 @@ final class CategoryService {
         subCategories.append(newSubCategory)
     }
     
+    func isIncomeExist(_ id: UUID) -> Bool {
+        incomes.contains { $0.id == id }
+    }
+    
 //MARK: - EXPENSES
     func createExpense(_ draftExpense: Expense) {
         expenses.append(draftExpense)
@@ -82,6 +86,10 @@ final class CategoryService {
         )
         
         subCategories.append(newSubCategory)
+    }
+    
+    func isExpenseExist(_ id: UUID) -> Bool {
+        expenses.contains { $0.id == id }
     }
     
 //MARK: - SUBCATEGORIES
@@ -128,6 +136,20 @@ final class CategoryService {
     
     func isGroupOfAccountsExist(_ id: UUID) -> Bool {
         groupsOfAccounts.contains { $0.id == id }
+    }
+    
+    func isContainsAccount(group: GroupOfAccounts, account: Account) -> Bool {
+        group.accounts.contains(account)
+    }
+    
+    func manageAccounts(for group: GroupOfAccounts, and account: Account) {
+        if isContainsAccount(group: group, account: account) {
+            group.accounts.removeAll(where: { $0.id == account.id })
+            print("\(group.accounts.count) removed")
+        } else {
+            group.accounts.append(account)
+            print("\(group.accounts.count) added")
+        }
     }
 }
 

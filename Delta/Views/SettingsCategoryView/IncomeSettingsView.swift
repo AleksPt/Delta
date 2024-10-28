@@ -71,17 +71,19 @@ struct IncomeSettingsView: View {
                     income?.repeatingType = selectedType
                     income?.subCategories = categoryService.getSubIncomes()
                     
-                    categoryService.createIncome(income ?? Income(
-                        amount: 0,
-                        image: "",
-                        repeatingType: .random,
-                        subCategories: [],
-                        transactions: [],
-                        id: UUID(),
-                        title: "",
-                        currency: .usd,
-                        categoryType: .income
-                    ))
+                    if !categoryService.isIncomeExist(income!.id) {
+                        categoryService.createIncome(income ?? Income(
+                            amount: 0,
+                            image: "",
+                            repeatingType: .random,
+                            subCategories: [],
+                            transactions: [],
+                            id: UUID(),
+                            title: "",
+                            currency: .usd,
+                            categoryType: .income
+                        ))
+                    }
                     categoryService.subCategories.removeAll()
                     
                     dismiss()
@@ -112,7 +114,7 @@ struct RandomIncomesView: View {
                     inputValue: $title,
                     title: "Income title",
                     keyboardType: .default, 
-                    placeholder: "New income"
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
@@ -163,7 +165,7 @@ struct CertainIncomesView: View {
                     inputValue: $title,
                     title: "Income title",
                     keyboardType: .default,
-                    placeholder: "New Income"
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 

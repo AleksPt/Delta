@@ -25,6 +25,7 @@
 		1A2A33A42CAFEA95008F6414 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33A32CAFEA95008F6414 /* CategoryService.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
 		1AB8A7462CBD2B2B0080D148 /* ExpenseSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A7452CBD2B260080D148 /* ExpenseSettingsView.swift */; };
+		1AB8A74A2CC8E9BA0080D148 /* SeeAllAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A7492CC8E9BA0080D148 /* SeeAllAccounts.swift */; };
 		640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */; };
 		640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */; };
 		640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4D2C7F742700244B24 /* InvestmentCategoryCardView.swift */; };
@@ -97,6 +98,7 @@
 		1A2A33A32CAFEA95008F6414 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
 		1AB8A7452CBD2B260080D148 /* ExpenseSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSettingsView.swift; sourceTree = "<group>"; };
+		1AB8A7492CC8E9BA0080D148 /* SeeAllAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllAccounts.swift; sourceTree = "<group>"; };
 		640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4D2C7F742700244B24 /* InvestmentCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentCategoryCardView.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				64FB5C522C4BF51700BBADB1 /* SeeAllView.swift */,
+				1AB8A7492CC8E9BA0080D148 /* SeeAllAccounts.swift */,
 			);
 			path = SeeAllView;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A2A33872C8893EB008F6414 /* GoalCategoryRowView.swift in Sources */,
+				1AB8A74A2CC8E9BA0080D148 /* SeeAllAccounts.swift in Sources */,
 				1A2A33792C80B5A1008F6414 /* Router.swift in Sources */,
 				6415A0CE2C9CAA28004F1D26 /* ShoppingListAddView.swift in Sources */,
 				1A2A33A42CAFEA95008F6414 /* CategoryService.swift in Sources */,

@@ -31,9 +31,11 @@ struct ColorPickerView: View {
                                 Circle()
                                     .stroke(selectedItem == color ? Color.appBlack : Color.clear, lineWidth: 2)
                             )
-                            .onTapGesture {
-                                selectedItem = color
-                            }
+                            .simultaneousGesture(
+                                TapGesture().onEnded {
+                                    selectedItem = color
+                                }
+                            )
                     }
                     .frame(height: 40)
                 }
@@ -76,9 +78,11 @@ struct IconPickerView: View {
                                 .foregroundStyle(.appBlack)
                         }
                         .frame(height: 40)
-                        .onTapGesture {
-                            selectedItem = icon
-                        }
+                        .simultaneousGesture(
+                            TapGesture().onEnded {
+                                selectedItem = icon
+                            }
+                        )
                     }
                 }
                 .padding(.horizontal, 16)

@@ -70,17 +70,19 @@ struct ExpenseSettingsView: View {
                     expense?.repeatingType = selectedType
                     expense?.subCategories = categoryService.getSubExpenses()
                     
-                    categoryService.createExpense(expense ?? Expense(
-                        amount: 0,
-                        image: "",
-                        repeatingType: .random,
-                        subCategories: [],
-                        transactions: [],
-                        id: UUID(),
-                        title: "",
-                        currency: .usd,
-                        categoryType: .expense
-                    ))
+                    if !categoryService.isExpenseExist(expense!.id) {
+                        categoryService.createExpense(expense ?? Expense(
+                            amount: 0,
+                            image: "",
+                            repeatingType: .random,
+                            subCategories: [],
+                            transactions: [],
+                            id: UUID(),
+                            title: "",
+                            currency: .usd,
+                            categoryType: .expense
+                        ))
+                    }
                     categoryService.subCategories.removeAll()
                     
                     dismiss()
@@ -111,7 +113,7 @@ struct RandomExpensesView: View {
                     inputValue: $title,
                     title: "Expense title",
                     keyboardType: .default,
-                    placeholder: "New expense"
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
@@ -162,7 +164,7 @@ struct CertainExpensesView: View {
                     inputValue: $title,
                     title: "Expense title",
                     keyboardType: .default,
-                    placeholder: "New Expense"
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 

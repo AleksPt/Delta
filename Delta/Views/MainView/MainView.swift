@@ -71,5 +71,5 @@ struct MainView: View {
 #Preview {
     MainView()
         .environment(CategoryService())
-        .environment(Router())
+        .environment(Router.shared)
 }

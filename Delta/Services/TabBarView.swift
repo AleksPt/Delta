@@ -9,7 +9,7 @@ import SwiftUI
 import UISystem
 
 struct TabBarView: View {
-    @State private var router = Router()
+    @State private var router = Router.shared
     @State private var selectedTab = TabRoute.main
     
     init() {
