@@ -166,9 +166,14 @@ struct AccountGroupSettingsView: View {
             Spacer()
             
             ChevronButtonView() {
-                router.presentModal(.seeAllAccounts(accounts: $accounts))
+                //router.presentModal(.seeAllAccounts(accounts: $accounts))
             }
             .textCase(.none)
+            .simultaneousGesture(
+                TapGesture().onEnded {
+                    router.presentModal(.seeAllAccounts(accounts: $accounts))
+                }
+            )
         }
         .padding(.bottom, 6)
         .padding(.horizontal, -16)

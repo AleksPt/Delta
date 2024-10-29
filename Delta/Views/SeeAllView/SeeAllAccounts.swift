@@ -39,7 +39,6 @@ struct SeeAllAccounts: View {
                     .padding(.vertical, 4)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        //categoryService.manageAccounts(for: group, and: account)
                         setCheckmarks(for: account)
                     }
                 }

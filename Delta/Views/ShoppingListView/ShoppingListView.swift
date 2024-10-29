@@ -86,8 +86,6 @@ final class Tag {
         )
     ]
     
-    let accountsAndGroups = DataManager.shared.getAccountsAndGroup()
-    
     var completedItems: [ShoppingListItem] {
         categories.flatMap { $0.items.filter { $0.isCompleted } }
     }
@@ -167,6 +165,8 @@ final class Tag {
 }
 
 struct ShoppingListView: View {
+    @Environment(CategoryService.self) private var categoryService
+    
     @State private var shoppingListModel = ShoppingListModel()
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
@@ -202,8 +202,9 @@ struct ShoppingListView: View {
                             }
                             
                             ShoppingListAccountsScrollView(
-                                categories: shoppingListModel.accountsAndGroups,
-                                selectedAccount: $selectedAccount
+                                selectedAccount: $selectedAccount,
+                                accounts: categoryService.accounts,
+                                groups: categoryService.groupsOfAccounts
                             )
                             .listRowInsets(EdgeInsets())
                          
@@ -246,5 +247,5 @@ struct ShoppingListView: View {
 }
 
 #Preview {
-    ShoppingListView()
+    ShoppingListView().environment(CategoryService())
 }

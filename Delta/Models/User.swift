@@ -1007,7 +1007,7 @@ final class Investment {
 
 //MARK: - Extensions for protocols
 extension UTType {
-    static let category = UTType(exportedAs: "com.delta.category")
+    //static let category = UTType(exportedAs: "com.delta.category")
     static let subCategory = UTType(exportedAs: "com.delta.subCategory")
     static let income = UTType(exportedAs: "com.delta.income")
     static let expense = UTType(exportedAs: "com.delta.expense")

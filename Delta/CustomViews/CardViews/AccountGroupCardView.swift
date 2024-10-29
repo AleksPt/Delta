@@ -78,7 +78,7 @@ struct AccountGroupCardView: View {
         
         // TODO: - drag and drop
         
-        .dropDestination(for: Category.self) { droppedCategories, location in
+        .dropDestination(for: GroupOfAccounts.self) { droppedCategories, location in
             isExpanded.toggle()
             return true
         } isTargeted: { isTargeted in
@@ -93,7 +93,6 @@ struct AccountGroupCardView: View {
 }
 
 #Preview {
-    let group = DataManager.shared.getCategories(with: .groupOfAccounts).first as? GroupOfAccounts
-    
-    return AccountGroupCardView(accountsGroup: group!, onSelect: {})
+    let group = CategoryService().groupsOfAccounts.first!
+    return AccountGroupCardView(accountsGroup: group, onSelect: {})
 }
