@@ -11,7 +11,7 @@ import SwiftUI
 struct DeltaApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            ContentView()
         }
     }
 }
