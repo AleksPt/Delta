@@ -15,14 +15,14 @@ final class CategoryService {
     var accounts: [Account] = DataStore.shared.accounts
     var groupsOfAccounts: [GroupOfAccounts] = DataStore.shared.groupsOfAccounts
     
-    var categories: [Category] {
-        incomes + expenses + accounts + groupsOfAccounts
-    }
+//    var categories: [Category] {
+//        incomes + expenses + accounts + groupsOfAccounts
+//    }
 
 //MARK: - CATEGORIES
-    func getCategories(with categoryType: CategoryType) -> [Category] {
-        categories.filter { $0.categoryType == categoryType }
-    }
+//    func getCategories(with categoryType: CategoryType) -> [Category] {
+//        categories.filter { $0.categoryType == categoryType }
+//    }
     
 //MARK: - INCOMES
     func createIncome(_ draftIncome: Income) {
@@ -113,11 +113,11 @@ final class CategoryService {
         accounts.contains { $0.id == id }
     }
     
-    func getAccounts(from categories: [Category]) -> [Account] {
-        categories
-            .filter { $0.categoryType == .account }
-            .compactMap { $0 as? Account }
-    }
+//    func getAccounts(from categories: [Category]) -> [Account] {
+//        categories
+//            .filter { $0.categoryType == .account }
+//            .compactMap { $0 as? Account }
+//    }
     
 //MARK: - GROUP OF ACCOUNTS
     func createGroupOfAccounts(_ group: GroupOfAccounts) {
@@ -138,19 +138,19 @@ final class CategoryService {
         groupsOfAccounts.contains { $0.id == id }
     }
     
-    func isContainsAccount(group: GroupOfAccounts, account: Account) -> Bool {
-        group.accounts.contains(account)
-    }
-    
-    func manageAccounts(for group: GroupOfAccounts, and account: Account) {
-        if isContainsAccount(group: group, account: account) {
-            group.accounts.removeAll(where: { $0.id == account.id })
-            print("\(group.accounts.count) removed")
-        } else {
-            group.accounts.append(account)
-            print("\(group.accounts.count) added")
-        }
-    }
+//    func isContainsAccount(group: GroupOfAccounts, account: Account) -> Bool {
+//        group.accounts.contains(account)
+//    }
+//    
+//    func manageAccounts(for group: GroupOfAccounts, and account: Account) {
+//        if isContainsAccount(group: group, account: account) {
+//            group.accounts.removeAll(where: { $0.id == account.id })
+//            print("\(group.accounts.count) removed")
+//        } else {
+//            group.accounts.append(account)
+//            print("\(group.accounts.count) added")
+//        }
+//    }
 }
 
 

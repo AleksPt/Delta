@@ -18,7 +18,7 @@ struct AccountGroupSettingsView: View {
     @State private var balance: String
     @State private var selectedIcon: Icon
     @State private var selectedColor: AppGradient
-    @State private var accounts: [Category] = []
+    @State private var accounts: [Account] = []
     
     let dataManager = DataManager.shared
     var groupOfAccounts: GroupOfAccounts?
@@ -56,7 +56,7 @@ struct AccountGroupSettingsView: View {
             .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 14, trailing: 0))
             
             Section(header: headerView) {
-                AccountsScrollView(categories: accounts)
+                AccountsScrollView(accounts: accounts)
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
             }
@@ -127,7 +127,7 @@ struct AccountGroupSettingsView: View {
                     groupOfAccounts?.currency = currency
                     groupOfAccounts?.image = selectedIcon.name
                     groupOfAccounts?.color = selectedColor.name
-                    groupOfAccounts?.accounts = categoryService.getAccounts(from: accounts)
+                    groupOfAccounts?.accounts = accounts
                     
                     if !categoryService.isGroupOfAccountsExist(groupOfAccounts!.id) {
                         categoryService.createGroupOfAccounts(groupOfAccounts ?? GroupOfAccounts(
@@ -166,9 +166,14 @@ struct AccountGroupSettingsView: View {
             Spacer()
             
             ChevronButtonView() {
-                router.presentModal(.seeAllAccounts(accounts: $accounts))
+                //router.presentModal(.seeAllAccounts(accounts: $accounts))
             }
             .textCase(.none)
+            .simultaneousGesture(
+                TapGesture().onEnded {
+                    router.presentModal(.seeAllAccounts(accounts: $accounts))
+                }
+            )
         }
         .padding(.bottom, 6)
         .padding(.horizontal, -16)

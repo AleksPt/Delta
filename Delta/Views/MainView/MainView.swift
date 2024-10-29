@@ -11,22 +11,18 @@ import UISystem
 struct MainView: View {
     @Environment(CategoryService.self) private var categoryService
     
-    private var dataManager = DataManager.shared // @StateObject
     let categoryTypes = CategoryType.getCategoryTypes()
 
-    @State private var accounts: [Category] = []
+    @State private var accounts: [Account] = []
+    @State private var groups: [GroupOfAccounts] = []
     @State private var activeTab = CategoryType.expense
-    
-    init() {
-        _ = DataManager.shared
-    }
     
     var body: some View {
         VStack {
             InfoMainView()
             Spacer()
             
-            AccountsAndGroupsScrollView(categories: accounts)
+            AccountsAndGroupsScrollView(accounts: accounts, groups: groups)
                 .safeAreaPadding(.horizontal)
             Spacer()
             
@@ -36,13 +32,13 @@ struct MainView: View {
             
             switch activeTab {
             case .expense:
-                CategoriesScrollView(categories: categoryService.getCategories(with: .expense), title: "Expenses", settingsRoute: .expenseCreate, categoryRoute: .incomes)
+                ExpenseScrollView(expenses: categoryService.expenses, title: "Expenses", settingsRoute: .expenseCreate, categoryRoute: .incomes)
             case .account:
                 EmptyView()
             case .groupOfAccounts:
                 EmptyView()
             case .income:
-                CategoriesScrollView(categories: categoryService.getCategories(with: .income), title: "Incomes", settingsRoute: .incomeCreate, categoryRoute: .incomes)
+                IncomeScrollView(incomes: categoryService.incomes, title: "Incomes", settingsRoute: .incomeCreate, categoryRoute: .incomes)
             }
             
 //            if activeTab == .income {
@@ -62,8 +58,8 @@ struct MainView: View {
         .padding(.vertical)
         .background(AppGradient.appBackground.value)
         .onAppear {
-            accounts = dataManager.getAccountsAndGroup()
-            
+            accounts = categoryService.accounts
+            groups = categoryService.groupsOfAccounts
         }
     }
 }

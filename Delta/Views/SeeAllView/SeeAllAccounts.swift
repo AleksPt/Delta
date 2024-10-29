@@ -12,7 +12,7 @@ struct SeeAllAccounts: View {
     @Environment(CategoryService.self) private var categoryService
     @Environment(Router.self) private var router
     
-    @Binding var accounts: [Category]
+    @Binding var accounts: [Account]
     
     var body: some View {
         VStack {
@@ -39,7 +39,6 @@ struct SeeAllAccounts: View {
                     .padding(.vertical, 4)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        //categoryService.manageAccounts(for: group, and: account)
                         setCheckmarks(for: account)
                     }
                 }
