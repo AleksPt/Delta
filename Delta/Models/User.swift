@@ -592,7 +592,8 @@ class Transaction: Codable {
 //    var isMyDebt = false
 //    var interestRate: Double = 0.0
 //}
-@Observable
+
+/*@Observable
 class Category: Identifiable, Hashable, Transferable, Codable {
     var id: UUID = UUID()
     var title: String = ""
@@ -645,14 +646,14 @@ class Category: Identifiable, Hashable, Transferable, Codable {
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .category)
     }
-}
-
-extension UTType {
-    static let category = UTType(exportedAs: "com.delta.category")
-}
+}*/
 
 @Observable
-final class SubCategory: Category {
+final class SubCategory: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .income
     var amount: Double = 0
     var date: Date
     var notification: Bool
@@ -670,44 +671,38 @@ final class SubCategory: Category {
         autoTransaction: Bool,
         transaction: Transaction? = nil
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.amount = amount
         self.date = date
         self.notification = notification
         self.autoTransaction = autoTransaction
         self.transaction = transaction
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
     
     // Добавляем required init(from:)
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
         self.amount = try container.decode(Double.self, forKey: .amount)
         self.date = try container.decode(Date.self, forKey: .date)
         self.notification = try container.decode(Bool.self, forKey: .notification)
         self.autoTransaction = try container.decode(Bool.self, forKey: .autoTransaction)
         self.transaction = try container.decodeIfPresent(Transaction.self, forKey: .transaction)
-        try super.init(from: decoder)
-    }
-    
-    // Добавляем encode(to:)
-    override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(amount, forKey: .amount)
-        try container.encode(date, forKey: .date)
-        try container.encode(notification, forKey: .notification)
-        try container.encode(autoTransaction, forKey: .autoTransaction)
-        try container.encode(transaction, forKey: .transaction)
-        try super.encode(to: encoder)
-    }
-    
-    // Определяем CodingKeys для кодирования/декодирования
-    private enum CodingKeys: String, CodingKey {
-        case amount, date, notification, autoTransaction, transaction
     }
 }
 
 @Observable
-final class Income: Category {
+final class Income: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .income
     var amount: Double
     var image: String = ""
     var repeatingType: RepeatingType = .random
@@ -747,12 +742,15 @@ final class Income: Category {
         currency: Currency,
         categoryType: CategoryType
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.amount = amount
         self.image = image
         self.repeatingType = repeatingType
         self.subCategories = subCategories
         self.transactions = transactions
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
     
     // Добавляем обязательный инициализатор для 'Decodable'
@@ -760,34 +758,15 @@ final class Income: Category {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         // Декодирование новых свойств подкласса
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
         self.amount = try container.decode(Double.self, forKey: .amount)
         self.image = try container.decode(String.self, forKey: .image)
         self.repeatingType = try container.decode(RepeatingType.self, forKey: .repeatingType)
         self.subCategories = try container.decode([SubCategory].self, forKey: .subCategories)
         self.transactions = try container.decode([Transaction].self, forKey: .transactions)
-        
-        // Вызов инициализатора суперкласса
-        try super.init(from: decoder)
-    }
-    
-    // Реализуем 'Encodable'
-    override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        // Кодирование свойств подкласса
-        try container.encode(amount, forKey: .amount)
-        try container.encode(image, forKey: .image)
-        try container.encode(repeatingType, forKey: .repeatingType)
-        try container.encode(subCategories, forKey: .subCategories)
-        try container.encode(transactions, forKey: .transactions)
-        
-        // Вызов кодирования для суперкласса
-        try super.encode(to: encoder)
-    }
-    
-    // Определяем ключи для кодирования/декодирования
-    private enum CodingKeys: String, CodingKey {
-        case amount, image, repeatingType, subCategories, transactions
     }
     
     // методы для построения графика "План"
@@ -816,7 +795,11 @@ final class Income: Category {
 }
 
 @Observable
-final class Expense: Category {
+final class Expense: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .expense
     var amount: Double
     var image: String = ""
     var repeatingType: RepeatingType = .random
@@ -852,43 +835,29 @@ final class Expense: Category {
         currency: Currency,
         categoryType: CategoryType
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.amount = amount
         self.image = image
         self.repeatingType = repeatingType
         self.subCategories = subCategories
         self.transactions = transactions
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
     
     // Добавляем required init для декодирования
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
         self.amount = try container.decode(Double.self, forKey: .amount)
         self.image = try container.decode(String.self, forKey: .image)
         self.repeatingType = try container.decode(RepeatingType.self, forKey: .repeatingType)
         self.subCategories = try container.decode([SubCategory].self, forKey: .subCategories)
         self.transactions = try container.decode([Transaction].self, forKey: .transactions)
-        
-        // Вызов инициализатора суперкласса
-        try super.init(from: decoder)
-    }
-    
-    // Добавляем метод для кодирования
-    override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(amount, forKey: .amount)
-        try container.encode(image, forKey: .image)
-        try container.encode(repeatingType, forKey: .repeatingType)
-        try container.encode(subCategories, forKey: .subCategories)
-        try container.encode(transactions, forKey: .transactions)
-        
-        // Вызов метода кодирования суперкласса
-        try super.encode(to: encoder)
-    }
-    
-    // CodingKeys
-    private enum CodingKeys: String, CodingKey {
-        case amount, image, repeatingType, subCategories, transactions
     }
     
     // методы для построения графика "План"
@@ -916,7 +885,11 @@ final class Expense: Category {
     }
 }
 
-final class Account: Category {
+final class Account: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .account
     var image: String = ""
     var color: String = ""
     var users: [Person] = []
@@ -947,45 +920,36 @@ final class Account: Category {
         categoryType: CategoryType,
         groupOfAccounts: String
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.image = image
         self.color = color
         self.users = users
         self.transactions = transactions
         self.groupOfAccounts = groupOfAccounts
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
     
     // Добавляем required init для декодирования
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
         self.image = try container.decode(String.self, forKey: .image)
         self.color = try container.decode(String.self, forKey: .color)
         self.users = try container.decode([Person].self, forKey: .users)
         self.transactions = try container.decode([Transaction].self, forKey: .transactions)
-        
-        // Вызов инициализатора суперкласса
-        try super.init(from: decoder)
-    }
-    
-    // Добавляем метод для кодирования
-    override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(image, forKey: .image)
-        try container.encode(color, forKey: .color)
-        try container.encode(users, forKey: .users)
-        try container.encode(transactions, forKey: .transactions)
-        
-        // Вызов метода кодирования суперкласса
-        try super.encode(to: encoder)
-    }
-    
-    // CodingKeys
-    private enum CodingKeys: String, CodingKey {
-        case image, color, users, transactions
     }
 }
 
-final class GroupOfAccounts: Category {
+final class GroupOfAccounts: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .groupOfAccounts
     var image: String = ""
     var color: String = ""
     var accounts: [Account] = []
@@ -1003,52 +967,214 @@ final class GroupOfAccounts: Category {
         accounts: [Account],
         categoryType: CategoryType
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.image = image
         self.color = color
         self.accounts = accounts
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
     
     // Добавляем required init для декодирования
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
         self.image = try container.decode(String.self, forKey: .image)
         self.color = try container.decode(String.self, forKey: .color)
         self.accounts = try container.decode([Account].self, forKey: .accounts)
-        
-        // Вызов инициализатора суперкласса
-        try super.init(from: decoder)
+    }
+}
+
+final class Goal {
+    
+}
+
+final class Loan {
+    
+}
+
+final class Credit {
+    
+}
+
+final class Investment {
+    
+}
+
+//MARK: - Extensions for protocols
+extension UTType {
+    static let category = UTType(exportedAs: "com.delta.category")
+    static let subCategory = UTType(exportedAs: "com.delta.subCategory")
+    static let income = UTType(exportedAs: "com.delta.income")
+    static let expense = UTType(exportedAs: "com.delta.expense")
+    static let account = UTType(exportedAs: "com.delta.account")
+    static let groupOfAccounts = UTType(exportedAs: "com.delta.groupOfAccounts")
+}
+
+extension SubCategory {
+    // Добавляем encode(to:)
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(date, forKey: .date)
+        try container.encode(notification, forKey: .notification)
+        try container.encode(autoTransaction, forKey: .autoTransaction)
+        try container.encode(transaction, forKey: .transaction)
     }
     
-    // Добавляем метод для кодирования
-    override func encode(to encoder: Encoder) throws {
+    // Определяем CodingKeys для кодирования/декодирования
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, amount, date, notification, autoTransaction, transaction
+    }
+    
+    static func == (lhs: SubCategory, rhs: SubCategory) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<SubCategory, JSONEncoder, JSONDecoder>(contentType: .subCategory)
+    }
+}
+
+extension Income {
+    // Реализуем 'Encodable'
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(image, forKey: .image)
-        try container.encode(color, forKey: .color)
-        try container.encode(accounts, forKey: .accounts)
         
-        // Вызов метода кодирования суперкласса
-        try super.encode(to: encoder)
+        // Кодирование свойств подкласса
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(image, forKey: .image)
+        try container.encode(repeatingType, forKey: .repeatingType)
+        try container.encode(subCategories, forKey: .subCategories)
+        try container.encode(transactions, forKey: .transactions)
+    }
+    
+    // Определяем ключи для кодирования/декодирования
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, amount, image, repeatingType, subCategories, transactions
+    }
+    
+    static func == (lhs: Income, rhs: Income) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<Income, JSONEncoder, JSONDecoder>(contentType: .income)
+    }
+}
+
+extension Expense {
+    // Добавляем метод для кодирования
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(image, forKey: .image)
+        try container.encode(repeatingType, forKey: .repeatingType)
+        try container.encode(subCategories, forKey: .subCategories)
+        try container.encode(transactions, forKey: .transactions)
     }
     
     // CodingKeys
     private enum CodingKeys: String, CodingKey {
-        case image, color, accounts
+        case id, title, currency, categoryType, amount, image, repeatingType, subCategories, transactions
+    }
+    
+    static func == (lhs: Expense, rhs: Expense) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<Expense, JSONEncoder, JSONDecoder>(contentType: .expense)
     }
 }
 
-final class Goal: Category {
+extension Account {
+    // Добавляем метод для кодирования
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(image, forKey: .image)
+        try container.encode(color, forKey: .color)
+        try container.encode(users, forKey: .users)
+        try container.encode(transactions, forKey: .transactions)
+    }
     
+    // CodingKeys
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, image, color, users, transactions
+    }
+    
+    static func == (lhs: Account, rhs: Account) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<Account, JSONEncoder, JSONDecoder>(contentType: .account)
+    }
 }
 
-final class Loan: Category {
+extension GroupOfAccounts {
+    // Добавляем метод для кодирования
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(image, forKey: .image)
+        try container.encode(color, forKey: .color)
+        try container.encode(accounts, forKey: .accounts)
+    }
     
-}
-
-final class Credit: Category {
+    // CodingKeys
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, image, color, accounts
+    }
     
-}
-
-final class Investment: Category {
+    static func == (lhs: GroupOfAccounts, rhs: GroupOfAccounts) -> Bool {
+        return lhs.id == rhs.id
+    }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<GroupOfAccounts, JSONEncoder, JSONDecoder>(contentType: .groupOfAccounts)
+    }
 }
