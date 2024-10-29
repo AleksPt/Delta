@@ -12,7 +12,7 @@ struct SeeAllAccounts: View {
     @Environment(CategoryService.self) private var categoryService
     @Environment(Router.self) private var router
     
-    @Binding var accounts: [Category]
+    @Binding var accounts: [Account]
     
     var body: some View {
         VStack {

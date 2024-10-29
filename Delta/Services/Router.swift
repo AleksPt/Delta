@@ -45,7 +45,7 @@ enum ModalRoute: Equatable {
         }
     }
     
-    case seeAllAccounts(accounts: Binding<[Category]>)
+    case seeAllAccounts(accounts: Binding<[Account]>)
     case seeAll
 }
 
