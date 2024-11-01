@@ -18,6 +18,7 @@ final class DataStore {
     var accounts: [Account] = []
     var incomes: [Income] = []
     var expenses: [Expense] = []
+    var tags: [Tag] = []
     
     private init() {
         initializeTestData()
@@ -175,6 +176,18 @@ final class DataStore {
         incomes.append(award)
         incomes.append(salary)
         expenses.append(taxi)
+        
+        let food = Tag(name: "Food")
+        let farmacy = Tag(name: "Farmacy")
+        let clothes = Tag(name: "Clothes")
+        let pets = Tag(name: "Pets")
+        let hobbies = Tag(name: "Hobbies")
+        
+        tags.append(food)
+        tags.append(farmacy)
+        tags.append(clothes)
+        tags.append(pets)
+        tags.append(hobbies)
         
 //        categories.append(award)
 //        categories.append(salary)

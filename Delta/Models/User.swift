@@ -496,7 +496,7 @@ enum CategoryType: String, CaseIterable, Codable {
     }
 }
 
-enum Period {
+enum Period: CaseIterable {
     case day
     case week
     case month
@@ -515,6 +515,21 @@ enum Period {
                 .quarter
         case .year:
                 .year
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .day:
+            "Day"
+        case .week:
+            "Week"
+        case .month:
+            "Month"
+        case .quarter:
+            "Quarter"
+        case .year:
+            "Year"
         }
     }
 }
@@ -573,7 +588,7 @@ final class Person: Hashable, Identifiable, Codable {
     }
 }
 
-class Transaction: Codable {
+final class Transaction: Codable {
     var id: UUID = UUID()
     var amount: Double = 0.0
     var date: Date = Date()
@@ -582,10 +597,20 @@ class Transaction: Codable {
     var tags: [String] = []
     var currency: Currency = .rub
     var person: Person?
+    var autoTransaction: AutoTransaction?
     
     private enum CodingKeys: String, CodingKey {
         case id, amount, date, sourceID, destinationID, tags, currency, person
     }
+}
+
+final class AutoTransaction {
+    var id: UUID = UUID()
+    var title: String = ""
+    var repeatDate: Date = Date()
+    var endDate: Date = Date()
+    var period: Period = .month
+    var isNotify: Bool = false
 }
 
 //final class DebtTransaction: Transaction {

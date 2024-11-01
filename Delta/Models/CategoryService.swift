@@ -15,6 +15,8 @@ final class CategoryService {
     var accounts: [Account] = DataStore.shared.accounts
     var groupsOfAccounts: [GroupOfAccounts] = DataStore.shared.groupsOfAccounts
     
+    var tags: [Tag] = DataStore.shared.tags
+    
 //    var categories: [Category] {
 //        incomes + expenses + accounts + groupsOfAccounts
 //    }

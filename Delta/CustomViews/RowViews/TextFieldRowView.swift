@@ -88,7 +88,7 @@ struct NotificationRowView: View {
             
         }
         .padding(.vertical, 8)
-        .frame(height: 37)
+        .frame(height: 46)
     }
 }
 
