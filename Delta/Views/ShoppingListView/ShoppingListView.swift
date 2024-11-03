@@ -266,12 +266,12 @@ struct ShoppingListView: View {
                             ShoppingListAmountRowView(category: category)
                         }
                         .focused($textFieldFocus, equals: .amountField)
-                        
-                        ShoppingListAccountsScrollView(
-                            categories: shoppingListModel.accountsAndGroups,
-                            selectedAccount: $selectedAccount
-                        )
-                        .listRowInsets(EdgeInsets())
+                        #warning("что положить вместо accountsAndGroups?")
+//                        ShoppingListAccountsScrollView(
+//                            categories: shoppingListModel.accountsAndGroups,
+//                            selectedAccount: $selectedAccount
+//                        )
+//                        .listRowInsets(EdgeInsets())
                         
                         RoundedButtonView(title: "Buy", action: {
 
