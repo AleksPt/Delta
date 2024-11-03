@@ -126,8 +126,6 @@ final class Tag {
         )
     ]
     
-    let accountsAndGroups = DataManager.shared.getAccountsAndGroup()
-    
     var completedItems: [ShoppingListItem] {
         categories.flatMap { $0.items.filter { $0.isCompleted } }
     }
@@ -216,6 +214,8 @@ enum Field: Hashable {
 }
 
 struct ShoppingListView: View {
+    @Environment(CategoryService.self) private var categoryService
+    
     @State private var shoppingListModel = ShoppingListModel()
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
@@ -274,6 +274,7 @@ struct ShoppingListView: View {
                         .listRowInsets(EdgeInsets())
                         
                         RoundedButtonView(title: "Buy", action: {
+
                             if selectedAccount != nil {
                                 let transactions = shoppingListModel.createTransactions(for: selectedAccount)
                                 shoppingListModel.saveTransactions(transactions)
@@ -385,5 +386,5 @@ struct ShoppingListView: View {
 }
 
 #Preview {
-    ShoppingListView()
+    ShoppingListView().environment(CategoryService())
 }

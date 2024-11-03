@@ -9,14 +9,27 @@ import SwiftUI
 
 @Observable
 final class CategoryService {
-    var incomes: [IncomeExpense] = []
+    var incomes: [Income] = DataStore.shared.incomes
+    var expenses: [Expense] = DataStore.shared.expenses
     var subCategories: [SubCategory] = []
+    var accounts: [Account] = DataStore.shared.accounts
+    var groupsOfAccounts: [GroupOfAccounts] = DataStore.shared.groupsOfAccounts
     
-    func createIncome(_ draftIncome: IncomeExpense) {
+//    var categories: [Category] {
+//        incomes + expenses + accounts + groupsOfAccounts
+//    }
+
+//MARK: - CATEGORIES
+//    func getCategories(with categoryType: CategoryType) -> [Category] {
+//        categories.filter { $0.categoryType == categoryType }
+//    }
+    
+//MARK: - INCOMES
+    func createIncome(_ draftIncome: Income) {
         incomes.append(draftIncome)
     }
     
-    func getIncomes() -> [SubCategory] {
+    func getSubIncomes() -> [SubCategory] {
         subCategories.filter { $0.categoryType == .income }
     }
     
@@ -41,10 +54,103 @@ final class CategoryService {
         subCategories.append(newSubCategory)
     }
     
+    func isIncomeExist(_ id: UUID) -> Bool {
+        incomes.contains { $0.id == id }
+    }
+    
+//MARK: - EXPENSES
+    func createExpense(_ draftExpense: Expense) {
+        expenses.append(draftExpense)
+    }
+    
+    func getSubExpenses() -> [SubCategory] {
+        subCategories.filter { $0.categoryType == .expense }
+    }
+    
+    func removeExpense(at index: Int) {
+        guard index >= 0 && index < expenses.count else { return }
+        expenses.remove(at: index)
+    }
+    
+    func createSubExpense() {
+        let newSubCategory = SubCategory(
+            id: UUID(),
+            title: "",
+            currency: .usd,
+            categoryType: .expense,
+            amount: 5000,
+            date: Date(),
+            notification: false,
+            autoTransaction: true,
+            transaction: nil
+        )
+        
+        subCategories.append(newSubCategory)
+    }
+    
+    func isExpenseExist(_ id: UUID) -> Bool {
+        expenses.contains { $0.id == id }
+    }
+    
+//MARK: - SUBCATEGORIES
     func removeSubCategory(at index: Int) {
         guard index >= 0 && index < subCategories.count else { return }
         subCategories.remove(at: index)
     }
+    
+//MARK: - ACCOUNTS
+    func createAccount(_ account: Account) {
+        accounts.append(account)
+    }
+    
+    func removeAccount(by id: UUID) {
+        if let index = accounts.firstIndex(where: { $0.id == id }) {
+            accounts.remove(at: index)
+        }
+    }
+    
+    func isAccountExist(_ id: UUID) -> Bool {
+        accounts.contains { $0.id == id }
+    }
+    
+//    func getAccounts(from categories: [Category]) -> [Account] {
+//        categories
+//            .filter { $0.categoryType == .account }
+//            .compactMap { $0 as? Account }
+//    }
+    
+//MARK: - GROUP OF ACCOUNTS
+    func createGroupOfAccounts(_ group: GroupOfAccounts) {
+        groupsOfAccounts.append(group)
+    }
+    
+    func removeGroupOfAccounts(by id: UUID) {
+        if let index = groupsOfAccounts.firstIndex(where: { $0.id == id }) {
+            groupsOfAccounts.remove(at: index)
+        }
+    }
+    
+    func getGroupOfAccounts(from title: String) -> GroupOfAccounts? {
+        groupsOfAccounts.first { $0.title == title }
+    }
+    
+    func isGroupOfAccountsExist(_ id: UUID) -> Bool {
+        groupsOfAccounts.contains { $0.id == id }
+    }
+    
+//    func isContainsAccount(group: GroupOfAccounts, account: Account) -> Bool {
+//        group.accounts.contains(account)
+//    }
+//    
+//    func manageAccounts(for group: GroupOfAccounts, and account: Account) {
+//        if isContainsAccount(group: group, account: account) {
+//            group.accounts.removeAll(where: { $0.id == account.id })
+//            print("\(group.accounts.count) removed")
+//        } else {
+//            group.accounts.append(account)
+//            print("\(group.accounts.count) added")
+//        }
+//    }
 }
 
 

@@ -12,11 +12,12 @@ final class DataStore {
     static let shared = DataStore()
     
     var people: [Person] = []
-    var categories: [Category] = []
+    //var categories: [Category] = []
     var transactions: [Transaction] = []
     var groupsOfAccounts: [GroupOfAccounts] = []
     var accounts: [Account] = []
-    var incomes: [IncomeExpense] = []
+    var incomes: [Income] = []
+    var expenses: [Expense] = []
     
     private init() {
         initializeTestData()
@@ -29,10 +30,11 @@ final class DataStore {
             title: "Alfa bank",
             currency: .rub,
             image: Icon.creditcard.name,
-            color: AppGradient.appRed.name,
+            color: AppGradient.redGradient.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Main"
         )
         
         let cash = Account(
@@ -40,10 +42,11 @@ final class DataStore {
             title: "Cash",
             currency: .rub,
             image: Icon.dollar.name,
-            color: AppGradient.appBlack.name,
+            color: AppGradient.blueGradient.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Main"
         )
         
         let basic = Account(
@@ -54,7 +57,8 @@ final class DataStore {
             color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Sber bank"
         )
         
         let currency = Account(
@@ -62,26 +66,25 @@ final class DataStore {
             title: "Currency",
             currency: .usd,
             image: Icon.dollar.name,
-            color: AppGradient.appBlack.name,
+            color: AppGradient.purpleGradient.name,
             users: [],
             transactions: [],
-            categoryType: .account
+            categoryType: .account,
+            groupOfAccounts: "Sber bank"
         )
         
         let person1 = Person(
             id: UUID(),
             photo: "person1",
             name: "Tim",
-            age: 30,
-            accounts: [alfabank, basic, currency]
+            age: 30
         )
         
         let person2 = Person(
             id: UUID(),
             photo: "person2",
             name: "Bob",
-            age: 25,
-            accounts: [cash]
+            age: 25
         )
 
         alfabank.users = [person1]
@@ -111,67 +114,71 @@ final class DataStore {
         
         people.append(person1)
         people.append(person2)
-        categories.append(alfabank)
-        categories.append(group1)
-        categories.append(cash)
-        categories.append(basic)
-        categories.append(currency)
+//        categories.append(alfabank)
+//        categories.append(group1)
+//        categories.append(cash)
+//        categories.append(basic)
+//        categories.append(currency)
         groupsOfAccounts.append(group1)
         groupsOfAccounts.append(group2)
         accounts.append(alfabank)
         accounts.append(cash)
+        accounts.append(basic)
+        accounts.append(currency)
         
-//        let taxi = IncomeExpense(
-//            image: "creditcard",
-//            repeatingType: .certain,
-//            subCategories: [],
-//            transactions: [],
-//            id: UUID(),
-//            title: "Taxi",
-//            currency: .rub,
-//            categoryType: .expense
-//        )
-//        
-//        let award = IncomeExpense(
-//            image: "trophy",
-//            repeatingType: .random,
-//            subCategories: [],
-//            transactions: [],
-//            id: UUID(),
-//            title: "Award",
-//            currency: .usd,
-//            categoryType: .income
-//        )
-//        
-//        let salary = IncomeExpense(
-//            amount: 5000,
-//            image: "handbag",
-//            repeatingType: .certain,
-//            subCategories: [SubCategory(
-//                id: UUID(),
-//                title: "Avance",
-//                currency: .rub,
-//                categoryType: .income,
-//                amount: 2000,
-//                date: Date(),
-//                notification: false,
-//                autoTransaction:  true,
-//                transaction: nil
-//            )],
-//            transactions: [],
-//            id: UUID(),
-//            title: "Salary",
-//            currency: .rub,
-//            categoryType: .income, 
-//            categoryService: <#CategoryService#>
-//        )
-//        
-//        incomes.append(award)
-//        incomes.append(salary)
-//        
-//        categories.append(taxi)
+        let taxi = Expense(
+            amount: 200,
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Taxi",
+            currency: .rub,
+            categoryType: .expense
+        )
+        
+        let award = Income(
+            amount: 20000,
+            image: "trophy",
+            repeatingType: .random,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Award",
+            currency: .usd,
+            categoryType: .income
+        )
+        
+        let salary = Income(
+            amount: 0,
+            image: "handbag",
+            repeatingType: .certain,
+            subCategories: [SubCategory(
+                id: UUID(),
+                title: "Avance",
+                currency: .rub,
+                categoryType: .income,
+                amount: 2000,
+                date: Date(),
+                notification: false,
+                autoTransaction:  false,
+                transaction: nil
+            )],
+            transactions: [],
+            id: UUID(),
+            title: "Salary",
+            currency: .rub,
+            categoryType: .income
+        )
+        
+        incomes.append(award)
+        incomes.append(salary)
+        expenses.append(taxi)
+        
 //        categories.append(award)
 //        categories.append(salary)
+//        categories.append(taxi)
         
     }
 }

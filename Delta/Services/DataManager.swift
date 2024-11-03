@@ -14,24 +14,13 @@ struct DataManager {
     
     private init() {}
     
-    func getAccountsAndGroup() -> [Category] {
-        dataStore.categories.filter { $0.categoryType == .account || $0.categoryType == .groupOfAccounts }
-    }
-    
-    func getCategories(with categoryType: CategoryType) -> [Category] {
-        dataStore.categories.filter { $0.categoryType == categoryType }
-    }
-    
-    func getGroupsOfAccount() -> [Category] {
-        dataStore.categories.filter { $0.categoryType == .groupOfAccounts }
-    }
-    
-    func getAccounts() -> [Category] {
-        dataStore.categories.filter { $0.categoryType == .account }
-    }
-    
-    
-    
+//    func getAccountsAndGroup() -> [Category] {
+//        dataStore.categories.filter { $0.categoryType == .account || $0.categoryType == .groupOfAccounts }
+//    }
+//    
+//    func getCategories(with categoryType: CategoryType) -> [Category] {
+//        dataStore.categories.filter { $0.categoryType == categoryType }
+//    }
     
     static func filterTransactions(
         _ transactions: [Transaction],

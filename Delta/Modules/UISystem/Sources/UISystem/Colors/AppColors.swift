@@ -31,7 +31,7 @@ public struct AppColors {
     
 }
 
-public enum AppGradient: CaseIterable {
+public enum AppGradient: CaseIterable, Hashable {
     case blueGradient
     case purpleGradient
     case pinkGradient

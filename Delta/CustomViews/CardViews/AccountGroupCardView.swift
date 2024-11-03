@@ -12,8 +12,10 @@ struct AccountGroupCardView: View {
     @Environment(Router.self) private var router
     
     let accountsGroup: GroupOfAccounts
+    let onSelect: () -> Void
     
     @State private var isExpanded = false
+    @State private var isDragging: Bool = false
     
     var countOfAccounts: Int {
         accountsGroup.accounts.count
@@ -62,6 +64,7 @@ struct AccountGroupCardView: View {
                     .onTapGesture {
                         withAnimation(.spring()) {
                             isExpanded.toggle()
+                            onSelect()
                         }
                     }
             }
@@ -72,11 +75,24 @@ struct AccountGroupCardView: View {
         .background(isExpanded ? backgroundColor : nil)
         .cornerRadius(isExpanded ? 24 : 16)
         .animation(.spring(), value: isExpanded)
+        
+        // TODO: - drag and drop
+        
+        .dropDestination(for: GroupOfAccounts.self) { droppedCategories, location in
+            isExpanded.toggle()
+            return true
+        } isTargeted: { isTargeted in
+            isDragging = isTargeted
+        }
+        .onChange(of: isDragging) { _, isDragging in
+            if isDragging {
+                isExpanded = true
+            }
+        }
     }
 }
 
 #Preview {
-    let group = DataManager.shared.getCategories(with: .groupOfAccounts).first as? GroupOfAccounts
-    
-    return AccountGroupCardView(accountsGroup: group!)
+    let group = CategoryService().groupsOfAccounts.first!
+    return AccountGroupCardView(accountsGroup: group, onSelect: {})
 }

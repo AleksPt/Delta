@@ -9,6 +9,8 @@ import SwiftUI
 import UISystem
 
 struct AccountLargeCardView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    
     let title: String
     let currency: Currency
     let amount: String
@@ -24,7 +26,7 @@ struct AccountLargeCardView: View {
                         .font(.heading2())
                         .padding(.bottom, 2)
                     
-                    Text(Double(amount)?.formattedAmount(for: currency) ?? "-10")
+                    Text(Double(amount)?.formattedAmount(for: currency) ?? "1000")
                         .font(.subheading2())
                 }
                 .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
@@ -38,10 +40,10 @@ struct AccountLargeCardView: View {
                 .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
         }
         .padding()
-        .componentBackground(
-            color: color,
-            size: CGSize(width: size.width, height: size.height)
-        )
+        .frame(width: size.width, height: size.height)
+        .background(AppGradient.getColor(from: color)?.value)
+        .cornerRadius(24)
+        .shadow(color: colorScheme == .light ? Color.gray.opacity(0.4) : Color.black.opacity(0.4), radius: 6, x: 2, y: 4)
     }
 }
 

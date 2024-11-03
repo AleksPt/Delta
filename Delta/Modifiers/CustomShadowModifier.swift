@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct CustomShadowModifier: ViewModifier {
+    @Environment(\.colorScheme) private var colorScheme
+    
     func body(content: Content) -> some View {
-        content
-            .shadow(color: Color.gray.opacity(0.2), radius: 16)
+        switch colorScheme {
+        case .light:
+            content.shadow(color: Color.gray.opacity(0.2), radius: 16)
+        case .dark:
+            content.shadow(color: Color.black.opacity(0.4), radius: 12)
+        @unknown default:
+            content.shadow(color: Color.black.opacity(0.2), radius: 12)
+        }
     }
 }
 

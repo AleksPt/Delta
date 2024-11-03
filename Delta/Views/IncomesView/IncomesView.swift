@@ -11,10 +11,6 @@ import UISystem
 struct IncomesView: View {
     @Environment(CategoryService.self) private var categoryService
     
-//    init() {
-//        self.incomes = IncomesMockData().incomes
-//    }
-    
     var body: some View {
         VStack {
             List(categoryService.incomes, id: \.self) { income in
@@ -38,6 +34,7 @@ struct IncomesView: View {
     }
 }
 
-//#Preview {
-//    IncomesView()
-//}
+#Preview {
+    IncomesView()
+        .environment(CategoryService())
+}

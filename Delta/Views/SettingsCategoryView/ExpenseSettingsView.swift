@@ -1,14 +1,14 @@
 //
-//  IncomeSettingsView.swift
+//  Untitled.swift
 //  Delta
 //
-//  Created by Tatiana Lazarenko on 10/3/24.
+//  Created by Tatiana Lazarenko on 10/14/24.
 //
 
 import SwiftUI
 import UISystem
 
-struct IncomeSettingsView: View {
+struct ExpenseSettingsView: View {
     @Environment(CategoryService.self) private var categoryService
     @Environment(\.dismiss) private var dismiss
     
@@ -18,9 +18,9 @@ struct IncomeSettingsView: View {
     @State private var amount: String = ""
     @State private var icon: Icon = .dollar
     
-    var income: Income?
+    var expense: Expense?
     
-    init(income: Income = Income(
+    init(expense: Expense = Expense(
         amount: 0,
         image: "",
         repeatingType: .random,
@@ -29,9 +29,9 @@ struct IncomeSettingsView: View {
         id: UUID(),
         title: "",
         currency: .usd,
-        categoryType: .income
+        categoryType: .expense
     )) {
-        self.income = income
+        self.expense = expense
     }
 
     var body: some View {
@@ -42,7 +42,7 @@ struct IncomeSettingsView: View {
             
             switch selectedType {
             case .random:
-                RandomIncomesView(
+                RandomExpensesView(
                     title: $title,
                     currency: $currency,
                     amount: $amount,
@@ -50,7 +50,7 @@ struct IncomeSettingsView: View {
                 )
                 .padding(.top, -10)
             case .certain:
-                CertainIncomesView(
+                CertainExpensesView(
                     title: $title,
                     currency: $currency,
                     icon: $icon
@@ -58,21 +58,20 @@ struct IncomeSettingsView: View {
                 .padding(.top, -10)
             }
         }
-        .navigationTitle("Income source")
+        .navigationTitle("Expense source")
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
-                    //сохраняем изменения
-                    income?.title = title
-                    income?.currency = currency
-                    income?.amount = Double(amount) ?? 0
-                    income?.image = icon.name
-                    income?.repeatingType = selectedType
-                    income?.subCategories = categoryService.getSubIncomes()
+                    expense?.title = title
+                    expense?.currency = currency
+                    expense?.amount = Double(amount) ?? 0
+                    expense?.image = icon.name
+                    expense?.repeatingType = selectedType
+                    expense?.subCategories = categoryService.getSubExpenses()
                     
-                    if !categoryService.isIncomeExist(income!.id) {
-                        categoryService.createIncome(income ?? Income(
+                    if !categoryService.isExpenseExist(expense!.id) {
+                        categoryService.createExpense(expense ?? Expense(
                             amount: 0,
                             image: "",
                             repeatingType: .random,
@@ -81,15 +80,15 @@ struct IncomeSettingsView: View {
                             id: UUID(),
                             title: "",
                             currency: .usd,
-                            categoryType: .income
+                            categoryType: .expense
                         ))
                     }
                     categoryService.subCategories.removeAll()
                     
                     dismiss()
                     
-                    categoryService.incomes.forEach { income in
-                        print(income.title)
+                    categoryService.expenses.forEach { expense in
+                        print(expense.title)
                     }
                 }
             }
@@ -101,7 +100,7 @@ struct IncomeSettingsView: View {
     }
 }
 
-struct RandomIncomesView: View {
+struct RandomExpensesView: View {
     @Binding var title: String
     @Binding var currency: Currency
     @Binding var amount: String
@@ -112,8 +111,8 @@ struct RandomIncomesView: View {
             Section {
                 TextFieldRowView(
                     inputValue: $title,
-                    title: "Income title",
-                    keyboardType: .default, 
+                    title: "Expense title",
+                    keyboardType: .default,
                     placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
@@ -127,12 +126,12 @@ struct RandomIncomesView: View {
                 TextFieldRowView(
                     inputValue: $amount,
                     title: "Amount",
-                    keyboardType: .decimalPad, 
+                    keyboardType: .decimalPad,
                     placeholder: "0.0"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
-                Text("Income main info")
+                Text("Expense main info")
                     .font(.bodyText1())
                     .padding(.bottom, 6)
             }
@@ -152,7 +151,7 @@ struct RandomIncomesView: View {
     }
 }
 
-struct CertainIncomesView: View {
+struct CertainExpensesView: View {
     @Environment(CategoryService.self) private var categoryService
     @Binding var title: String
     @Binding var currency: Currency
@@ -163,7 +162,7 @@ struct CertainIncomesView: View {
             Section {
                 TextFieldRowView(
                     inputValue: $title,
-                    title: "Income title",
+                    title: "Expense title",
                     keyboardType: .default,
                     placeholder: "Your title"
                 )
@@ -175,7 +174,7 @@ struct CertainIncomesView: View {
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
-                Text("Income main info")
+                Text("Expense main info")
                     .font(.bodyText1())
                     .padding(.bottom, 6)
             }
@@ -190,8 +189,8 @@ struct CertainIncomesView: View {
             .padding(.vertical, 8)
             
             ForEach(categoryService.subCategories.indices, id: \.self) { index in
-                CertainIncomeSettingsView(
-                    certainIncome: categoryService.subCategories[index],
+                CertainExpenseSettingsView(
+                    certainExpense: categoryService.subCategories[index],
                     action: {
                         categoryService.removeSubCategory(at: index)
                     }
@@ -199,7 +198,7 @@ struct CertainIncomesView: View {
             }
             
             PlusButtonView {
-                categoryService.createSubIncome()
+                categoryService.createSubExpense()
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
@@ -211,14 +210,14 @@ struct CertainIncomesView: View {
         .listSectionSpacing(.compact)
         .onAppear {
             if categoryService.subCategories.isEmpty {
-                categoryService.createSubIncome()
+                categoryService.createSubExpense()
             }
         }
     }
 }
 
-struct CertainIncomeSettingsView: View {
-    @Bindable var certainIncome: SubCategory
+struct CertainExpenseSettingsView: View {
+    @Bindable var certainExpense: SubCategory
     @State private var amount: String = ""
     
     let action: () -> Void
@@ -226,10 +225,10 @@ struct CertainIncomeSettingsView: View {
     var body: some View {
         Section(header: headerView) {
             TextFieldRowView(
-                inputValue: $certainIncome.title,
-                title: "Income title",
+                inputValue: $certainExpense.title,
+                title: "Expense title",
                 keyboardType: .default,
-                placeholder: "New income"
+                placeholder: "New expense"
             )
             .listRowBackground(AppGradient.appBackgroundMini.value)
             
@@ -237,32 +236,32 @@ struct CertainIncomeSettingsView: View {
                 inputValue: $amount,
                 title: "Amount",
                 keyboardType: .decimalPad,
-                placeholder: String(certainIncome.amount)
+                placeholder: String(certainExpense.amount)
             )
             .listRowBackground(AppGradient.appBackgroundMini.value)
             .onChange(of: amount) { _, newValue in
-                certainIncome.amount = Double(newValue) ?? 0
+                certainExpense.amount = Double(newValue) ?? 0
             }
             
             DateRowView(
-                date: $certainIncome.date,
+                date: $certainExpense.date,
                 title: "Choose date"
             )
             .listRowBackground(AppGradient.appBackgroundMini.value)
             
             NotificationRowView(
-                notificationIsOn: $certainIncome.notification,
+                notificationIsOn: $certainExpense.notification,
                 title: "Notifications"
             )
             .listRowBackground(AppGradient.appBackgroundMini.value)
             
             NotificationRowView(
-                notificationIsOn: $certainIncome.autoTransaction,
+                notificationIsOn: $certainExpense.autoTransaction,
                 title: "Autotransaction"
             )
             .listRowBackground(AppGradient.appBackgroundMini.value)
             
-            if certainIncome.autoTransaction == true {
+            if certainExpense.autoTransaction == true {
                 TransactionRowView(action: {
                     //show modal
                 }, title: "Transaction")
@@ -273,7 +272,7 @@ struct CertainIncomeSettingsView: View {
     
     private var headerView: some View {
         HStack {
-            Text("Certain income")
+            Text("Certain expense")
                 .font(.bodyText1())
             
             Spacer()
@@ -283,6 +282,7 @@ struct CertainIncomeSettingsView: View {
                     .foregroundStyle(.appBlack)
             }
         }
+        .padding(.bottom, 6)
     }
 }
     
@@ -290,6 +290,6 @@ struct CertainIncomeSettingsView: View {
 
 
 #Preview {
-    IncomeSettingsView()
+    ExpenseSettingsView()
         .environment(CategoryService())
 }

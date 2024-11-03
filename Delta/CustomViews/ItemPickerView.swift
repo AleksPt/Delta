@@ -42,10 +42,9 @@ struct ItemPickerView<T: Hashable>: View {
             
             Spacer()
         }
-        .componentBackground(
-            color: AppGradient.appBackgroundMini.name,
-            size: CGSize(width: size.width, height: size.height)
-        )
+        .frame(height: 56)
+        .background(AppGradient.appBackgroundMini.value)
+        .cornerRadius(16)
     }
 }
 

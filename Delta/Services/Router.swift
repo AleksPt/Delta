@@ -15,11 +15,15 @@ enum Route: Hashable {
     case appDesignSettings
     case accountSettings(account: Account)
     case accountGroupSettings(group: GroupOfAccounts)
-    case categorySettings
+    case accountCreate
+    case accountGroupCreate
     case seeAll
     case transfer
     case incomes
-    case incomeSettings(income: IncomeExpense)
+    case incomeSettings(income: Income)
+    case expenseSettings(expense: Expense)
+    case incomeCreate
+    case expenseCreate
 }
 
 enum TabRoute: Hashable {
@@ -29,11 +33,33 @@ enum TabRoute: Hashable {
     case settings
 }
 
+enum ModalRoute: Equatable {
+    static func == (lhs: ModalRoute, rhs: ModalRoute) -> Bool {
+        switch (lhs, rhs) {
+        case (.seeAllAccounts(let lhsAccounts), .seeAllAccounts(let rhsAccounts)):
+            lhsAccounts.wrappedValue == rhsAccounts.wrappedValue
+        case (.seeAll, .seeAll):
+            true
+        default:
+            false
+        }
+    }
+    
+    case seeAllAccounts(accounts: Binding<[Account]>)
+    case seeAll
+}
+
 @MainActor
 @Observable
 final class Router {
+
+    static let shared = Router()
+    
     var startScreen: Route = .main
     var path = NavigationPath()
+    
+    var modalRoute: ModalRoute? = nil
+    var isModalPresented: Bool = false
     
     @ViewBuilder func tabView() -> some View {
         TabBarView()
@@ -59,9 +85,6 @@ final class Router {
             AccountSettingsView(account: account)
         case .accountGroupSettings(let group):
             AccountGroupSettingsView(groupOfAccounts: group)
-        case .categorySettings:
-            SettingsCategoryView()
-                .navigationBarBackButtonHidden()
         case .seeAll:
             SeeAllView()
                 .navigationBarBackButtonHidden()
@@ -72,8 +95,27 @@ final class Router {
             IncomesView()
         case .incomeSettings(let income):
             IncomeSettingsView(income: income)
+        case .expenseSettings(let expense):
+            ExpenseSettingsView(expense: expense)
+        case .accountCreate:
+            AccountSettingsView()
+        case .accountGroupCreate:
+            AccountGroupSettingsView()
+        case .incomeCreate:
+            IncomeSettingsView()
+        case .expenseCreate:
+            ExpenseSettingsView()
         }
-            
+    }
+    
+    @ViewBuilder func modalView(for modalRoute: ModalRoute) -> some View {
+        switch modalRoute {
+        case .seeAllAccounts(let accounts):
+            SeeAllAccounts(accounts: accounts)
+        case .seeAll:
+            SeeAllView()
+        }
+
     }
     
     func navigateTo(_ appRoute: Route) {
@@ -87,4 +129,15 @@ final class Router {
     func popToRoot() {
         path.removeLast(path.count)
     }
+    
+    func presentModal(_ appRoute: ModalRoute) {
+        modalRoute = appRoute
+        isModalPresented = true
+    }
+    
+    func dismissModal() {
+        isModalPresented = false
+    }
+    
+    private init() {}
 }

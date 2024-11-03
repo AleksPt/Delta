@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
-enum Currency: String, CaseIterable, Identifiable {
+enum Currency: String, CaseIterable, Identifiable, Codable {
     case kes = "KES"
     case uah = "UAH"
     case bbd = "BBD"
@@ -478,15 +479,15 @@ enum Currency: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
 }
 
-enum CategoryType: String, CaseIterable {
+enum CategoryType: String, CaseIterable, Codable {
     case account = "Account"
     case groupOfAccounts = "GroupOfAccounts"
     case income = "Income"
     case expense = "Expense"
-    case goal = "Goal"
-    case loan = "Loan"
-    case credit = "Credit"
-    case investment = "Investment"
+    //    case goal = "Goal"
+    //    case loan = "Loan"
+    //    case credit = "Credit"
+    //    case investment = "Investment"
     
     static func getCategoryTypes() -> [CategoryType] {
         CategoryType.allCases
@@ -501,59 +502,66 @@ enum Period {
     case month
     case quarter
     case year
-
+    
     var calendarComponent: Calendar.Component {
         switch self {
         case .day:
-            .day
+                .day
         case .week:
-            .weekOfYear
+                .weekOfYear
         case .month:
-            .month
+                .month
         case .quarter:
-            .quarter
+                .quarter
         case .year:
-            .year
+                .year
         }
     }
 }
 
-enum RepeatingType: String, CaseIterable, Identifiable {
+enum RepeatingType: String, CaseIterable, Identifiable, Codable {
     case random = "Random"
     case certain = "Certain"
     
     var id: String { self.rawValue }
 }
 
-final class User {
+final class User: Codable {
     var mail: String = ""
     var phoneNumber: String = ""
     var password: String = ""
     var passwordCode: String = ""
     var person: Person?
+    
+    init(mail: String, phoneNumber: String, password: String, passwordCode: String, person: Person? = nil) {
+        self.mail = mail
+        self.phoneNumber = phoneNumber
+        self.password = password
+        self.passwordCode = passwordCode
+        self.person = person
+    }
 }
 
-final class Person: Hashable, Identifiable {
+final class Person: Hashable, Identifiable, Codable {
     var id: UUID = UUID()
     var photo: String = ""
     var name: String = ""
     var age: Int = 0
-    var accounts: [Account] = []
     
     var isAdult: Bool {
         age >= 18
     }
     
     var balance: Double {
-        accounts.reduce(0) { $0 + $1.amount }
+//        accounts.reduce(0) { $0 + $1.amount }
+        0
     }
     
-    init(id: UUID, photo: String, name: String, age: Int, accounts: [Account] = []) {
+    init(id: UUID, photo: String, name: String, age: Int) {
         self.id = id
         self.photo = photo
         self.name = name
         self.age = age
-        self.accounts = accounts
     }
     
     static func == (lhs: Person, rhs: Person) -> Bool {
@@ -565,7 +573,7 @@ final class Person: Hashable, Identifiable {
     }
 }
 
-class Transaction {
+class Transaction: Codable {
     var id: UUID = UUID()
     var amount: Double = 0.0
     var date: Date = Date()
@@ -574,14 +582,19 @@ class Transaction {
     var tags: [String] = []
     var currency: Currency = .rub
     var person: Person?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, amount, date, sourceID, destinationID, tags, currency, person
+    }
 }
 
 //final class DebtTransaction: Transaction {
 //    var isMyDebt = false
 //    var interestRate: Double = 0.0
 //}
-@Observable
-class Category: Identifiable, Hashable {
+
+/*@Observable
+class Category: Identifiable, Hashable, Transferable, Codable {
     var id: UUID = UUID()
     var title: String = ""
     var currency: Currency = .usd
@@ -599,6 +612,29 @@ class Category: Identifiable, Hashable {
         self.categoryType = categoryType
     }
     
+    // Добавляем required init(from:)
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
+    }
+    
+    // Добавляем encode(to:)
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+    }
+    
+    // CodingKeys для декодирования
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType
+    }
+    
     static func == (lhs: Category, rhs: Category) -> Bool {
         return lhs.id == rhs.id
     }
@@ -606,10 +642,18 @@ class Category: Identifiable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-}
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .category)
+    }
+}*/
 
 @Observable
-final class SubCategory: Category {
+final class SubCategory: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .income
     var amount: Double = 0
     var date: Date
     var notification: Bool
@@ -627,27 +671,50 @@ final class SubCategory: Category {
         autoTransaction: Bool,
         transaction: Transaction? = nil
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.amount = amount
         self.date = date
         self.notification = notification
         self.autoTransaction = autoTransaction
         self.transaction = transaction
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
+    }
+    
+    // Добавляем required init(from:)
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
+        self.amount = try container.decode(Double.self, forKey: .amount)
+        self.date = try container.decode(Date.self, forKey: .date)
+        self.notification = try container.decode(Bool.self, forKey: .notification)
+        self.autoTransaction = try container.decode(Bool.self, forKey: .autoTransaction)
+        self.transaction = try container.decodeIfPresent(Transaction.self, forKey: .transaction)
     }
 }
 
 @Observable
-final class IncomeExpense: Category {
+final class Income: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .income
     var amount: Double
     var image: String = ""
     var repeatingType: RepeatingType = .random
     var subCategories: [SubCategory] = []
     var transactions: [Transaction] = []
     
-    private var categoryService: CategoryService
-    
     var plannedAmount: Double {
-        subCategories.reduce(0) { $0 + $1.amount }
+        if subCategories.isEmpty {
+            return amount
+        } else {
+            return subCategories.reduce(0) { $0 + $1.amount }
+        }
     }
     
     // проверить обнуления amount при начале нового периода
@@ -655,7 +722,7 @@ final class IncomeExpense: Category {
         let filteredTransactions = DataManager.filterTransactions(transactions, for: .month, startDay: 1, fromMonthOffset: 0)
         return filteredTransactions.reduce(0) { $0 + $1.amount }
     }
-
+    
     var isExceeded: Bool {
         amount >= plannedAmount
     }
@@ -670,24 +737,36 @@ final class IncomeExpense: Category {
         repeatingType: RepeatingType,
         subCategories: [SubCategory],
         transactions: [Transaction],
-        categoryService: CategoryService,
         id: UUID,
         title: String,
         currency: Currency,
         categoryType: CategoryType
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.amount = amount
         self.image = image
         self.repeatingType = repeatingType
         self.subCategories = subCategories
         self.transactions = transactions
-        self.categoryService = categoryService
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
-        updateSubCategories()
     }
     
-    func updateSubCategories() {
-        subCategories = categoryService.getIncomes()
+    // Добавляем обязательный инициализатор для 'Decodable'
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        // Декодирование новых свойств подкласса
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
+        self.amount = try container.decode(Double.self, forKey: .amount)
+        self.image = try container.decode(String.self, forKey: .image)
+        self.repeatingType = try container.decode(RepeatingType.self, forKey: .repeatingType)
+        self.subCategories = try container.decode([SubCategory].self, forKey: .subCategories)
+        self.transactions = try container.decode([Transaction].self, forKey: .transactions)
     }
     
     // методы для построения графика "План"
@@ -715,11 +794,107 @@ final class IncomeExpense: Category {
     }
 }
 
-final class Account: Category {
+@Observable
+final class Expense: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .expense
+    var amount: Double
+    var image: String = ""
+    var repeatingType: RepeatingType = .random
+    var subCategories: [SubCategory] = []
+    var transactions: [Transaction] = []
+    
+    var plannedAmount: Double {
+        subCategories.reduce(0) { $0 + $1.amount }
+    }
+    
+    // проверить обнуления amount при начале нового периода
+    var totalAmount: Double {
+        let filteredTransactions = DataManager.filterTransactions(transactions, for: .month, startDay: 1, fromMonthOffset: 0)
+        return filteredTransactions.reduce(0) { $0 + $1.amount }
+    }
+    
+    var isExceeded: Bool {
+        amount >= plannedAmount
+    }
+    
+    var amountsAndDates: [(amount: Double, date: Date)] {
+        repeatingType == .random ? getAmountsByDate() : getAmountsByPeriod()
+    }
+    
+    init(
+        amount: Double,
+        image: String,
+        repeatingType: RepeatingType,
+        subCategories: [SubCategory],
+        transactions: [Transaction],
+        id: UUID,
+        title: String,
+        currency: Currency,
+        categoryType: CategoryType
+    ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
+        self.amount = amount
+        self.image = image
+        self.repeatingType = repeatingType
+        self.subCategories = subCategories
+        self.transactions = transactions
+    }
+    
+    // Добавляем required init для декодирования
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
+        self.amount = try container.decode(Double.self, forKey: .amount)
+        self.image = try container.decode(String.self, forKey: .image)
+        self.repeatingType = try container.decode(RepeatingType.self, forKey: .repeatingType)
+        self.subCategories = try container.decode([SubCategory].self, forKey: .subCategories)
+        self.transactions = try container.decode([Transaction].self, forKey: .transactions)
+    }
+    
+    // методы для построения графика "План"
+    func getAmountsByPeriod() -> [(amount: Double, date: Date)] {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        let range = calendar.range(of: .day, in: .month, for: currentDate)!
+        let numberOfDaysInMonth = range.count
+        
+        let dailyAmount = plannedAmount / Double(numberOfDaysInMonth)
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
+        
+        var result: [(amount: Double, date: Date)] = []
+        for day in 0..<numberOfDaysInMonth {
+            if let date = calendar.date(byAdding: .day, value: day, to: startOfMonth) {
+                result.append((amount: dailyAmount, date: date))
+            }
+        }
+        return result
+    }
+    
+    func getAmountsByDate() -> [(amount: Double, date: Date)] {
+        return subCategories.map { ($0.amount, $0.date) }
+    }
+}
+
+final class Account: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .account
     var image: String = ""
     var color: String = ""
     var users: [Person] = []
     var transactions: [Transaction] = []
+    var groupOfAccounts: String = ""
     
     var incomingTransactions: [Transaction] {
         transactions.filter { $0.destinationID == self.id }
@@ -728,7 +903,7 @@ final class Account: Category {
     var outgoingTransactions: [Transaction] {
         transactions.filter { $0.sourceID == self.id }
     }
-
+    
     var amount: Double {
         incomingTransactions.reduce(0) { $0 + $1.amount } - outgoingTransactions.reduce(0) { $0 + $1.amount }
     }
@@ -742,17 +917,39 @@ final class Account: Category {
         color: String,
         users: [Person],
         transactions: [Transaction],
-        categoryType: CategoryType
+        categoryType: CategoryType,
+        groupOfAccounts: String
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.image = image
         self.color = color
         self.users = users
         self.transactions = transactions
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
+        self.groupOfAccounts = groupOfAccounts
+    }
+    
+    // Добавляем required init для декодирования
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
+        self.image = try container.decode(String.self, forKey: .image)
+        self.color = try container.decode(String.self, forKey: .color)
+        self.users = try container.decode([Person].self, forKey: .users)
+        self.transactions = try container.decode([Transaction].self, forKey: .transactions)
     }
 }
 
-final class GroupOfAccounts: Category {
+final class GroupOfAccounts: Identifiable, Hashable, Transferable, Codable {
+    var id: UUID = UUID()
+    var title: String = ""
+    var currency: Currency = .usd
+    var categoryType: CategoryType = .groupOfAccounts
     var image: String = ""
     var color: String = ""
     var accounts: [Account] = []
@@ -770,25 +967,214 @@ final class GroupOfAccounts: Category {
         accounts: [Account],
         categoryType: CategoryType
     ) {
+        self.id = id
+        self.title = title
+        self.currency = currency
+        self.categoryType = categoryType
         self.image = image
         self.color = color
         self.accounts = accounts
-        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
+    }
+    
+    // Добавляем required init для декодирования
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
+        self.image = try container.decode(String.self, forKey: .image)
+        self.color = try container.decode(String.self, forKey: .color)
+        self.accounts = try container.decode([Account].self, forKey: .accounts)
     }
 }
 
-final class Goal: Category {
+final class Goal {
     
 }
 
-final class Loan: Category {
+final class Loan {
     
 }
 
-final class Credit: Category {
+final class Credit {
     
 }
 
-final class Investment: Category {
+final class Investment {
     
+}
+
+//MARK: - Extensions for protocols
+extension UTType {
+    //static let category = UTType(exportedAs: "com.delta.category")
+    static let subCategory = UTType(exportedAs: "com.delta.subCategory")
+    static let income = UTType(exportedAs: "com.delta.income")
+    static let expense = UTType(exportedAs: "com.delta.expense")
+    static let account = UTType(exportedAs: "com.delta.account")
+    static let groupOfAccounts = UTType(exportedAs: "com.delta.groupOfAccounts")
+}
+
+extension SubCategory {
+    // Добавляем encode(to:)
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(date, forKey: .date)
+        try container.encode(notification, forKey: .notification)
+        try container.encode(autoTransaction, forKey: .autoTransaction)
+        try container.encode(transaction, forKey: .transaction)
+    }
+    
+    // Определяем CodingKeys для кодирования/декодирования
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, amount, date, notification, autoTransaction, transaction
+    }
+    
+    static func == (lhs: SubCategory, rhs: SubCategory) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<SubCategory, JSONEncoder, JSONDecoder>(contentType: .subCategory)
+    }
+}
+
+extension Income {
+    // Реализуем 'Encodable'
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        // Кодирование свойств подкласса
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(image, forKey: .image)
+        try container.encode(repeatingType, forKey: .repeatingType)
+        try container.encode(subCategories, forKey: .subCategories)
+        try container.encode(transactions, forKey: .transactions)
+    }
+    
+    // Определяем ключи для кодирования/декодирования
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, amount, image, repeatingType, subCategories, transactions
+    }
+    
+    static func == (lhs: Income, rhs: Income) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<Income, JSONEncoder, JSONDecoder>(contentType: .income)
+    }
+}
+
+extension Expense {
+    // Добавляем метод для кодирования
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(image, forKey: .image)
+        try container.encode(repeatingType, forKey: .repeatingType)
+        try container.encode(subCategories, forKey: .subCategories)
+        try container.encode(transactions, forKey: .transactions)
+    }
+    
+    // CodingKeys
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, amount, image, repeatingType, subCategories, transactions
+    }
+    
+    static func == (lhs: Expense, rhs: Expense) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<Expense, JSONEncoder, JSONDecoder>(contentType: .expense)
+    }
+}
+
+extension Account {
+    // Добавляем метод для кодирования
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(image, forKey: .image)
+        try container.encode(color, forKey: .color)
+        try container.encode(users, forKey: .users)
+        try container.encode(transactions, forKey: .transactions)
+    }
+    
+    // CodingKeys
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, image, color, users, transactions
+    }
+    
+    static func == (lhs: Account, rhs: Account) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<Account, JSONEncoder, JSONDecoder>(contentType: .account)
+    }
+}
+
+extension GroupOfAccounts {
+    // Добавляем метод для кодирования
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(image, forKey: .image)
+        try container.encode(color, forKey: .color)
+        try container.encode(accounts, forKey: .accounts)
+    }
+    
+    // CodingKeys
+    private enum CodingKeys: String, CodingKey {
+        case id, title, currency, categoryType, image, color, accounts
+    }
+    
+    static func == (lhs: GroupOfAccounts, rhs: GroupOfAccounts) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<GroupOfAccounts, JSONEncoder, JSONDecoder>(contentType: .groupOfAccounts)
+    }
 }

@@ -7,146 +7,105 @@
 
 import SwiftUI
 
-struct TextFieldRowView<T>: View {
+struct TextFieldRowView: View {
     @Binding var inputValue: String
     
-    let source: T
     let title: String
     let keyboardType: UIKeyboardType
     let placeholder: String
     
     var body: some View {
         HStack {
-            if source is Account {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(placeholder, text: $inputValue)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(keyboardType)
-            }
-            
-            if source is GroupOfAccounts {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(placeholder, text: $inputValue)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(keyboardType)
-            }
-            
-            if source is IncomeExpense {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(placeholder, text: $inputValue)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(keyboardType)
-            }
-        
-            
-            if source is SubCategory {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(placeholder, text: $inputValue)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(keyboardType)
-            }
+            Text(title)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            TextField(placeholder, text: $inputValue)
+                .textFieldStyle(.plain)
+                .multilineTextAlignment(.trailing)
+                .keyboardType(keyboardType)
         }
         .padding(.vertical, 8)
         .frame(height: 37)
     }
+        
 }
 
-struct PickerRowView<T>: View {
+
+struct PickerRowView: View {
     @Binding var currency: Currency
     
-    let source: T
     let title: String
     
     var body: some View {
         HStack {
-            if source is Account{
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Picker("", selection: $currency) {
-                    ForEach(Currency.allCases) { currency in
-                        Text(currency.rawValue).tag(currency)
-                    }
+            Text(title)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Picker("", selection: $currency) {
+                ForEach(Currency.allCases) { currency in
+                    Text(currency.rawValue).tag(currency)
                 }
-                .pickerStyle(.menu)
-                .labelsHidden()
-                .accentColor(.appBlack)
             }
-            
-            if source is GroupOfAccounts {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Picker("", selection: $currency) {
-                    ForEach(Currency.allCases) { currency in
-                        Text(currency.rawValue).tag(currency)
-                    }
-                }
-                .pickerStyle(.menu)
-                .labelsHidden()
-                .accentColor(.appBlack)
-            }
-            
-            if source is IncomeExpense {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Picker("", selection: $currency) {
-                    ForEach(Currency.allCases) { currency in
-                        Text(currency.rawValue).tag(currency)
-                    }
-                }
-                .pickerStyle(.menu)
-                .labelsHidden()
-                .accentColor(.appBlack)
-            }
+            .pickerStyle(.menu)
+            .labelsHidden()
+            .accentColor(.appBlack)
         }
+        
         .padding(.vertical, 8)
         .frame(height: 37)
     }
 }
 
 
-struct DateRowView<T>: View {
+struct DateRowView: View {
     @Binding var date: Date
     
-    let source: T
     let title: String
     
     var body: some View {
         HStack {
-            if source is SubCategory {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                DatePicker("", selection: $date, displayedComponents: .date)
-                    .datePickerStyle(.compact)
-                    .labelsHidden()
-                    .accentColor(.appBlack)
-            }
+            Text(title)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            DatePicker("", selection: $date, displayedComponents: .date)
+                .datePickerStyle(.compact)
+                .labelsHidden()
+                .accentColor(.appBlack)
+            
         }
         .padding(.vertical, 8)
         .frame(height: 37)
     }
 }
 
-struct NotificationRowView<T>: View {
+struct NotificationRowView: View {
     @Binding var notificationIsOn: Bool
     
-    let source: T
     let title: String
     
     var body: some View {
         HStack {
-            if source is SubCategory {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Toggle("", isOn: $notificationIsOn)
+            Text(title)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Toggle("", isOn: $notificationIsOn)
+            
+        }
+        .padding(.vertical, 8)
+        .frame(height: 37)
+    }
+}
+
+struct TransactionRowView: View {
+    //@Binding var notificationIsOn: Bool
+    let action: () -> Void
+    let title: String
+    
+    var body: some View {
+        HStack {
+            Text(title)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Button(action: action) {
+                Image(systemName: "chevron.right")
+                    .tint(.appBlack)
             }
+            
         }
         .padding(.vertical, 8)
         .frame(height: 37)
@@ -183,16 +142,6 @@ struct NotificationRowView<T>: View {
 #Preview {
     NotificationRowView(
         notificationIsOn: .constant(true),
-        source: SubCategory(
-            id: UUID(),
-            title: "Avance",
-            currency: .usd,
-            categoryType: .income,
-            amount: 3000,
-            date: Date(),
-            notification: false,
-            autoTransaction: true
-        ),
         title: "Notifications"
     )
 }

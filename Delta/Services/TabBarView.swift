@@ -9,11 +9,13 @@ import SwiftUI
 import UISystem
 
 struct TabBarView: View {
-    @State private var router = Router()
+    @State private var router = Router.shared
     @State private var selectedTab = TabRoute.main
     
     init() {
         setupTabBarAppearance()
+
+
     }
     
     var body: some View {
@@ -55,30 +57,6 @@ struct TabBarView: View {
                 setTabItem(icon: "gearshape", title: "Settings")
             }
             .tag(TabRoute.settings)
-            
-            //            MainView()
-            //                .tabItem {
-            //                    setTabItem(icon: "house", title: "Main")
-            //                }
-            //                .tag(TabRoute.main)
-            //
-            //            AnalyticsView()
-            //                .tabItem {
-            //                    setTabItem(icon: "chartPie", title: "Analytics")
-            //                }
-            //                .tag(TabRoute.analytic)
-            //
-            //            ShoppingListView()
-            //                .tabItem {
-            //                    setTabItem(icon: "list", title: "Shopping List")
-            //                }
-            //                .tag(TabRoute.shoppingList)
-            //
-            //            SettingsView()
-            //                .tabItem {
-            //                    setTabItem(icon: "gearshape", title: "Settings")
-            //                }
-            //                .tag(TabRoute.settings)
         }
     }
 }
@@ -116,7 +94,6 @@ extension TabBarView {
     }
 }
 
-#Preview {
-    TabBarView()
-}
-
+//#Preview {
+//    TabBarView()
+//}

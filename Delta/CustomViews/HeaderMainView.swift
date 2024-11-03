@@ -15,10 +15,10 @@ struct HeaderMainView: View {
         HStack(alignment: .firstTextBaseline) {
             Text(text)
                 .font(.heading1())
+                .foregroundStyle(.appBlack)
             Spacer()
             ChevronButtonView(action: action)
         }
-        .padding(.horizontal)
     }
 }
 

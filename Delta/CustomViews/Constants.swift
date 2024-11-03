@@ -8,17 +8,33 @@
 import SwiftUI
 
 struct Constants {
-    static let widthOne = (UIScreen.main.bounds.width - 16 * 6) / 5
-    static let widthTwo = (UIScreen.main.bounds.width - 16 * 6) / 5 * 2 + 16
-    static let widthThree = (UIScreen.main.bounds.width - 16 * 6) / 5 * 3 + 32
-    static let widthFive = UIScreen.main.bounds.width - 32
-    static let widthHalfScreen = (UIScreen.main.bounds.width - 18 * 3) / 2
-    static let widthSix = UIScreen.main.bounds.width - 38
-
-    static let heightOne = UIScreen.main.bounds.height * 0.09
-    static let heightTwo = UIScreen.main.bounds.height * 0.18 + 16
-    static let heightThree = UIScreen.main.bounds.height * 0.1
-    static let heightFour = UIScreen.main.bounds.height * 0.12
-    static let heightFive = UIScreen.main.bounds.height * 0.06
-    static let heightSix = UIScreen.main.bounds.height * 0.16
+    static let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    
+    static let screenWidth: CGFloat = {
+        guard let width = windowScene?.screen.bounds.width else {
+            return UIScreen.main.bounds.width
+        }
+        return width
+    }()
+    
+    static let screenHeight: CGFloat = {
+        guard let height = windowScene?.screen.bounds.height else {
+            return UIScreen.main.bounds.height
+        }
+        return height
+    }()
+    
+    static let widthOne = (screenWidth - 16 * 6) / 5
+    static let widthTwo = (screenWidth - 16 * 6) / 5 * 2 + 16
+    static let widthThree = (screenWidth - 16 * 6) / 5 * 3 + 32
+    static let widthFive = screenWidth - 32
+    static let widthHalfScreen = (screenWidth - 18 * 3) / 2
+    static let widthSix = screenWidth - 38
+    
+    static let heightOne = screenHeight * 0.09
+    static let heightTwo = screenHeight * 0.18 + 16
+    static let heightThree = screenHeight * 0.1
+    static let heightFour = screenHeight * 0.12
+    static let heightFive = screenHeight * 0.06
+    static let heightSix = screenHeight * 0.16
 }
