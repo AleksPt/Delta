@@ -47,6 +47,7 @@
 		648E092C2C8F004F00ECA13D /* HeaderMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648E092B2C8F004F00ECA13D /* HeaderMainView.swift */; };
 		648E092E2C8F027000ECA13D /* CategoriesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648E092D2C8F027000ECA13D /* CategoriesScrollView.swift */; };
 		648E09302C8F04A700ECA13D /* ButtonsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648E092F2C8F04A700ECA13D /* ButtonsScrollView.swift */; };
+		6491A4F82CBC1B930089A66A /* ScrollTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491A4F72CBC1B930089A66A /* ScrollTagsView.swift */; };
 		649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6952C3C58520081BC63 /* DeltaApp.swift */; };
 		649FF6982C3C58520081BC63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6972C3C58520081BC63 /* MainView.swift */; };
 		649FF69A2C3C58520081BC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF6992C3C58520081BC63 /* Assets.xcassets */; };
@@ -119,6 +120,7 @@
 		648E092B2C8F004F00ECA13D /* HeaderMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMainView.swift; sourceTree = "<group>"; };
 		648E092D2C8F027000ECA13D /* CategoriesScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesScrollView.swift; sourceTree = "<group>"; };
 		648E092F2C8F04A700ECA13D /* ButtonsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsScrollView.swift; sourceTree = "<group>"; };
+		6491A4F72CBC1B930089A66A /* ScrollTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTagsView.swift; sourceTree = "<group>"; };
 		649FF6922C3C58520081BC63 /* Delta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		649FF6952C3C58520081BC63 /* DeltaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaApp.swift; sourceTree = "<group>"; };
 		649FF6972C3C58520081BC63 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				64E00AF52CA59C40000092CB /* GroupCapsuleView.swift */,
 				64E00AF72CA5AF7E000092CB /* ShoppingListAccountsScrollView.swift */,
 				64BA80F52CA71C86003AE566 /* ShoppingListAmountRowView.swift */,
+				6491A4F72CBC1B930089A66A /* ScrollTagsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				1A2A33942C9440BD008F6414 /* ItemPickerView.swift in Sources */,
 				64FB5C472C4BF4BB00BBADB1 /* SettingsView.swift in Sources */,
 				1A2A33A02CAE9523008F6414 /* IncomeSettingsView.swift in Sources */,
+				6491A4F82CBC1B930089A66A /* ScrollTagsView.swift in Sources */,
 				6457CA4F2C518375008C56DE /* Settings.swift in Sources */,
 				64BA80F62CA71C86003AE566 /* ShoppingListAmountRowView.swift in Sources */,
 				64FB5C492C4BF4C500BBADB1 /* ProfileSettingsView.swift in Sources */,
