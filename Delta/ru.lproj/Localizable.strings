@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  Delta
+
+  Created by Алексей on 03.11.2024.
+  
+*/
+
+"Actual" = "Факт";
+"Accounts" = "Счета";
+"Account settings" = "Настройки счета";
+"Account balance" = "Баланс счета";
+"Account name" = "Наименование счета";
+"Alfa bank" = "Альфа Банк";
+"Amount" = "Сумма";
+"Avance" = "Аванс";
+"Award" = "Премия";
+"Basic" = "Основной";
+"Cash" = "Наличные";
+"Certain" = "Регулярные";
+"Color" = "Цвет";
+"Currency" = "Валюта";
+"Delete account" = "Удалить аккаунт";
+"Expense" = "Доход";
+"Expenses" = "Доходы";
+"History" = "История";
+"Income" = "Расход";
+"Incomes" = "Расходы";
+"Icon" = "Иконка";
+"Income source" = "Источник дохода";
+"Income title" = "Заголовок дохода";
+"Main" = "Главный";
+"My balance" = "Мой баланс";
+"Plan" = "План";
+"Random" = "Случайные";
+"Save" = "Сохранить";
+"Salary" = "Зарплата";
+"Sber bank" = "Сбер";
+"Show" = "Показать";
+"See all" = "Подробнее";
+"Total balance" = "Всего баланс";
+"Taxi" = "Такси";
+"Your account" = "Ваш аккаунт";
+"Your title" = "Ваш заголовок";

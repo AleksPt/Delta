@@ -22,23 +22,39 @@ struct MainView: View {
             InfoMainView()
             Spacer()
             
-            AccountsAndGroupsScrollView(accounts: accounts, groups: groups)
+            AccountsAndGroupsScrollView(
+                accounts: accounts,
+                groups: groups
+            )
                 .safeAreaPadding(.horizontal)
             Spacer()
             
-            ButtonsScrollView(categoryTypes: categoryTypes, activeTab: $activeTab)
+            ButtonsScrollView(
+                categoryTypes: categoryTypes,
+                activeTab: $activeTab
+            )
                 .safeAreaPadding(.horizontal)
             Spacer()
             
             switch activeTab {
             case .expense:
-                ExpenseScrollView(expenses: categoryService.expenses, title: "Expenses", settingsRoute: .expenseCreate, categoryRoute: .incomes)
+                ExpenseScrollView(
+                    expenses: categoryService.expenses,
+                    title: String(localized: "Expenses"),
+                    settingsRoute: .expenseCreate,
+                    categoryRoute: .incomes
+                )
             case .account:
                 EmptyView()
             case .groupOfAccounts:
                 EmptyView()
             case .income:
-                IncomeScrollView(incomes: categoryService.incomes, title: "Incomes", settingsRoute: .incomeCreate, categoryRoute: .incomes)
+                IncomeScrollView(
+                    incomes: categoryService.incomes,
+                    title: String(localized: "Incomes"),
+                    settingsRoute: .incomeCreate,
+                    categoryRoute: .incomes
+                )
             }
             
 //            if activeTab == .income {

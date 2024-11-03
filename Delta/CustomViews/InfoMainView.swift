@@ -20,14 +20,14 @@ struct InfoMainView: View {
             HStack(spacing: 16) {
                 VStack(spacing: 16) {
                     ExpenseIncomeView(
-                        title: "Income",
+                        title: String(localized: "Income"),
                         currentAmount: 123235,
                         plannedAmount: 200235,
                         currency: .rub
                     )
                         
                     ExpenseIncomeView(
-                        title: "Expense",
+                        title: String(localized: "Expense"),
                         currentAmount: 123235,
                         plannedAmount: 200235,
                         currency: .rub

@@ -18,7 +18,7 @@ struct AccountsAndGroupsScrollView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HeaderMainView(text: "Accounts", action: {
+            HeaderMainView(text: String(localized: "Accounts"), action: {
                 // TODO: - add See all
             })
             ScrollViewReader { proxy in

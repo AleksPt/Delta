@@ -77,6 +77,8 @@
 		64FB5C5B2C4BF5DB00BBADB1 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C5A2C4BF5DB00BBADB1 /* DataStore.swift */; };
 		64FEDB742C8109AC004F4E4E /* CustomShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FEDB732C8109AC004F4E4E /* CustomShadowModifier.swift */; };
 		FA7D60322CD7A230004FB425 /* SwapCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D60312CD7A230004FB425 /* SwapCategoriesView.swift */; };
+		FA7D603E2CD7AA2A004FB425 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D603D2CD7AA2A004FB425 /* LanguageManager.swift */; };
+		FA7D60412CD7AB80004FB425 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA7D603F2CD7AB80004FB425 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +156,9 @@
 		64FB5C5A2C4BF5DB00BBADB1 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		64FEDB732C8109AC004F4E4E /* CustomShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShadowModifier.swift; sourceTree = "<group>"; };
 		FA7D60312CD7A230004FB425 /* SwapCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapCategoriesView.swift; sourceTree = "<group>"; };
+		FA7D603D2CD7AA2A004FB425 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		FA7D60402CD7AB80004FB425 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FA7D60422CD7ADD5004FB425 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +270,7 @@
 				1A2A33782C80B5A1008F6414 /* Router.swift */,
 				1A2A337A2C80ED06008F6414 /* TabBarView.swift */,
 				64D4F49C2C8F66C7002C18BF /* DataManager.swift */,
+				FA7D603D2CD7AA2A004FB425 /* LanguageManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				649FF6952C3C58520081BC63 /* DeltaApp.swift */,
 				1A2A337C2C80F61F008F6414 /* ContentView.swift */,
 				649FF6992C3C58520081BC63 /* Assets.xcassets */,
+				FA7D603F2CD7AB80004FB425 /* Localizable.strings */,
 				649FF69B2C3C58520081BC63 /* Preview Content */,
 			);
 			path = Delta;
@@ -533,6 +540,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 649FF6892C3C58510081BC63;
 			productRefGroup = 649FF6932C3C58520081BC63 /* Products */;
@@ -550,6 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				649FF69D2C3C58520081BC63 /* Preview Assets.xcassets in Resources */,
+				FA7D60412CD7AB80004FB425 /* Localizable.strings in Resources */,
 				649FF69A2C3C58520081BC63 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,6 +585,7 @@
 				64FB5C492C4BF4C500BBADB1 /* ProfileSettingsView.swift in Sources */,
 				64FB5C5B2C4BF5DB00BBADB1 /* DataStore.swift in Sources */,
 				64FB5C532C4BF51700BBADB1 /* SeeAllView.swift in Sources */,
+				FA7D603E2CD7AA2A004FB425 /* LanguageManager.swift in Sources */,
 				1A2A33832C860431008F6414 /* Double +.swift in Sources */,
 				648E092C2C8F004F00ECA13D /* HeaderMainView.swift in Sources */,
 				647A6F3C2C811E4900927749 /* PlusButtonView.swift in Sources */,
@@ -632,6 +642,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FA7D603F2CD7AB80004FB425 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA7D60402CD7AB80004FB425 /* en */,
+				FA7D60422CD7ADD5004FB425 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		649FF69E2C3C58530081BC63 /* Debug */ = {

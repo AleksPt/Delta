@@ -494,6 +494,19 @@ enum CategoryType: String, CaseIterable, Codable {
             .filter { $0 != .account && $0 != .groupOfAccounts }
             .map { $0 }
     }
+    
+    var localNameCategory: String {
+        switch self {
+        case .account:
+            String(localized: "Account")
+        case .groupOfAccounts:
+            String(localized: "GroupOfAccounts")
+        case .income:
+            String(localized: "Income")
+        case .expense:
+            String(localized: "Expense")
+        }
+    }
 }
 
 enum Period {
@@ -524,6 +537,15 @@ enum RepeatingType: String, CaseIterable, Identifiable, Codable {
     case certain = "Certain"
     
     var id: String { self.rawValue }
+    
+    var localNameType: String {
+        switch self {
+        case .random:
+            String(localized: "Random")
+        case .certain:
+            String(localized: "Certain")
+        }
+    }
 }
 
 final class User: Codable {

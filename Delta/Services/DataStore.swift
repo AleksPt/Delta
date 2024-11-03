@@ -27,50 +27,50 @@ final class DataStore {
         
         let alfabank = Account(
             id: UUID(),
-            title: "Alfa bank",
+            title: String(localized: "Alfa bank"),
             currency: .rub,
             image: Icon.creditcard.name,
             color: AppGradient.redGradient.name,
             users: [],
             transactions: [],
             categoryType: .account,
-            groupOfAccounts: "Main"
+            groupOfAccounts: String(localized: "Main")
         )
         
         let cash = Account(
             id: UUID(),
-            title: "Cash",
+            title: String(localized: "Cash"),
             currency: .rub,
             image: Icon.dollar.name,
             color: AppGradient.blueGradient.name,
             users: [],
             transactions: [],
             categoryType: .account,
-            groupOfAccounts: "Main"
+            groupOfAccounts: String(localized: "Main")
         )
         
         let basic = Account(
             id: UUID(),
-            title: "Basic",
+            title: String(localized: "Basic"),
             currency: .rub,
             image: Icon.dollar.name,
             color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
             categoryType: .account,
-            groupOfAccounts: "Sber bank"
+            groupOfAccounts: String(localized: "Sber bank")
         )
         
         let currency = Account(
             id: UUID(),
-            title: "Currency",
+            title: String(localized: "Currency"),
             currency: .usd,
             image: Icon.dollar.name,
             color: AppGradient.purpleGradient.name,
             users: [],
             transactions: [],
             categoryType: .account,
-            groupOfAccounts: "Sber bank"
+            groupOfAccounts: String(localized: "Sber bank")
         )
         
         let person1 = Person(
@@ -94,7 +94,7 @@ final class DataStore {
         
         let group1 = GroupOfAccounts(
             id: UUID(),
-            title: "Sber bank",
+            title: String(localized: "Sber bank"),
             currency: .rub,
             image: "building.columns",
             color: AppGradient.appGreen.name,
@@ -104,7 +104,7 @@ final class DataStore {
         
         let group2 = GroupOfAccounts(
             id: UUID(),
-            title: "Main",
+            title: String(localized: "Main"),
             currency: .usd,
             image: "building.columns",
             color: AppGradient.blueGradient.name,
@@ -133,7 +133,7 @@ final class DataStore {
             subCategories: [],
             transactions: [],
             id: UUID(),
-            title: "Taxi",
+            title: String(localized: "Taxi"),
             currency: .rub,
             categoryType: .expense
         )
@@ -145,7 +145,7 @@ final class DataStore {
             subCategories: [],
             transactions: [],
             id: UUID(),
-            title: "Award",
+            title: String(localized: "Award"),
             currency: .usd,
             categoryType: .income
         )
@@ -156,7 +156,7 @@ final class DataStore {
             repeatingType: .certain,
             subCategories: [SubCategory(
                 id: UUID(),
-                title: "Avance",
+                title: String(localized: "Avance"),
                 currency: .rub,
                 categoryType: .income,
                 amount: 2000,
@@ -167,7 +167,7 @@ final class DataStore {
             )],
             transactions: [],
             id: UUID(),
-            title: "Salary",
+            title: String(localized: "Salary"),
             currency: .rub,
             categoryType: .income
         )

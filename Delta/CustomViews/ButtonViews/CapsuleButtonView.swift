@@ -18,7 +18,7 @@ struct CapsuleButtonView: View {
                 activeTab = categoryType
             }
         }) {
-            Text(categoryType.rawValue)
+            Text(categoryType.localNameCategory)
                 .font(.metadata3())
                 .padding()
                 .frame(height: 32)

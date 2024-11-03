@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  Delta
+
+  Created by Алексей on 03.11.2024.
+  
+*/
+
+"Actual" = "Actual";
+"Accounts" = "Accounts";
+"Account settings" = "Account settings";
+"Account balance" = "Account balance";
+"Account name" = "Account name";
+"Alfa bank" = "Alfa bank";
+"Amount" = "Amount";
+"Avance" = "Avance";
+"Award" = "Award";
+"Basic" = "Basic";
+"Cash" = "Cash";
+"Certain" = "Certain";
+"Color" = "Color";
+"Currency" = "Currency";
+"Delete account" = "Delete account";
+"Expense" = "Expense";
+"Expenses" = "Expenses";
+"History" = "History";
+"Income" = "Income";
+"Incomes" = "Incomes";
+"Icon" = "Icon";
+"Income source" = "Income source";
+"Income title" = "Income title";
+"Main" = "Main";
+"My balance" = "My balance";
+"Plan" = "Plan";
+"Random" = "Random";
+"Save" = "Save";
+"Salary" = "Salary";
+"Sber bank" = "Sber bank";
+"Show" = "Show";
+"See all" = "See all";
+"Taxi" = "Taxi";
+"Total balance" = "Total balance";
+"Your account" = "Your account";
+"Your title" = "Your title";
+
