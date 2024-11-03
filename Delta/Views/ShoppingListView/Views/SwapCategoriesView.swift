@@ -2,8 +2,10 @@
 //  SwapCategoriesView.swift
 //  Delta
 //
-//  Created by Алексей on 28.10.2024.
+//  Created by Алексей on 03.11.2024.
 //
+
+import Foundation
 
 import SwiftUI
 
@@ -11,7 +13,7 @@ struct SwapCategoriesView: View {
     @Binding var categories: [ShoppingListCategory]
     @State private var editMode: EditMode = .active
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         NavigationStack {
             List {
@@ -28,12 +30,8 @@ struct SwapCategoriesView: View {
             .environment(\.editMode, $editMode)
         }
     }
-    
+
     private func moveSection(from source: IndexSet, to destination: Int) {
         categories.move(fromOffsets: source, toOffset: destination)
     }
-}
-
-#Preview {
-//    SwapCategoriesView()
 }

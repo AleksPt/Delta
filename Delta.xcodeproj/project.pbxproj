@@ -76,6 +76,7 @@
 		64FB5C572C4BF56400BBADB1 /* MyBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */; };
 		64FB5C5B2C4BF5DB00BBADB1 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C5A2C4BF5DB00BBADB1 /* DataStore.swift */; };
 		64FEDB742C8109AC004F4E4E /* CustomShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FEDB732C8109AC004F4E4E /* CustomShadowModifier.swift */; };
+		FA7D60322CD7A230004FB425 /* SwapCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D60312CD7A230004FB425 /* SwapCategoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -152,6 +153,7 @@
 		64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBalanceView.swift; sourceTree = "<group>"; };
 		64FB5C5A2C4BF5DB00BBADB1 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		64FEDB732C8109AC004F4E4E /* CustomShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShadowModifier.swift; sourceTree = "<group>"; };
+		FA7D60312CD7A230004FB425 /* SwapCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapCategoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 				64E00AF72CA5AF7E000092CB /* ShoppingListAccountsScrollView.swift */,
 				64BA80F52CA71C86003AE566 /* ShoppingListAmountRowView.swift */,
 				6491A4F72CBC1B930089A66A /* ScrollTagsView.swift */,
+				FA7D60312CD7A230004FB425 /* SwapCategoriesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				1A2A33962C9453B2008F6414 /* ShowHistoryView.swift in Sources */,
 				64FB5C452C4BF4B100BBADB1 /* ShoppingListView.swift in Sources */,
 				64E00AF02CA45915000092CB /* AccountCapsuleView.swift in Sources */,
+				FA7D60322CD7A230004FB425 /* SwapCategoriesView.swift in Sources */,
 				648E09302C8F04A700ECA13D /* ButtonsScrollView.swift in Sources */,
 				64D644D52CC01C71003A42FD /* AccountsAndGroupsScrollView.swift in Sources */,
 				648E092A2C8EBBE900ECA13D /* InfoMainView.swift in Sources */,
