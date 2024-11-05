@@ -30,7 +30,7 @@ struct CustomSegmentedControlView: View {
                         }
                 }
                 .overlay(
-                    Text(type.rawValue)
+                    Text(LocalizedStringKey(type.rawValue))
                         .foregroundStyle(selection == type ? .appWhite : .appBlack)
                 )
             }

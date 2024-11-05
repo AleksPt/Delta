@@ -31,7 +31,7 @@ struct GroupCardView: View {
             VStack(alignment: .trailing) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(group.title)
+                        Text(LocalizedStringKey(group.title))
                             .font(.subheading1())
                         Spacer(minLength: 0)
                         

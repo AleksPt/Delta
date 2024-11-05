@@ -12,7 +12,7 @@ struct ShoppingListAmountRowView: View {
     
     var body: some View {
         HStack {
-            Text("Amount for \(category.name)")
+            Text(LocalizedStringKey("Amount for \(category.name)"))
                 .lineLimit(1)
                 .layoutPriority(1)
             Spacer()

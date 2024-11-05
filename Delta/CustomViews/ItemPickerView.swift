@@ -19,7 +19,7 @@ struct ItemPickerView<T: Hashable>: View {
             if let items = items as? [GroupOfAccounts] {
                 Picker(title, selection: $selectedItem) {
                     ForEach(items) { item in
-                        Text(item.title).tag(item)
+                        Text(LocalizedStringKey(item.title)).tag(item)
                     }
                 }
                 .pickerStyle(.menu)
@@ -31,7 +31,7 @@ struct ItemPickerView<T: Hashable>: View {
             if let items = items as? [Person] {
                 Picker(title, selection: $selectedItem) {
                     ForEach(items) { item in
-                        Text(item.name).tag(item)
+                        Text(LocalizedStringKey(item.name)).tag(item)
                     }
                 }
                 .pickerStyle(.menu)

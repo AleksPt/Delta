@@ -13,7 +13,7 @@ struct HeaderMainView: View {
     
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(text)
+            Text(LocalizedStringKey(text))
                 .font(.heading1())
                 .foregroundStyle(.appBlack)
             Spacer()

@@ -285,7 +285,7 @@ struct ShoppingListView: View {
                         .id(buyButtonID)
                         .transition(.move(edge: .bottom))
                     } header: {
-                        Text("Completed")
+                        Text(LocalizedStringKey("Completed"))
                     }
                     .listRowBackground(Color.appBackgroundMini)
                     Spacer(minLength: heightKeyboard).listRowBackground(Color.clear).id(emptySpacerID)

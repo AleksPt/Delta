@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var router = Router.shared
     @State private var categoryService = CategoryService()
+    @State private var languageManager = LanguageManager()
     
     var body: some View {
 
@@ -28,6 +29,8 @@ struct ContentView: View {
             }
             .environment(router)
             .environment(categoryService)
+            .environment(languageManager)
+            .environment(\.locale, languageManager.locale)
     }
 }
 
