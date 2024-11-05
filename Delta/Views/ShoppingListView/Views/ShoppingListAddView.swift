@@ -19,7 +19,7 @@ struct ShoppingListAddView: View {
             Image(systemName: "plus.circle.fill")
                 .font(.title2)
                 .foregroundColor(.appBlack)
-            TextField("Add", text: $inputText)
+            TextField(LocalizedStringKey("Add"), text: $inputText)
                 .onSubmit {
                     guard !inputText.isEmpty else { return }
                     withAnimation {

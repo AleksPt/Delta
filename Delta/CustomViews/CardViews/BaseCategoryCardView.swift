@@ -20,9 +20,9 @@ struct BaseCategoryCardView: View {
         VStack(alignment: .leading) {
 
                 VStack(alignment: .leading) {
-                    Text(title)
+                    Text(LocalizedStringKey(title))
                         .font(.bodyText1())
-                    Text(subtitle)
+                    Text(LocalizedStringKey(subtitle))
                         .font(.metadata3())
                         .foregroundStyle(.textGray)
                 }

@@ -19,7 +19,7 @@ struct ShowHistoryView: View {
             Text(LocalizedStringKey(title))
             
             Button(action: action, label: {
-                Label(buttonTitle, systemImage: "chevron.forward")
+                Label(LocalizedStringKey(buttonTitle), systemImage: "chevron.forward")
                     .labelStyle(CustomLabelStyle())
             })
             .tint(.gray)

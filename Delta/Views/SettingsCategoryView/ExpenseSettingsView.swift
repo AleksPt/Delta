@@ -131,7 +131,7 @@ struct RandomExpensesView: View {
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
-                Text("Expense main info")
+                Text(LocalizedStringKey("Expense main info"))
                     .font(.bodyText1())
                     .padding(.bottom, 6)
             }

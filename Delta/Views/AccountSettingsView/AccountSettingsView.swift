@@ -82,7 +82,7 @@ struct AccountSettingsView: View {
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
-                Text("Account settings")
+                Text(LocalizedStringKey("Account settings"))
                     .font(.subheading1())
                     .padding(.leading, -18)
                     .padding(.bottom, 8)
@@ -162,7 +162,7 @@ struct AccountSettingsView: View {
         .listSectionSpacing(.compact)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
+                Button(LocalizedStringKey("Save")) {
                     account?.title = name
                     account?.currency = currency
                     account?.color = selectedColor.name

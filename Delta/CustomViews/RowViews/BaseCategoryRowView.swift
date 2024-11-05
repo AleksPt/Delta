@@ -28,7 +28,7 @@ struct BaseCategoryRowView: View {
                     .frame(width: 18, height: 16)
             }
             
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.subheading2())
             
             Spacer()
