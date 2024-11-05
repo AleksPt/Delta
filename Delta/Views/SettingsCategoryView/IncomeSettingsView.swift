@@ -58,11 +58,11 @@ struct IncomeSettingsView: View {
                 .padding(.top, -10)
             }
         }
-        .navigationTitle(String(localized: "Income source"))
+        .navigationTitle(LocalizedStringKey("Income source"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(String(localized: "Save")) {
+                Button(LocalizedStringKey("Save")) {
                     //сохраняем изменения
                     income?.title = title
                     income?.currency = currency
@@ -112,21 +112,21 @@ struct RandomIncomesView: View {
             Section {
                 TextFieldRowView(
                     inputValue: $title,
-                    title: String(localized: "Income title"),
+                    title: "Income title",
                     keyboardType: .default,
-                    placeholder: String(localized: "Your title")
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
-                    title: String(localized: "Currency")
+                    title: "Currency"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 TextFieldRowView(
                     inputValue: $amount,
-                    title: String(localized: "Amount"),
+                    title: "Amount",
                     keyboardType: .decimalPad,
                     placeholder: "0.0"
                 )
@@ -163,15 +163,15 @@ struct CertainIncomesView: View {
             Section {
                 TextFieldRowView(
                     inputValue: $title,
-                    title: String(localized: "Income title"),
+                    title: "Income title",
                     keyboardType: .default,
-                    placeholder: String(localized: "Your title")
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
-                    title: String(localized: "Currency")
+                    title: "Currency"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
@@ -183,7 +183,7 @@ struct CertainIncomesView: View {
             IconPickerView(
                 selectedItem: $icon,
                 items: Icon.allCases,
-                title: String(localized: "Icon")
+                title: "Icon"
             )
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)

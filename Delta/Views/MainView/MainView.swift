@@ -40,7 +40,7 @@ struct MainView: View {
             case .expense:
                 ExpenseScrollView(
                     expenses: categoryService.expenses,
-                    title: String(localized: "Expenses"),
+                    title: "Expenses",
                     settingsRoute: .expenseCreate,
                     categoryRoute: .incomes
                 )
@@ -51,7 +51,7 @@ struct MainView: View {
             case .income:
                 IncomeScrollView(
                     incomes: categoryService.incomes,
-                    title: String(localized: "Incomes"),
+                    title: "Incomes",
                     settingsRoute: .incomeCreate,
                     categoryRoute: .incomes
                 )

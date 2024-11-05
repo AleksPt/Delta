@@ -16,7 +16,7 @@ struct ShowHistoryView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
             
             Button(action: action, label: {
                 Label(buttonTitle, systemImage: "chevron.forward")

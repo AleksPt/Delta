@@ -17,7 +17,7 @@ struct ExpenseIncomeView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.metadata3())
                 Spacer(minLength: 0)
                 Text(currentAmount.formattedAmount(for: currency))

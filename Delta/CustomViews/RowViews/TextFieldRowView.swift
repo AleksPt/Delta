@@ -16,9 +16,9 @@ struct TextFieldRowView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            TextField(placeholder, text: $inputValue)
+            TextField(LocalizedStringKey(placeholder), text: $inputValue)
                 .textFieldStyle(.plain)
                 .multilineTextAlignment(.trailing)
                 .keyboardType(keyboardType)

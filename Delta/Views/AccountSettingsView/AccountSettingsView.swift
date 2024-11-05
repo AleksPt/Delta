@@ -33,7 +33,7 @@ struct AccountSettingsView: View {
             users: DataStore.shared.people,
             transactions: [],
             categoryType: .account,
-            groupOfAccounts: String(localized: "Main")
+            groupOfAccounts: "Main"
         )) {
         self.account = account
         _name = State(initialValue: account.title)
@@ -62,21 +62,21 @@ struct AccountSettingsView: View {
             Section {
                 TextFieldRowView(
                     inputValue: $name,
-                    title: String(localized: "Account name"),
+                    title: "Account name",
                     keyboardType: .default,
-                    placeholder: String(localized: "Your account")
+                    placeholder: "Your account"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
-                    title: String(localized: "Currency")
+                    title: "Currency"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 TextFieldRowView(
                     inputValue: $balance,
-                    title: String(localized: "Account balance"),
+                    title: "Account balance",
                     keyboardType: .decimalPad,
                     placeholder: "0.0"
                 )
@@ -94,13 +94,13 @@ struct AccountSettingsView: View {
                     IconPickerView(
                         selectedItem: $selectedIcon,
                         items: Icon.allCases,
-                        title: String(localized: "Icon")
+                        title: "Icon"
                     )
                     
                     ColorPickerView(
                         selectedItem: $selectedColor,
                         items: AppGradient.allCases,
-                        title: String(localized: "Color")
+                        title: "Color"
                     )
                 }
                 .listRowInsets(EdgeInsets())
@@ -131,8 +131,8 @@ struct AccountSettingsView: View {
             
             Section {
                 ShowHistoryView(
-                    title: String(localized: "History"),
-                    buttonTitle: String(localized: "Show"),
+                    title: "History",
+                    buttonTitle: "Show",
                     action: {
                         //TODO: - router.navigateTo(.history)
                     },
@@ -142,7 +142,7 @@ struct AccountSettingsView: View {
                 .listRowBackground(Color.clear)
             }
             
-            RoundedButtonView(title: String(localized: "Delete account")) {
+            RoundedButtonView(title: "Delete account") {
                 if categoryService.isAccountExist(account!.id) {
                     categoryService.removeAccount(by: account!.id)
                 }

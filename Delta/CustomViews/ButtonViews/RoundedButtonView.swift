@@ -14,7 +14,7 @@ struct RoundedButtonView: View {
     var body: some View {
         Button(action: action) {
             VStack {
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.bodyText2())
                     .foregroundStyle(.appWhite)
             }
