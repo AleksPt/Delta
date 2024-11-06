@@ -19,7 +19,7 @@ struct AccountSettingsView: View {
     @State private var selectedIcon: Icon
     @State private var selectedColor: AppGradient
     @State private var selectedUser: Person //TODO: - add multiple choising
-    @State private var selectedGroup: GroupOfAccounts
+    @State private var selectedGroup: GroupOfAccounts?
     
     let dataStore = DataStore.shared
     var account: Account?
@@ -110,17 +110,15 @@ struct AccountSettingsView: View {
             
             Section {
                 HStack(spacing: 16) {
-                    ItemPickerView(
-                        selectedItem: $selectedGroup,
-                        items: dataStore.groupsOfAccounts,
-                        title: "Group of Accounts",
+                    GroupPickerView(
+                        selectedGroup: $selectedGroup,
+                        groups: dataStore.groupsOfAccounts,
                         size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
                     )
                     
-                    ItemPickerView(
-                        selectedItem: $selectedUser,
-                        items: dataStore.people,
-                        title: "User",
+                    PersonPickerView(
+                        selectedPerson: $selectedUser,
+                        persons: dataStore.people,
                         size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
                     )
                 }
@@ -167,7 +165,7 @@ struct AccountSettingsView: View {
                     account?.currency = currency
                     account?.color = selectedColor.name
                     account?.image = selectedIcon.name
-                    account?.groupOfAccounts = selectedGroup.title
+                    account?.groupOfAccounts = selectedGroup?.title ?? ""
                     
                     if !categoryService.isAccountExist(account!.id) {
                         categoryService.createAccount(account ?? Account(
@@ -182,6 +180,7 @@ struct AccountSettingsView: View {
                             groupOfAccounts: "Main"
                         ))
                     }
+                    categoryService.updateGroups()
                     
                     dismiss()
                     

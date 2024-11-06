@@ -17,7 +17,7 @@ struct HeaderMainView: View {
                 .font(.heading1())
                 .foregroundStyle(.appBlack)
             Spacer()
-            ChevronButtonView(action: action)
+            ChevronButtonView(image: "chevron.right.circle.fill", title: "See all", action: action)
         }
     }
 }

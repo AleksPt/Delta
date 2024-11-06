@@ -10,7 +10,7 @@ import SwiftUI
 struct AccountsScrollView: View {
     @Environment(Router.self) private var router
     
-    let accounts: [Account]
+    @Binding var accounts: [Account]
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -25,6 +25,11 @@ struct AccountsScrollView: View {
                 PlusButtonView {
                     router.navigateTo(.accountCreate)
                 }
+                .simultaneousGesture(
+                    TapGesture().onEnded {
+                        router.navigateTo(.accountCreate)
+                    }
+                )
             }
         }
         .shadow()
@@ -33,5 +38,5 @@ struct AccountsScrollView: View {
 
 #Preview {
     let accounts = DataStore.shared.accounts
-    return AccountsScrollView(accounts: accounts).environment(Router.shared)
+    return AccountsScrollView(accounts: .constant(accounts)).environment(Router.shared)
 }
