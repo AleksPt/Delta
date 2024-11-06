@@ -885,7 +885,15 @@ final class Expense: Identifiable, Hashable, Transferable, Codable {
     }
 }
 
-final class Account: Identifiable, Hashable, Transferable, Codable {
+protocol AccountRepresentable: Identifiable, Hashable, Codable {
+    var id: UUID { get }
+    var title: String { get }
+    var currency: Currency { get }
+    var image: String { get }
+    var color: String { get }
+}
+
+final class Account: Identifiable, Hashable, Transferable, Codable, AccountRepresentable {
     var id: UUID = UUID()
     var title: String = ""
     var currency: Currency = .usd
@@ -945,7 +953,7 @@ final class Account: Identifiable, Hashable, Transferable, Codable {
     }
 }
 
-final class GroupOfAccounts: Identifiable, Hashable, Transferable, Codable {
+final class GroupOfAccounts: Identifiable, Hashable, Transferable, Codable, AccountRepresentable {
     var id: UUID = UUID()
     var title: String = ""
     var currency: Currency = .usd

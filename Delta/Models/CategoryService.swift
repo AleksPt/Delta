@@ -14,6 +14,8 @@ final class CategoryService {
     var subCategories: [SubCategory] = []
     var accounts: [Account] = DataStore.shared.accounts
     var groupsOfAccounts: [GroupOfAccounts] = DataStore.shared.groupsOfAccounts
+    
+    var accountsAndGroups: [any AccountRepresentable] = []
        
 //MARK: - INCOMES
     func createIncome(_ draftIncome: Income) {
@@ -134,6 +136,12 @@ final class CategoryService {
             }
         }
     }
+    
+//MARK: - ACCOUNTS AND GROUPS
+    func getAccountsAndGroups() {
+        accountsAndGroups = groupsOfAccounts + accounts.filter { $0.groupOfAccounts == "" }
+    }
+    
 }
 
 

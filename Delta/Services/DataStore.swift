@@ -58,7 +58,7 @@ final class DataStore {
             users: [],
             transactions: [],
             categoryType: .account,
-            groupOfAccounts: "Sber bank"
+            groupOfAccounts: ""
         )
         
         let currency = Account(
@@ -98,7 +98,7 @@ final class DataStore {
             currency: .rub,
             image: "building.columns",
             color: AppGradient.appGreen.name,
-            accounts: [basic, currency],
+            accounts: [currency],
             categoryType: .groupOfAccounts
         )
         
@@ -114,13 +114,10 @@ final class DataStore {
         
         people.append(person1)
         people.append(person2)
-//        categories.append(alfabank)
-//        categories.append(group1)
-//        categories.append(cash)
-//        categories.append(basic)
-//        categories.append(currency)
+        
         groupsOfAccounts.append(group1)
         groupsOfAccounts.append(group2)
+        
         accounts.append(alfabank)
         accounts.append(cash)
         accounts.append(basic)
@@ -175,10 +172,5 @@ final class DataStore {
         incomes.append(award)
         incomes.append(salary)
         expenses.append(taxi)
-        
-//        categories.append(award)
-//        categories.append(salary)
-//        categories.append(taxi)
-        
     }
 }

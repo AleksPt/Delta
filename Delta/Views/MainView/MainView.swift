@@ -22,10 +22,7 @@ struct MainView: View {
             InfoMainView()
             Spacer()
             
-            AccountsAndGroupsScrollView(
-                accounts: accounts,
-                groups: groups
-            )
+            AccountsAndGroupsScrollView()
                 .safeAreaPadding(.horizontal)
             Spacer()
             
