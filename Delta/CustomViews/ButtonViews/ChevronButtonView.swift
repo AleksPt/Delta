@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ChevronButtonView: View {
+    let image: String
+    let title: String
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
-        Label("See all", systemImage: "chevron.right.circle.fill")
+        Label(title, systemImage: image)
             .font(.bodyText2())
             .labelStyle(IconTrailingLabelStyle())
             .foregroundStyle(.appBlack)
@@ -30,5 +32,5 @@ struct IconTrailingLabelStyle: LabelStyle {
 }
 
 #Preview {
-    ChevronButtonView(action: {})
+    ChevronButtonView(image: "chevron.right.circle.fill", title: "See all", action: {})
 }
