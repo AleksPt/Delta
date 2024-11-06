@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(LanguageManager.self) var languageManager
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        Button("Switch language") {
+            if languageManager.locale.identifier == "ru_RU" {
+                languageManager.changeLanguage(to: "en_EN")
+            } else {
+                languageManager.changeLanguage(to: "ru_RU")
+            }
+        }
+        .buttonStyle(.borderedProminent)
     }
 }
 
 #Preview {
     SettingsView()
+        .environment(LanguageManager())
 }

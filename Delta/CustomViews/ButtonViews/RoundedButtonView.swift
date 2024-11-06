@@ -13,14 +13,17 @@ struct RoundedButtonView: View {
     
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .font(.bodyText2())
-                .foregroundStyle(.appWhite)
+            VStack {
+                Text(LocalizedStringKey(title))
+                    .font(.bodyText2())
+                    .foregroundStyle(.appWhite)
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(.appBlack)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(.appBlack)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .buttonStyle(.plain)
     }
 }
 

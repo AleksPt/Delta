@@ -52,6 +52,7 @@ enum ModalRoute: Equatable {
 @MainActor
 @Observable
 final class Router {
+
     static let shared = Router()
     
     var startScreen: Route = .main
@@ -114,6 +115,7 @@ final class Router {
         case .seeAll:
             SeeAllView()
         }
+
     }
     
     func navigateTo(_ appRoute: Route) {

@@ -63,7 +63,7 @@ struct AccountSettingsView: View {
                 TextFieldRowView(
                     inputValue: $name,
                     title: "Account name",
-                    keyboardType: .default, 
+                    keyboardType: .default,
                     placeholder: "Your account"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
@@ -77,12 +77,12 @@ struct AccountSettingsView: View {
                 TextFieldRowView(
                     inputValue: $balance,
                     title: "Account balance",
-                    keyboardType: .decimalPad, 
+                    keyboardType: .decimalPad,
                     placeholder: "0.0"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
-                Text("Account settings")
+                Text(LocalizedStringKey("Account settings"))
                     .font(.subheading1())
                     .padding(.leading, -18)
                     .padding(.bottom, 8)
@@ -162,7 +162,7 @@ struct AccountSettingsView: View {
         .listSectionSpacing(.compact)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
+                Button(LocalizedStringKey("Save")) {
                     account?.title = name
                     account?.currency = currency
                     account?.color = selectedColor.name

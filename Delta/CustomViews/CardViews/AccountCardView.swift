@@ -18,7 +18,7 @@ struct AccountCardView: View {
         VStack(alignment: .trailing) {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(account.title)
+                    Text(LocalizedStringKey(account.title))
                         .font(.subheading1())
                     Spacer(minLength: 0)
                     

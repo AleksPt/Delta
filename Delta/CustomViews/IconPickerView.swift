@@ -16,7 +16,7 @@ struct ColorPickerView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.subheading2())
                 .padding(.horizontal, 16)
             
@@ -58,7 +58,7 @@ struct IconPickerView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.subheading2())
                 .padding(.horizontal, 16)
             

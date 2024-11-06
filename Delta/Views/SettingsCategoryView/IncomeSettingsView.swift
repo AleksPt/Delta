@@ -58,11 +58,11 @@ struct IncomeSettingsView: View {
                 .padding(.top, -10)
             }
         }
-        .navigationTitle("Income source")
+        .navigationTitle(LocalizedStringKey("Income source"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
+                Button(LocalizedStringKey("Save")) {
                     //сохраняем изменения
                     income?.title = title
                     income?.currency = currency
@@ -113,7 +113,7 @@ struct RandomIncomesView: View {
                 TextFieldRowView(
                     inputValue: $title,
                     title: "Income title",
-                    keyboardType: .default, 
+                    keyboardType: .default,
                     placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
@@ -127,7 +127,7 @@ struct RandomIncomesView: View {
                 TextFieldRowView(
                     inputValue: $amount,
                     title: "Amount",
-                    keyboardType: .decimalPad, 
+                    keyboardType: .decimalPad,
                     placeholder: "0.0"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
