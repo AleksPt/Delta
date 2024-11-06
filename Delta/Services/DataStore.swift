@@ -12,7 +12,7 @@ final class DataStore {
     static let shared = DataStore()
     
     var people: [Person] = []
-    var categories: [Category] = []
+    //var categories: [Category] = []
     var transactions: [Transaction] = []
     var groupsOfAccounts: [GroupOfAccounts] = []
     var accounts: [Account] = []
@@ -114,11 +114,11 @@ final class DataStore {
         
         people.append(person1)
         people.append(person2)
-        categories.append(alfabank)
-        categories.append(group1)
-        categories.append(cash)
-        categories.append(basic)
-        categories.append(currency)
+//        categories.append(alfabank)
+//        categories.append(group1)
+//        categories.append(cash)
+//        categories.append(basic)
+//        categories.append(currency)
         groupsOfAccounts.append(group1)
         groupsOfAccounts.append(group2)
         accounts.append(alfabank)
@@ -176,9 +176,9 @@ final class DataStore {
         incomes.append(salary)
         expenses.append(taxi)
         
-        categories.append(award)
-        categories.append(salary)
-        categories.append(taxi)
+//        categories.append(award)
+//        categories.append(salary)
+//        categories.append(taxi)
         
     }
 }

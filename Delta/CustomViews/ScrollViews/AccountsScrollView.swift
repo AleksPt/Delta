@@ -10,31 +10,20 @@ import SwiftUI
 struct AccountsScrollView: View {
     @Environment(Router.self) private var router
     
-    let categories: [Category]
+    let accounts: [Account]
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
-                ForEach(categories) { category in
-                    if let account = category as? Account {
-                        AccountCardView(
-                            account: account,
-                            size: CGSize(width: Constants.widthTwo, height: Constants.heightThree))
-                    }
+                ForEach(accounts) { account in
+                    AccountCardView(
+                        account: account,
+                        size: CGSize(width: Constants.widthTwo, height: Constants.heightThree))
+                    
                 }
                 
                 PlusButtonView {
-                    let account = Account(
-                        id: UUID(),
-                        title: "",
-                        currency: .rub,
-                        image: "",
-                        color: "",
-                        users: [],
-                        transactions: [],
-                        categoryType: .account
-                    )
-                    router.navigateTo(.accountSettings(account: account))
+                    router.navigateTo(.accountCreate)
                 }
             }
         }
@@ -43,6 +32,6 @@ struct AccountsScrollView: View {
 }
 
 #Preview {
-    let accounts = DataManager.shared.getCategories(with: .account)
-    return AccountsScrollView(categories: accounts).environment(Router())
+    let accounts = DataStore.shared.accounts
+    return AccountsScrollView(accounts: accounts).environment(Router.shared)
 }

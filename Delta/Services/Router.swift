@@ -45,7 +45,7 @@ enum ModalRoute: Equatable {
         }
     }
     
-    case seeAllAccounts(accounts: Binding<[Category]>)
+    case seeAllAccounts(accounts: Binding<[Account]>)
     case seeAll
 }
 
@@ -104,8 +104,6 @@ final class Router {
             IncomeSettingsView()
         case .expenseCreate:
             ExpenseSettingsView()
-        case .expenseCreate(let expense):
-            ExpenseSettingsView(expense: expense)
         }
     }
     

@@ -64,8 +64,8 @@ struct AccountGroupCapsuleView: View {
 }
 
 #Preview {
-    let group = DataManager.shared.getCategories(with: .groupOfAccounts).first as? GroupOfAccounts
-    let account = group?.accounts.first
+    let group = CategoryService().groupsOfAccounts.first!
+    let account = group.accounts.first!
     
-    return AccountGroupCapsuleView(accountsGroup: group!, selectedAccount: .constant(account), isExpanded: .constant(false))
+    return AccountGroupCapsuleView(accountsGroup: group, selectedAccount: .constant(account), isExpanded: .constant(false))
 }
