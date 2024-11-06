@@ -56,9 +56,13 @@ struct AccountGroupSettingsView: View {
             .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 14, trailing: 0))
             
             Section(header: headerView) {
-                AccountsScrollView(accounts: accounts)
+                AccountsScrollView(accounts: $accounts)
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
+                    .onChange(of: categoryService.accounts) {
+                        let group = categoryService.groupsOfAccounts.first(where: { $0.title == groupOfAccounts?.title })
+                        accounts = group?.accounts ?? []
+                    }
             }
             
             Section {
@@ -165,7 +169,7 @@ struct AccountGroupSettingsView: View {
             
             Spacer()
             
-            ChevronButtonView() {
+            ChevronButtonView(image: "chevron.right.circle.fill", title: "Edit") {
                 //router.presentModal(.seeAllAccounts(accounts: $accounts))
             }
             .textCase(.none)

@@ -182,6 +182,7 @@ struct AccountSettingsView: View {
                             groupOfAccounts: "Main"
                         ))
                     }
+                    categoryService.updateGroups()
                     
                     dismiss()
                     
