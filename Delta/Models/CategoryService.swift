@@ -15,7 +15,7 @@ final class CategoryService {
     var accounts: [Account] = DataStore.shared.accounts
     var groupsOfAccounts: [GroupOfAccounts] = DataStore.shared.groupsOfAccounts
     
-    var accountsAndGroups: [any AccountRepresentable] = []
+    var accountsAndGroups: [AccountsAndGroups] = []
        
 //MARK: - INCOMES
     func createIncome(_ draftIncome: Income) {

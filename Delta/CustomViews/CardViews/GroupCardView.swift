@@ -35,7 +35,7 @@ struct GroupCardView: View {
                             .font(.subheading1())
                         Spacer(minLength: 0)
                         
-                        Text(group.amount.formattedAmount(for: group.currency))
+                        Text(group.totalAmount.formattedAmount(for: group.currency))
                             .font(.metadata3())
                     }
                     Spacer(minLength: 0)
