@@ -1038,8 +1038,9 @@ extension UTType {
     static let subCategory = UTType(exportedAs: "com.delta.subCategory")
     static let income = UTType(exportedAs: "com.delta.income")
     static let expense = UTType(exportedAs: "com.delta.expense")
-    static let account = UTType(exportedAs: "com.delta.account")
-    static let groupOfAccounts = UTType(exportedAs: "com.delta.groupOfAccounts")
+    static let accountsAndGroups = UTType(exportedAs: "com.delta.accountsAndGroups")
+//    static let account = UTType(exportedAs: "com.delta.account")
+//    static let groupOfAccounts = UTType(exportedAs: "com.delta.groupOfAccounts")
 }
 
 extension SubCategory {
@@ -1232,6 +1233,6 @@ extension AccountsAndGroups {
     }
     
     static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation<Account, JSONEncoder, JSONDecoder>(contentType: .account)
+        CodableRepresentation<AccountsAndGroups, JSONEncoder, JSONDecoder>(contentType: .accountsAndGroups)
     }
 }
