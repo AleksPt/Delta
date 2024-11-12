@@ -19,7 +19,7 @@ struct AccountSettingsView: View {
     @State private var selectedIcon: Icon
     @State private var selectedColor: AppGradient
     @State private var selectedUser: Person //TODO: - add multiple choising
-    @State private var selectedGroup: GroupOfAccounts?
+    @State private var selectedGroup: String
     
     let dataStore = DataStore.shared
     var account: Account?
@@ -42,7 +42,7 @@ struct AccountSettingsView: View {
         _selectedIcon = State(initialValue: Icon.getIcon(from: account.image) ?? .dollar)
         _selectedColor = State(initialValue: AppGradient.getColor(from: account.color) ?? .blueGradient)
         _selectedUser = State(initialValue: account.users.first ?? DataStore.shared.people.first!)
-        _selectedGroup = State(initialValue: CategoryService().getGroupOfAccounts(from: account.groupOfAccounts)!)
+        _selectedGroup = State(initialValue: account.groupOfAccounts)
     }
     
     var body: some View {
@@ -165,7 +165,7 @@ struct AccountSettingsView: View {
                     account?.currency = currency
                     account?.color = selectedColor.name
                     account?.image = selectedIcon.name
-                    account?.groupOfAccounts = selectedGroup?.title ?? ""
+                    account?.groupOfAccounts = selectedGroup
                     
                     if !categoryService.isAccountExist(account!.id) {
                         categoryService.createAccount(account ?? Account(

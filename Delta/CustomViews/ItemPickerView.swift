@@ -9,16 +9,16 @@ import SwiftUI
 import UISystem
 
 struct GroupPickerView: View {
-    @Binding var selectedGroup: GroupOfAccounts?
+    @Binding var selectedGroup: String
     let groups: [GroupOfAccounts]
     let size: CGSize
     
     var body: some View {
         HStack {
             Picker("", selection: $selectedGroup) {
-                Text("No group").tag(nil as GroupOfAccounts?)
+                Text("No group").tag("")
                 ForEach(groups) { group in
-                    Text(LocalizedStringKey(group.title)).tag(group as GroupOfAccounts?)
+                    Text(LocalizedStringKey(group.title)).tag(group.title)
                 }
             }
             .labelsHidden()
@@ -61,7 +61,7 @@ struct PersonPickerView: View {
 
 #Preview {
     GroupPickerView(
-        selectedGroup: .constant(DataStore.shared.groupsOfAccounts.first!),
+        selectedGroup: .constant(DataStore.shared.groupsOfAccounts.first!.title),
         groups: DataStore.shared.groupsOfAccounts,
         size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
     )

@@ -60,21 +60,9 @@
 				<string></string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>com.delta.account</string>
+			<string>com.delta.accountsAndGroups</string>
 			<key>UTTypeDescription</key>
-			<string>Account</string>
-			<key>UTTypeTagSpecification</key>
-			<dict/>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string></string>
-			</array>
-			<key>UTTypeIdentifier</key>
-			<string>com.delta.groupOfAccounts</string>
-			<key>UTTypeDescription</key>
-			<string>GroupOfAccounts</string>
+			<string>AccountsAndGroups</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
