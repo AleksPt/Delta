@@ -65,7 +65,33 @@ struct TransferView: View {
             
             Spacer()
             RoundedButtonView(title: "Save") {
+                let autoTransaction = AutoTransaction(
+                    id: UUID(),
+                    title: title,
+                    repeatDate: repeatDate,
+                    endDate: endDate,
+                    period: period,
+                    isNotify: isNotify
+                )
+                
+                let transaction: Transaction = Transaction(
+                    id: UUID(),
+                    amount: Double(amount) ?? 0,
+                    date: date,
+                    sourceID: fromAccount.id,
+                    destinationID: toAccount.id,
+                    tags: tags.map { $0.name },
+                    currency: fromAccount.currency,
+                    person: nil,
+                    autoTransaction: isRepeatable ? autoTransaction : nil
+                )
+                
+                fromAccount.transactions.append(transaction)
+                toAccount.transactions.append(transaction)
+                
                 dismiss()
+                
+                print(toAccount.title, toAccount.amount)
             }
             .buttonStyle(.borderless)
             .background(.appBackground)

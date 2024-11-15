@@ -602,6 +602,28 @@ final class Transaction: Codable {
     private enum CodingKeys: String, CodingKey {
         case id, amount, date, sourceID, destinationID, tags, currency, person
     }
+    
+    init(
+        id: UUID,
+        amount: Double,
+        date: Date,
+        sourceID: UUID,
+        destinationID: UUID,
+        tags: [String],
+        currency: Currency,
+        person: Person?,
+        autoTransaction: AutoTransaction?
+    ) {
+        self.id = id
+        self.amount = amount
+        self.date = date
+        self.sourceID = sourceID
+        self.destinationID = destinationID
+        self.tags = tags
+        self.currency = currency
+        self.person = person
+        self.autoTransaction = autoTransaction
+    }
 }
 
 final class AutoTransaction {
@@ -611,6 +633,22 @@ final class AutoTransaction {
     var endDate: Date = Date()
     var period: Period = .month
     var isNotify: Bool = false
+    
+    init(
+        id: UUID,
+        title: String,
+        repeatDate: Date,
+        endDate: Date,
+        period: Period,
+        isNotify: Bool
+    ) {
+        self.id = id
+        self.title = title
+        self.repeatDate = repeatDate
+        self.endDate = endDate
+        self.period = period
+        self.isNotify = isNotify
+    }
 }
 
 //final class DebtTransaction: Transaction {
@@ -918,6 +956,7 @@ final class Expense: Identifiable, Hashable, Transferable, Codable {
 //    var color: String { get }
 //}
 
+@Observable
 class AccountsAndGroups: Identifiable {
     var id: UUID = UUID()
     var title: String = ""
@@ -953,6 +992,7 @@ class AccountsAndGroups: Identifiable {
     }
 }
 
+@Observable
 final class Account: AccountsAndGroups, Transferable, Codable, Hashable, Equatable {
     var users: [Person] = []
     var transactions: [Transaction] = []
@@ -1011,6 +1051,7 @@ final class Account: AccountsAndGroups, Transferable, Codable, Hashable, Equatab
     }
 }
 
+@Observable
 final class GroupOfAccounts: AccountsAndGroups, Hashable, Equatable {
     var accounts: [Account] = []
     

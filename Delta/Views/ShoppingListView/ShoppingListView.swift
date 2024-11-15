@@ -185,14 +185,17 @@ final class Tag: Hashable, Identifiable {
         
         for category in categoriesWithCompletedItems {
             
-            let transaction = Transaction()
-            transaction.amount = Double(category.amount) ?? 0
-            transaction.date = Date()
-            transaction.sourceID = category.id // TODO: - Устанавливаем категорию как источник
-            transaction.destinationID = account.id
-            transaction.tags = category.completedItems.map { $0.name }
-            transaction.currency = account.currency
-            transaction.person = nil // TODO: - Задать пользователя
+            let transaction: Transaction = Transaction(
+                id: UUID(),
+                amount: Double(category.amount) ?? 0,
+                date: Date(),
+                sourceID: category.id, // TODO: - Устанавливаем категорию как источник
+                destinationID: account.id,
+                tags: category.completedItems.map { $0.name },
+                currency: account.currency,
+                person: nil, // TODO: - Задать пользователя
+                autoTransaction: nil
+            )
             
             transactions.append(transaction)
         }
