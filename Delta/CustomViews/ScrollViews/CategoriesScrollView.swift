@@ -42,7 +42,7 @@ struct IncomeScrollView: View {
                         .draggable(income)
                         
                         .dropDestination(for: Income.self) { droppedCategories, location in
-                            router.navigateTo(.incomes)
+                            //router.navigateTo(.incomes)
                             return true
                         } isTargeted: { isTargeted in
                             // change appearance
@@ -94,7 +94,7 @@ struct ExpenseScrollView: View {
                         .draggable(expense)
                         
                         .dropDestination(for: Expense.self) { droppedCategories, location in
-                            router.navigateTo(.incomes)
+                            //router.navigateTo(.incomes)
                             return true
                         } isTargeted: { isTargeted in
                             // change appearance

@@ -13,6 +13,7 @@ struct AccountsAndGroupsScrollView: View {
     
     @State private var selectedGroup: GroupOfAccounts?
     @State private var isExpanded = false
+    @State private var droppedAccount: Account?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -26,7 +27,17 @@ struct AccountsAndGroupsScrollView: View {
                             if let account = item as? Account {
                                 AccountCardView(
                                     account: account,
-                                    size: CGSize(width: Constants.widthTwo, height: Constants.heightThree))
+                                    size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
+                                )
+                                .draggable(account)
+                                .dropDestination(for: Account.self) { droppedAccounts, location in
+                                    droppedAccount = droppedAccounts.first
+                                    guard let droppedAccount else { return false }
+                                    router.presentModal(.transfer(sourse: droppedAccount, destination: account))
+                                    return true
+                                } isTargeted: { isTargeted in
+                                    // change appearance
+                                }
                             } else if let group = item as? GroupOfAccounts {
                                 AccountGroupCardView(accountsGroup: group, onSelect: {
                                     selectedGroup = nil

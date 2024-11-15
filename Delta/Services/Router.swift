@@ -18,7 +18,6 @@ enum Route: Hashable {
     case accountCreate
     case accountGroupCreate
     case seeAll
-    case transfer
     case incomes
     case incomeSettings(income: Income)
     case expenseSettings(expense: Expense)
@@ -40,6 +39,8 @@ enum ModalRoute: Equatable {
             lhsAccounts.wrappedValue == rhsAccounts.wrappedValue
         case (.seeAll, .seeAll):
             true
+        case (.transfer(let lhsSource, let lhsDestination), .transfer(let rhsSource, let rhsDestination)):
+            lhsSource == rhsSource && lhsDestination == rhsDestination
         default:
             false
         }
@@ -47,6 +48,7 @@ enum ModalRoute: Equatable {
     
     case seeAllAccounts(accounts: Binding<[Account]>)
     case seeAll
+    case transfer(sourse: Account, destination: Account)
 }
 
 @MainActor
@@ -88,9 +90,6 @@ final class Router {
         case .seeAll:
             SeeAllView()
                 .navigationBarBackButtonHidden()
-        case .transfer:
-            TransferView()
-                .navigationBarBackButtonHidden()
         case .incomes:
             IncomesView()
         case .incomeSettings(let income):
@@ -114,6 +113,8 @@ final class Router {
             SeeAllAccounts(accounts: accounts)
         case .seeAll:
             SeeAllView()
+        case .transfer(let source, let destination):
+            TransferView(fromAccount: source, toAccount: destination)
         }
 
     }

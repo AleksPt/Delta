@@ -19,7 +19,6 @@ struct AutoTransactionView: View {
     var body: some View {
         VStack {
             NotificationRowView(notificationIsOn: $isRepeatable, title: "Repeat")
-                .padding(.horizontal, 16)
             switch isRepeatable {
             case true:
                 TextField("Title", text: $title)
@@ -27,27 +26,25 @@ struct AutoTransactionView: View {
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.leading)
                     .keyboardType(.default)
-                    .padding(.horizontal, 16)
+                
                 Divider()
-                    .padding(.horizontal, 16)
                 
                 HStack(spacing: 16) {
                     DatePickerView(date: $repeatDate, title: "Repeat date", background: AppGradient.appGray)
                     DatePickerView(date: $endDate, title: "End date", background: AppGradient.appGray)
                 }
                 .padding(.vertical, 8)
-                .padding(.horizontal, 16)
                 
                 HStack(spacing: 16) {
                     choosePeriod()
                     isNotificationsOn()
                 }
-                .padding(.horizontal, 16)
                 .padding(.bottom, 16)
             case false:
                 EmptyView()
             }
         }
+        .padding(.horizontal, 16)
         .background(AppGradient.appBackgroundMini.value)
         .cornerRadius(16)
     }

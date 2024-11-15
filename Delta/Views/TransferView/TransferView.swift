@@ -9,6 +9,8 @@ import SwiftUI
 import UISystem
 
 struct TransferView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @State private var amount: String = ""
     @State private var date: Date = Date()
     @State private var tags: [Tag] = []
@@ -20,65 +22,56 @@ struct TransferView: View {
     @State private var period: Period = .month
     @State private var isNotify: Bool = false
     
-    var account: Account?
-    var income: Income?
-    var expense: Expense?
+    var fromAccount: Account
+    var toAccount: Account
     
     var body: some View {
-        List {
-            Section {
-                textfieldView
-            }
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(Color.clear)
+        VStack {
+            Text("Transfer")
+                .font(.heading2())
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.top, 8)
+                .padding(.bottom, 8)
             
-            Section {
-                if let account {
-                    TransactionFieldView(type: .source, account: account)
-                }
+            textfieldView
+                .padding(.horizontal, 26)
+                .padding(.bottom, 8)
+            
+            TransactionFieldView(type: .source, account: fromAccount)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+            
+            TransactionFieldView(type: .destination, account: toAccount)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+            
+            HStack(spacing: 16) {
+                DatePickerView(date: $date, title: "Date", background: AppGradient.appBackgroundMini)
                 
-                if let income {
-                    TransactionFieldView(type: .source, income: income)
-                }
+                TagPickerView(selectedTags: $tags)
             }
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(Color.clear)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8)
             
-            Section {
-                if let expense {
-                    TransactionFieldView(type: .destination, expense: expense)
-                }
+            AutoTransactionView(
+                isRepeatable: $isRepeatable,
+                title: $title,
+                repeatDate: $repeatDate,
+                endDate: $endDate,
+                period: $period,
+                isNotify: $isNotify
+            )
+            .padding(.horizontal, 16)
+            
+            Spacer()
+            RoundedButtonView(title: "Save") {
+                dismiss()
             }
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(Color.clear)
-            
-            Section {
-                HStack(spacing: 16) {
-                    DatePickerView(date: $date, title: "Date", background: AppGradient.appBackgroundMini)
-                    
-                    TagPickerView(selectedTags: $tags)
-                }
-            }
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(Color.clear)
-            
-            Section {
-                AutoTransactionView(
-                    isRepeatable: $isRepeatable,
-                    title: $title,
-                    repeatDate: $repeatDate,
-                    endDate: $endDate,
-                    period: $period,
-                    isNotify: $isNotify
-                )
-            }
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(Color.clear)
-            
+            .buttonStyle(.borderless)
+            .background(.appBackground)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 16)
         }
-        .buttonStyle(.borderless)
-        .scrollContentBackground(.hidden)
-        .listSectionSpacing(.compact)
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()
@@ -98,6 +91,6 @@ struct TransferView: View {
 }
 
 #Preview {
-    TransferView(account: CategoryService().accounts.first, expense: CategoryService().expenses.first)
+    TransferView(fromAccount: CategoryService().accounts.first!, toAccount: CategoryService().accounts.last!)
         .environment(CategoryService())
 }

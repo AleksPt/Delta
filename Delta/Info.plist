@@ -10,59 +10,39 @@
 				<string>com.public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Category</string>
+			<string>Income</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.delta.category</string>
-			<key>UTTypeTagSpecification</key>
-			<dict/>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string></string>
-			</array>
-			<key>UTTypeIdentifier</key>
-			<string>com.delta.subCategory</string>
-			<key>UTTypeDescription</key>
-			<string>SubCategory</string>
-			<key>UTTypeTagSpecification</key>
-			<dict/>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string></string>
-			</array>
-			<key>UTTypeIdentifier</key>
 			<string>com.delta.income</string>
-			<key>UTTypeDescription</key>
-			<string>Income</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string></string>
+				<string>com.public.data</string>
 			</array>
-			<key>UTTypeIdentifier</key>
-			<string>com.delta.expense</string>
 			<key>UTTypeDescription</key>
 			<string>Expense</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>com.delta.expense</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string></string>
+				<string>com.public.data</string>
 			</array>
-			<key>UTTypeIdentifier</key>
-			<string>com.delta.accountsAndGroups</string>
 			<key>UTTypeDescription</key>
-			<string>AccountsAndGroups</string>
+			<string>Account</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>com.delta.account</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>

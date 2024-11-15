@@ -17,7 +17,7 @@ struct TagPickerView: View {
             VStack(alignment: .leading) {
                 Label("Tags", systemImage: "tag.fill")
                     .foregroundStyle(AppGradient.appBlack.value)
-                    .padding(.horizontal, 16)
+                    .safeAreaPadding(.horizontal)
                     .labelStyle(CustomLabel(spacing: 4))
                 
                 ScrollView(.horizontal) {
@@ -38,7 +38,7 @@ struct TagPickerView: View {
                     }
                 }
                 .scrollIndicators(.hidden)
-                .padding(.leading, 16)
+                .safeAreaPadding(.horizontal)
                 .padding(.top, -2)
             }
             .frame(height: 92)

@@ -674,7 +674,7 @@ class Category: Identifiable, Hashable, Transferable, Codable {
 }*/
 
 @Observable
-final class SubCategory: Identifiable, Hashable, Transferable, Codable {
+final class SubCategory: Identifiable, Hashable, Codable {
     var id: UUID = UUID()
     var title: String = ""
     var currency: Currency = .usd
@@ -918,7 +918,7 @@ final class Expense: Identifiable, Hashable, Transferable, Codable {
 //    var color: String { get }
 //}
 
-class AccountsAndGroups: Identifiable, Hashable, Transferable, Codable {
+class AccountsAndGroups: Identifiable {
     var id: UUID = UUID()
     var title: String = ""
     var currency: Currency = .usd
@@ -941,9 +941,19 @@ class AccountsAndGroups: Identifiable, Hashable, Transferable, Codable {
         self.image = image
         self.color = color
     }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.currency = try container.decode(Currency.self, forKey: .currency)
+        self.categoryType = try container.decode(CategoryType.self, forKey: .categoryType)
+        self.image = try container.decode(String.self, forKey: .image)
+        self.color = try container.decode(String.self, forKey: .color)
+    }
 }
 
-final class Account: AccountsAndGroups {
+final class Account: AccountsAndGroups, Transferable, Codable, Hashable, Equatable {
     var users: [Person] = []
     var transactions: [Transaction] = []
     var groupOfAccounts: String = ""
@@ -988,6 +998,7 @@ final class Account: AccountsAndGroups {
     // Добавляем required init для декодирования
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        try super.init(from: decoder)
 //        self.id = try container.decode(UUID.self, forKey: .id)
 //        self.title = try container.decode(String.self, forKey: .title)
 //        self.currency = try container.decode(Currency.self, forKey: .currency)
@@ -996,11 +1007,11 @@ final class Account: AccountsAndGroups {
 //        self.color = try container.decode(String.self, forKey: .color)
         self.users = try container.decode([Person].self, forKey: .users)
         self.transactions = try container.decode([Transaction].self, forKey: .transactions)
-        try super.init(from: decoder)
+        self.groupOfAccounts = try container.decode(String.self, forKey: .groupOfAccounts)
     }
 }
 
-final class GroupOfAccounts: AccountsAndGroups {
+final class GroupOfAccounts: AccountsAndGroups, Hashable, Equatable {
     var accounts: [Account] = []
     
     var totalAmount: Double {
@@ -1059,13 +1070,10 @@ final class Investment {
 
 //MARK: - Extensions for protocols
 extension UTType {
-    //static let category = UTType(exportedAs: "com.delta.category")
-    static let subCategory = UTType(exportedAs: "com.delta.subCategory")
     static let income = UTType(exportedAs: "com.delta.income")
     static let expense = UTType(exportedAs: "com.delta.expense")
-    static let accountsAndGroups = UTType(exportedAs: "com.delta.accountsAndGroups")
-//    static let account = UTType(exportedAs: "com.delta.account")
-//    static let groupOfAccounts = UTType(exportedAs: "com.delta.groupOfAccounts")
+    //static let accountsAndGroups = UTType(exportedAs: "com.delta.accountsAndGroups")
+    static let account = UTType(exportedAs: "com.delta.account")
 }
 
 extension SubCategory {
@@ -1094,10 +1102,6 @@ extension SubCategory {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-    }
-    
-    static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation<SubCategory, JSONEncoder, JSONDecoder>(contentType: .subCategory)
     }
 }
 
@@ -1171,34 +1175,35 @@ extension Expense {
 
 extension Account {
     // Добавляем метод для кодирования
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(id, forKey: .id)
-//        try container.encode(title, forKey: .title)
-//        try container.encode(currency, forKey: .currency)
-//        try container.encode(categoryType, forKey: .categoryType)
-//        try container.encode(image, forKey: .image)
-//        try container.encode(color, forKey: .color)
-//        try container.encode(users, forKey: .users)
-//        try container.encode(transactions, forKey: .transactions)
-//    }
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(categoryType, forKey: .categoryType)
+        try container.encode(image, forKey: .image)
+        try container.encode(color, forKey: .color)
+        try container.encode(users, forKey: .users)
+        try container.encode(transactions, forKey: .transactions)
+        try container.encode(groupOfAccounts, forKey: .groupOfAccounts)
+    }
     
     // CodingKeys
     private enum CodingKeys: String, CodingKey {
-        case id, title, currency, categoryType, image, color, users, transactions
+        case id, title, currency, categoryType, image, color, users, transactions, groupOfAccounts
     }
     
     static func == (lhs: Account, rhs: Account) -> Bool {
         return lhs.id == rhs.id
     }
     
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(id)
-//    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
     
-//    static var transferRepresentation: some TransferRepresentation {
-//        CodableRepresentation<Account, JSONEncoder, JSONDecoder>(contentType: .account)
-//    }
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation<Account, JSONEncoder, JSONDecoder>(contentType: .account)
+    }
 }
 
 extension GroupOfAccounts {
@@ -1216,16 +1221,16 @@ extension GroupOfAccounts {
     
     // CodingKeys
     private enum CodingKeys: String, CodingKey {
-        case id, title, currency, categoryType, image, color, accounts
+        case accounts
     }
     
     static func == (lhs: GroupOfAccounts, rhs: GroupOfAccounts) -> Bool {
         return lhs.id == rhs.id
     }
     
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(id)
-//    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
     
 //    static var transferRepresentation: some TransferRepresentation {
 //        CodableRepresentation<GroupOfAccounts, JSONEncoder, JSONDecoder>(contentType: .groupOfAccounts)
@@ -1234,17 +1239,17 @@ extension GroupOfAccounts {
 
 extension AccountsAndGroups {
     // Добавляем метод для кодирования
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(title, forKey: .title)
-        try container.encode(currency, forKey: .currency)
-        try container.encode(categoryType, forKey: .categoryType)
-        try container.encode(image, forKey: .image)
-        try container.encode(color, forKey: .color)
-    }
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(id, forKey: .id)
+//        try container.encode(title, forKey: .title)
+//        try container.encode(currency, forKey: .currency)
+//        try container.encode(categoryType, forKey: .categoryType)
+//        try container.encode(image, forKey: .image)
+//        try container.encode(color, forKey: .color)
+//    }
     
-    // CodingKeys
+     //CodingKeys
     private enum CodingKeys: String, CodingKey {
         case id, title, currency, categoryType, image, color
     }
@@ -1253,11 +1258,11 @@ extension AccountsAndGroups {
         return lhs.id == rhs.id
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
     
-    static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation<AccountsAndGroups, JSONEncoder, JSONDecoder>(contentType: .accountsAndGroups)
-    }
+//    static var transferRepresentation: some TransferRepresentation {
+//        CodableRepresentation<AccountsAndGroups, JSONEncoder, JSONDecoder>(contentType: .accountsAndGroups)
+//    }
 }
