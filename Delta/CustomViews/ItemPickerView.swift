@@ -8,51 +8,61 @@
 import SwiftUI
 import UISystem
 
-struct ItemPickerView<T: Hashable>: View {
-    @Binding var selectedItem: T
-    let items: [T]
-    let title: String
+struct GroupPickerView: View {
+    @Binding var selectedGroup: String
+    let groups: [GroupOfAccounts]
     let size: CGSize
     
     var body: some View {
         HStack {
-            if let items = items as? [GroupOfAccounts] {
-                Picker(title, selection: $selectedItem) {
-                    ForEach(items) { item in
-                        Text(item.title).tag(item)
-                    }
+            Picker("", selection: $selectedGroup) {
+                Text("No group").tag("")
+                ForEach(groups) { group in
+                    Text(LocalizedStringKey(group.title)).tag(group.title)
                 }
-                .pickerStyle(.menu)
-                .labelsHidden()
-                .accentColor(.appBlack)
-                .padding(.leading, 4)
             }
-            
-            if let items = items as? [Person] {
-                Picker(title, selection: $selectedItem) {
-                    ForEach(items) { item in
-                        Text(item.name).tag(item)
-                    }
-                }
-                .pickerStyle(.menu)
-                .labelsHidden()
-                .accentColor(.appBlack)
-                .padding(.leading, 4)
-            }
+            .labelsHidden()
+            .pickerStyle(.menu)
+            .accentColor(.appBlack)
+            .padding(.horizontal, 4)
             
             Spacer()
         }
-        .frame(height: 56)
+        .frame(width: size.width, height: size.height)
+        .background(AppGradient.appBackgroundMini.value)
+        .cornerRadius(16)
+    }
+}
+
+struct PersonPickerView: View {
+    @Binding var selectedPerson: Person
+    let persons: [Person]
+    let size: CGSize
+    
+    var body: some View {
+        HStack {
+            Picker("", selection: $selectedPerson) {
+                ForEach(persons) { person in
+                    Text(LocalizedStringKey(person.name)).tag(person)
+                }
+            }
+            .padding(.horizontal, 4)
+            .labelsHidden()
+            .pickerStyle(.menu)
+            .accentColor(.appBlack)
+            
+            Spacer()
+        }
+        .frame(width: size.width, height: size.height)
         .background(AppGradient.appBackgroundMini.value)
         .cornerRadius(16)
     }
 }
 
 #Preview {
-    ItemPickerView(
-        selectedItem: .constant(DataStore.shared.groupsOfAccounts.first),
-        items: DataStore.shared.groupsOfAccounts,
-        title: "Users",
+    GroupPickerView(
+        selectedGroup: .constant(DataStore.shared.groupsOfAccounts.first!.title),
+        groups: DataStore.shared.groupsOfAccounts,
         size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
     )
 }

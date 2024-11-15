@@ -22,7 +22,7 @@ struct AccountLargeCardView: View {
         VStack(alignment: .trailing) {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(title)
+                    Text(LocalizedStringKey(title))
                         .font(.heading2())
                         .padding(.bottom, 2)
                     

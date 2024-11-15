@@ -16,9 +16,9 @@ struct TextFieldRowView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            TextField(placeholder, text: $inputValue)
+            TextField(LocalizedStringKey(placeholder), text: $inputValue)
                 .textFieldStyle(.plain)
                 .multilineTextAlignment(.trailing)
                 .keyboardType(keyboardType)
@@ -37,11 +37,11 @@ struct PickerRowView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .frame(maxWidth: .infinity, alignment: .leading)
             Picker("", selection: $currency) {
                 ForEach(Currency.allCases) { currency in
-                    Text(currency.rawValue).tag(currency)
+                    Text(LocalizedStringKey(currency.rawValue)).tag(currency)
                 }
             }
             .pickerStyle(.menu)
@@ -62,7 +62,7 @@ struct DateRowView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .frame(maxWidth: .infinity, alignment: .leading)
             DatePicker("", selection: $date, displayedComponents: .date)
                 .datePickerStyle(.compact)
@@ -82,7 +82,7 @@ struct NotificationRowView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .frame(maxWidth: .infinity, alignment: .leading)
             Toggle("", isOn: $notificationIsOn)
             
@@ -99,7 +99,7 @@ struct TransactionRowView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .frame(maxWidth: .infinity, alignment: .leading)
             Button(action: action) {
                 Image(systemName: "chevron.right")

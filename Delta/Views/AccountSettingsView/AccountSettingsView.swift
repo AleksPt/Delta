@@ -19,7 +19,7 @@ struct AccountSettingsView: View {
     @State private var selectedIcon: Icon
     @State private var selectedColor: AppGradient
     @State private var selectedUser: Person //TODO: - add multiple choising
-    @State private var selectedGroup: GroupOfAccounts
+    @State private var selectedGroup: String
     
     let dataStore = DataStore.shared
     var account: Account?
@@ -42,7 +42,7 @@ struct AccountSettingsView: View {
         _selectedIcon = State(initialValue: Icon.getIcon(from: account.image) ?? .dollar)
         _selectedColor = State(initialValue: AppGradient.getColor(from: account.color) ?? .blueGradient)
         _selectedUser = State(initialValue: account.users.first ?? DataStore.shared.people.first!)
-        _selectedGroup = State(initialValue: CategoryService().getGroupOfAccounts(from: account.groupOfAccounts)!)
+        _selectedGroup = State(initialValue: account.groupOfAccounts)
     }
     
     var body: some View {
@@ -63,7 +63,7 @@ struct AccountSettingsView: View {
                 TextFieldRowView(
                     inputValue: $name,
                     title: "Account name",
-                    keyboardType: .default, 
+                    keyboardType: .default,
                     placeholder: "Your account"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
@@ -77,12 +77,12 @@ struct AccountSettingsView: View {
                 TextFieldRowView(
                     inputValue: $balance,
                     title: "Account balance",
-                    keyboardType: .decimalPad, 
+                    keyboardType: .decimalPad,
                     placeholder: "0.0"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
-                Text("Account settings")
+                Text(LocalizedStringKey("Account settings"))
                     .font(.subheading1())
                     .padding(.leading, -18)
                     .padding(.bottom, 8)
@@ -110,17 +110,15 @@ struct AccountSettingsView: View {
             
             Section {
                 HStack(spacing: 16) {
-                    ItemPickerView(
-                        selectedItem: $selectedGroup,
-                        items: dataStore.groupsOfAccounts,
-                        title: "Group of Accounts",
+                    GroupPickerView(
+                        selectedGroup: $selectedGroup,
+                        groups: dataStore.groupsOfAccounts,
                         size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
                     )
                     
-                    ItemPickerView(
-                        selectedItem: $selectedUser,
-                        items: dataStore.people,
-                        title: "User",
+                    PersonPickerView(
+                        selectedPerson: $selectedUser,
+                        persons: dataStore.people,
                         size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
                     )
                 }
@@ -162,12 +160,12 @@ struct AccountSettingsView: View {
         .listSectionSpacing(.compact)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
+                Button(LocalizedStringKey("Save")) {
                     account?.title = name
                     account?.currency = currency
                     account?.color = selectedColor.name
                     account?.image = selectedIcon.name
-                    account?.groupOfAccounts = selectedGroup.title
+                    account?.groupOfAccounts = selectedGroup
                     
                     if !categoryService.isAccountExist(account!.id) {
                         categoryService.createAccount(account ?? Account(
@@ -182,6 +180,7 @@ struct AccountSettingsView: View {
                             groupOfAccounts: "Main"
                         ))
                     }
+                    categoryService.updateGroups()
                     
                     dismiss()
                     

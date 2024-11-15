@@ -16,7 +16,7 @@ struct SeeAllAccounts: View {
     
     var body: some View {
         VStack {
-            Text("Choose accounts for group")
+            Text(LocalizedStringKey("Choose accounts for group"))
                 .font(.heading1())
                 .foregroundStyle(AppGradient.appBlack.value)
                 .frame(maxWidth: .infinity, alignment: .leading)

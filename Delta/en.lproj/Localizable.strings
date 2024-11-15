@@ -1,0 +1,71 @@
+/* 
+  Localizable.strings
+  Delta
+
+  Created by Алексей on 03.11.2024.
+  
+*/
+"Switch language" = "Switch language";
+
+"Add" = "Add";
+"Add category" = "Add category";
+"Analytics" = "Analytics";
+"Actual" = "Actual";
+"Accounts" = "Accounts";
+"Account settings" = "Account settings";
+"Account balance" = "Account balance";
+"Account name" = "Account name";
+"Alfa bank" = "Alfa bank";
+"Amount" = "Amount";
+"Amount for" = "Amount for";
+"Avance" = "Avance";
+"Award" = "Award";
+"Autotransaction" = "Autotransaction";
+"Basic" = "Basic";
+"Buy" = "Buy";
+"Completed" = "Completed";
+"Cash" = "Cash";
+"Certain" = "Certain";
+"Certain expense" = "Certain expense";
+"Certain income" = "Certain income";
+"Close" = "Close";
+"Color" = "Color";
+"Currency" = "Currency";
+"Choose date" = "Choose date";
+"Choose accounts for group" = "Choose accounts for group";
+"Delete account" = "Delete account";
+"Delete group" = "Delete group";
+"Expense" = "Expense";
+"Expenses" = "Expenses";
+"Expense source" = "Expense source";
+"Expense title" = "Expense title";
+"Expense main info" = "Expense main info";
+"History" = "History";
+"Income" = "Income";
+"Incomes" = "Incomes";
+"Icon" = "Icon";
+"Income source" = "Income source";
+"Income title" = "Income title";
+"Income main info" = "Income main info";
+"Main" = "Main";
+"My balance" = "My balance";
+"New expense" = "New expense";
+"New income" = "New income";
+"Notifications" = "Notifications";
+"Plan" = "Plan";
+"Random" = "Random";
+"Save" = "Save";
+"Salary" = "Salary";
+"Sber bank" = "Sber bank";
+"Show" = "Show";
+"Shopping List" = "Shopping list";
+"See all" = "See all";
+"Save accounts" = "Save accounts";
+"Settings" = "Settings";
+"Swap categories" = "Swap categories";
+"Taxi" = "Taxi";
+"Total balance" = "Total balance";
+"Transaction" = "Transaction";
+"Your account" = "Your account";
+"Your title" = "Your title";
+

@@ -31,11 +31,11 @@ struct GroupCardView: View {
             VStack(alignment: .trailing) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(group.title)
+                        Text(LocalizedStringKey(group.title))
                             .font(.subheading1())
                         Spacer(minLength: 0)
                         
-                        Text(group.amount.formattedAmount(for: group.currency))
+                        Text(group.totalAmount.formattedAmount(for: group.currency))
                             .font(.metadata3())
                     }
                     Spacer(minLength: 0)

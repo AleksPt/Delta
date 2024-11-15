@@ -13,11 +13,11 @@ struct HeaderMainView: View {
     
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(text)
+            Text(LocalizedStringKey(text))
                 .font(.heading1())
                 .foregroundStyle(.appBlack)
             Spacer()
-            ChevronButtonView(action: action)
+            ChevronButtonView(image: "chevron.right.circle.fill", title: "See all", action: action)
         }
     }
 }

@@ -14,6 +14,8 @@ struct TabBarView: View {
     
     init() {
         setupTabBarAppearance()
+
+
     }
     
     var body: some View {
