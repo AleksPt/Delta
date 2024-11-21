@@ -41,11 +41,11 @@ struct ShoppingListAddView: View {
     }
 }
 
-#Preview {
-    @Previewable var category = ShoppingListCategory(
-            name: "home",
-            items: [ShoppingListItem(name: "Table", isCompleted: false)]
-        )
-    
-    ShoppingListAddView(text: .constant(""), action: {})
-}
+//#Preview {
+//    @Previewable var category = ShoppingListCategory(
+//            name: "home",
+//            items: [ShoppingListItem(name: "Table", isCompleted: false)]
+//        )
+//    
+//    ShoppingListAddView(text: .constant(""), action: {})
+//}

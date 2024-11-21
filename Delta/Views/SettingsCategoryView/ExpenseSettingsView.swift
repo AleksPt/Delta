@@ -29,7 +29,8 @@ struct ExpenseSettingsView: View {
         id: UUID(),
         title: "",
         currency: .usd,
-        categoryType: .expense
+        categoryType: .expense,
+        items: []
     )) {
         self.expense = expense
     }
@@ -80,7 +81,8 @@ struct ExpenseSettingsView: View {
                             id: UUID(),
                             title: "",
                             currency: .usd,
-                            categoryType: .expense
+                            categoryType: .expense,
+                            items: []
                         ))
                     }
                     categoryService.subCategories.removeAll()

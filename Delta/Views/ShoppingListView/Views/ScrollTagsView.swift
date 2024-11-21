@@ -8,20 +8,25 @@
 import SwiftUI
 
 struct ScrollTagsView: View {
-    var tags: [String]
-    @Binding var shoppingListModel: ShoppingListModel
+    @Environment(CategoryService.self) private var categoryService
+    
+    var tags: [Tag]
+    
+    @Binding var text: String
+    @Binding var activeCategory: Expense?
     
     var body: some View {
         ForEach(tags, id: \.self) { tag in
             Button(action: {
-                shoppingListModel.text = tag
-                if let category = shoppingListModel.activeCategory {
-                    shoppingListModel.addItem(for: category)
+                text = tag.name
+                if let category = activeCategory {
+                    categoryService.addItem(for: category, text: text)
                 }
-                shoppingListModel.saveTags()
+                categoryService.saveTags(text: text)
+                text = ""
                 hideKeyboard()
             }) {
-                Text(tag)
+                Text(tag.name)
                     .font(.metadata3())
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
@@ -33,6 +38,6 @@ struct ScrollTagsView: View {
 }
 
 #Preview {
-    @Previewable var shoppingListModel = ShoppingListModel()
-    ScrollTagsView(tags: [], shoppingListModel: .constant(shoppingListModel))
+    ScrollTagsView(tags: [], text: .constant(""), activeCategory: .constant(nil))
+        .environment(CategoryService())
 }

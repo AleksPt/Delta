@@ -8,76 +8,37 @@
 import SwiftUI
 import UISystem
 
-final class Tag: Hashable, Identifiable {
-    let id: UUID
-    var name: String
+//@Observable final class ShoppingListCategory: Hashable, Identifiable{
+//    var id: UUID = UUID()
+//    var name: String = ""
+//    var items: [ShoppingListItem] = []
+//    var amount: String = ""
+//    
+//    var activeItems: [ShoppingListItem] {
+//        items.filter { !$0.isCompleted }
+//    }
+//    
+//    var completedItems: [ShoppingListItem] {
+//        items.filter { $0.isCompleted }
+//    }
+//    
+//    init(id: UUID = UUID(), name: String, items: [ShoppingListItem] = [], amount: String = "") {
+//        self.id = id
+//        self.name = name
+//        self.items = items
+//        self.amount = amount
+//    }
+//    
+//    static func == (lhs: ShoppingListCategory, rhs: ShoppingListCategory) -> Bool {
+//        return lhs.id == rhs.id
+//    }
+//    
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
+//}
 
-    init(name: String) {
-        self.id = UUID()
-        self.name = name
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-        hasher.combine(name)
-    }
-    
-    static func == (lhs: Tag, rhs: Tag) -> Bool {
-        return lhs.id == rhs.id && lhs.name == rhs.name
-    }
-}
-
-@Observable final class ShoppingListItem: Hashable, Identifiable{
-    var id: UUID = UUID()
-    var name: String
-    var isCompleted: Bool
-    
-    init(id: UUID = UUID(), name: String, isCompleted: Bool = false) {
-        self.id = id
-        self.name = name
-        self.isCompleted = isCompleted
-    }
-    
-    static func == (lhs: ShoppingListItem, rhs: ShoppingListItem) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
-@Observable final class ShoppingListCategory: Hashable, Identifiable{
-    var id: UUID = UUID()
-    var name: String = ""
-    var items: [ShoppingListItem] = []
-    var amount: String = ""
-    
-    var activeItems: [ShoppingListItem] {
-        items.filter { !$0.isCompleted }
-    }
-    
-    var completedItems: [ShoppingListItem] {
-        items.filter { $0.isCompleted }
-    }
-    
-    init(id: UUID = UUID(), name: String, items: [ShoppingListItem] = [], amount: String = "") {
-        self.id = id
-        self.name = name
-        self.items = items
-        self.amount = amount
-    }
-    
-    static func == (lhs: ShoppingListCategory, rhs: ShoppingListCategory) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
-@Observable final class ShoppingListModel {
+/*@Observable final class ShoppingListModel {
     
     // Tags
     
@@ -103,9 +64,9 @@ final class Tag: Hashable, Identifiable {
     }
     
     // Categories
-    var activeCategory: ShoppingListCategory?
+    //var activeCategory: ShoppingListCategory?
     
-    var categories = [
+   /* var categories = [
         ShoppingListCategory(
             name: "products",
             items: [
@@ -135,7 +96,7 @@ final class Tag: Hashable, Identifiable {
             name: "toys",
             items: [ShoppingListItem(name: "Lego")]
         )
-    ]
+    ]*/
     
     var completedItems: [ShoppingListItem] {
         categories.flatMap { $0.items.filter { $0.isCompleted } }
@@ -219,7 +180,7 @@ final class Tag: Hashable, Identifiable {
         
         deleteCompletedItems()
     }
-}
+}*/
 
 enum Field: Hashable {
     case addTextField
@@ -230,11 +191,15 @@ enum Field: Hashable {
 struct ShoppingListView: View {
     @Environment(CategoryService.self) private var categoryService
     
-    @State private var shoppingListModel = ShoppingListModel()
+    //@State private var shoppingListModel = ShoppingListModel()
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
     @State private var heightKeyboard: CGFloat = 0
     @State private var isPresentedSwapCategories: Bool = false
+    
+    @State private var categories: [Expense] = []
+    @State private var text: String = ""
+    @State private var activeCategory: Expense? = nil
     
     @FocusState private var textFieldFocus: Field?
     
@@ -244,39 +209,40 @@ struct ShoppingListView: View {
     var body: some View {
         ScrollViewReader { proxy in
             List {
-                ForEach($shoppingListModel.categories) { $category in
+                ForEach($categories, id: \.id) { $category in
                     Section {
                         ForEach(category.activeItems) { item in
                             ShoppingListItemView(item: item)
                                 .focused($textFieldFocus, equals: .textField)
                         }
                         .onDelete { indexSet in
-                            shoppingListModel.deleteItems(at: indexSet, from: category)
+                            categoryService.deleteItems(at: indexSet, from: category)
                         }
                         
-                        ShoppingListAddView(text: $shoppingListModel.text) {
-                            shoppingListModel.addItem(for: category)
-                            shoppingListModel.saveTags()
+                        ShoppingListAddView(text: $text) {
+                            categoryService.addItem(for: category, text: text)
+                            categoryService.saveTags(text: text)
+                            text = ""
                         }
                         .focused($textFieldFocus, equals: .addTextField)
                     } header: {
-                        Text(category.name)
+                        Text(category.title)
                     }
                     .simultaneousGesture(
                         TapGesture().onEnded {
-                            shoppingListModel.activeCategory = category
+                            activeCategory = category
                         }
                     )
                     .listRowBackground(Color.appBackgroundMini)
                 }
-                if !shoppingListModel.completedItems.isEmpty {
+                if !categoryService.getCompletedItems().isEmpty {
                     Section {
-                        ForEach(shoppingListModel.completedItems) { item in
+                        ForEach(categoryService.getCompletedItems()) { item in
                             ShoppingListItemView(item: item)
                         }
                         .focused($textFieldFocus, equals: .textField)
                         
-                        ForEach(shoppingListModel.categoriesWithCompletedItems) { category in
+                        ForEach(categoryService.getCategoriesWithCompletedItems()) { category in
                             ShoppingListAmountRowView(category: category)
                         }
                         .focused($textFieldFocus, equals: .amountField)
@@ -287,10 +253,9 @@ struct ShoppingListView: View {
                         .listRowInsets(EdgeInsets())
                         
                         RoundedButtonView(title: "Buy", action: {
-
                             if selectedAccount != nil {
-                                let transactions = shoppingListModel.createTransactions(for: selectedAccount)
-                                shoppingListModel.saveTransactions(transactions)
+                                let transactions = categoryService.createShoppingTransactions(for: selectedAccount)
+                                categoryService.saveTransactions(transactions)
                                 selectedAccount = nil
                             }
                             // TODO: - add alert if amount is empty
@@ -311,7 +276,7 @@ struct ShoppingListView: View {
             .toolbar {
                 Menu {
                     Button(action: {
-                        shoppingListModel.addCategory(withName: categoryName)
+                        categoryService.addCategory(withName: categoryName)
                     }) {
                         Label("Add category", systemImage: "plus")
                     }
@@ -340,17 +305,17 @@ struct ShoppingListView: View {
             })
             .onTapGesture {
                 textFieldFocus = nil
-                shoppingListModel.text = ""
+                text = ""
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     if textFieldFocus == .addTextField {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
-                                if shoppingListModel.text == "" {
-                                    ScrollTagsView(tags: shoppingListModel.tags, shoppingListModel: $shoppingListModel)
+                                if text == "" {
+                                    ScrollTagsView(tags: categoryService.tags, text: $text, activeCategory: $activeCategory)
                                 } else {
-                                    ScrollTagsView(tags: shoppingListModel.filteredTags, shoppingListModel: $shoppingListModel)
+                                    ScrollTagsView(tags: categoryService.getFilteredTags(text: text), text: $text, activeCategory: $activeCategory)
                                 }
                             }
                         }
@@ -369,10 +334,11 @@ struct ShoppingListView: View {
             }
         }
         .onAppear {
+            categories = categoryService.expenses.filter { $0.categoryType == .shoppingCategory }
             keyboardHeightObserver()
         }
         .sheet(isPresented: $isPresentedSwapCategories) {
-            SwapCategoriesView(categories: $shoppingListModel.categories)
+            SwapCategoriesView(categories: $categories)
         }
     }
     
