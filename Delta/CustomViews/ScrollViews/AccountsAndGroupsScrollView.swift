@@ -33,7 +33,7 @@ struct AccountsAndGroupsScrollView: View {
                                 .dropDestination(for: Account.self) { droppedAccounts, location in
                                     droppedAccount = droppedAccounts.first
                                     guard let droppedAccount else { return false }
-                                    router.presentModal(.transfer(sourse: droppedAccount, destination: account))
+                                    router.navigateTo(.transfer(sourse: droppedAccount, destination: account))
                                     return true
                                 } isTargeted: { isTargeted in
                                     // change appearance

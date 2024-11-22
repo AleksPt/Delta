@@ -21,6 +21,7 @@ struct TagPickerView: View {
                     .foregroundStyle(AppGradient.appBlack.value)
                     .safeAreaPadding(.horizontal)
                     .labelStyle(CustomLabel(spacing: 4))
+                    .padding(.bottom, 6)
                 
                 ScrollView(.horizontal) {
                     HStack(spacing: 10) {
@@ -31,7 +32,7 @@ struct TagPickerView: View {
                         PlusButtonView {
                             router.presentModal(.tags(tags: $selectedTags))
                         }
-                        .frame(width: 40)
+                        .frame(width: 30)
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -52,7 +53,7 @@ struct TagPickerView: View {
                 .foregroundStyle(AppGradient.appWhite.value)
         }
         .padding()
-        .frame(height: 40)
+        .frame(height: 30)
         .background(AppGradient.appBlack.value)
         .clipShape(Capsule())
     }

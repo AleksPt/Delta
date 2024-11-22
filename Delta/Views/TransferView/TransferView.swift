@@ -28,15 +28,10 @@ struct TransferView: View {
     
     var body: some View {
         VStack {
-            Text("Transfer")
-                .font(.heading2())
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 8)
-                .padding(.bottom, 8)
-            
             TransactionFieldView(type: .source, account: fromAccount)
                 .padding(.horizontal, 16)
                 .padding(.bottom, 8)
+                .padding(.top, 20)
             
             TransactionFieldView(type: .destination, account: toAccount)
                 .padding(.horizontal, 16)
@@ -65,43 +60,44 @@ struct TransferView: View {
             .padding(.horizontal, 16)
             
             Spacer()
-            RoundedButtonView(title: "Save") {
-                let autoTransaction = AutoTransaction(
-                    id: UUID(),
-                    title: title,
-                    repeatDate: repeatDate,
-                    endDate: endDate,
-                    period: period,
-                    isNotify: isNotify
-                )
-                
-                let transaction: Transaction = Transaction(
-                    id: UUID(),
-                    amount: Double(amount) ?? 0,
-                    date: date,
-                    sourceID: fromAccount.id,
-                    destinationID: toAccount.id,
-                    tags: tags.map { $0.name },
-                    currency: fromAccount.currency,
-                    person: nil,
-                    autoTransaction: isRepeatable ? autoTransaction : nil
-                )
-                
-                fromAccount.transactions.append(transaction)
-                toAccount.transactions.append(transaction)
-                
-                dismiss()
-                
-                print(toAccount.title, toAccount.amount)
-            }
-            .buttonStyle(.borderless)
-            .background(.appBackground)
-            .padding(.horizontal, 16)
-            .padding(.bottom, 16)
         }
+        .navigationTitle("Transfer")
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    let autoTransaction = AutoTransaction(
+                        id: UUID(),
+                        title: title,
+                        repeatDate: repeatDate,
+                        endDate: endDate,
+                        period: period,
+                        isNotify: isNotify
+                    )
+                    
+                    let transaction: Transaction = Transaction(
+                        id: UUID(),
+                        amount: Double(amount) ?? 0,
+                        date: date,
+                        sourceID: fromAccount.id,
+                        destinationID: toAccount.id,
+                        tags: tags.map { $0.name },
+                        currency: fromAccount.currency,
+                        person: nil,
+                        autoTransaction: isRepeatable ? autoTransaction : nil
+                    )
+                    
+                    fromAccount.transactions.append(transaction)
+                    toAccount.transactions.append(transaction)
+                    
+                    dismiss()
+                    
+                    print(toAccount.title, toAccount.amount)
+                }
+            }
         }
     }
     

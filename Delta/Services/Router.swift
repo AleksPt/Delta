@@ -23,6 +23,7 @@ enum Route: Hashable {
     case expenseSettings(expense: Expense)
     case incomeCreate
     case expenseCreate
+    case transfer(sourse: Account, destination: Account)
 }
 
 enum TabRoute: Hashable {
@@ -39,8 +40,6 @@ enum ModalRoute: Equatable {
             lhsAccounts.wrappedValue == rhsAccounts.wrappedValue
         case (.seeAll, .seeAll):
             true
-        case (.transfer(let lhsSource, let lhsDestination), .transfer(let rhsSource, let rhsDestination)):
-            lhsSource == rhsSource && lhsDestination == rhsDestination
         case (.tags(let lhsTags), .tags(let rhsTags)):
             lhsTags.wrappedValue == rhsTags.wrappedValue
         default:
@@ -50,7 +49,7 @@ enum ModalRoute: Equatable {
     
     case seeAllAccounts(accounts: Binding<[Account]>)
     case seeAll
-    case transfer(sourse: Account, destination: Account)
+    
     case tags(tags: Binding<[Tag]>)
 }
 
@@ -107,6 +106,8 @@ final class Router {
             IncomeSettingsView()
         case .expenseCreate:
             ExpenseSettingsView()
+        case .transfer(let source, let destination):
+            TransferView(fromAccount: source, toAccount: destination)
         }
     }
     
@@ -116,8 +117,6 @@ final class Router {
             SeeAllAccounts(accounts: accounts)
         case .seeAll:
             SeeAllView()
-        case .transfer(let source, let destination):
-            TransferView(fromAccount: source, toAccount: destination)
         case .tags(let tags):
             TagsView(selectedTags: tags)
         }

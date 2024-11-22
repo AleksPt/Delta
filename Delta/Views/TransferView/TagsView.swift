@@ -34,7 +34,7 @@ struct TagsView: View {
                     router.dismissModal()
                 }
                 .contentShape(Rectangle())
-                .padding(16)
+                .padding(20)
                 .onTapGesture {
                     router.dismissModal()
                 }
