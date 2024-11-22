@@ -9,6 +9,7 @@ import SwiftUI
 import UISystem
 
 struct TransferView: View {
+    @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
     
     @State private var amount: String = ""
@@ -33,15 +34,15 @@ struct TransferView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 8)
             
-            textfieldView
-                .padding(.horizontal, 26)
-                .padding(.bottom, 8)
-            
             TransactionFieldView(type: .source, account: fromAccount)
                 .padding(.horizontal, 16)
                 .padding(.bottom, 8)
             
             TransactionFieldView(type: .destination, account: toAccount)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+            
+            textfieldView
                 .padding(.horizontal, 16)
                 .padding(.bottom, 8)
             
@@ -105,13 +106,20 @@ struct TransferView: View {
     }
     
     private var textfieldView: some View {
-        VStack {
-            TextField("Input amount", text: $amount)
-                .font(.subheading1())
-                .textFieldStyle(.plain)
-                .multilineTextAlignment(.center)
-                .keyboardType(.decimalPad)
-            Divider()
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .frame(height: 60)
+                .foregroundStyle(.appBackgroundMini)
+            
+            VStack {
+                TextField("Input amount", text: $amount)
+                    .font(.subheading1())
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.center)
+                    .keyboardType(.decimalPad)
+                
+                //Divider().padding(.horizontal, 16)
+            }
         }
     }
 }
@@ -119,4 +127,5 @@ struct TransferView: View {
 #Preview {
     TransferView(fromAccount: CategoryService().accounts.first!, toAccount: CategoryService().accounts.last!)
         .environment(CategoryService())
+        .environment(Router.shared)
 }

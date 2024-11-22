@@ -58,6 +58,7 @@ struct AccountsAndGroupsScrollView: View {
                         PlusButtonView {
                             router.navigateTo(.accountCreate)
                         }
+                        .frame(width: Constants.widthOne)
                     }
                 }
             }

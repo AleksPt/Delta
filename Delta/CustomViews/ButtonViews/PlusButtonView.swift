@@ -14,7 +14,7 @@ struct PlusButtonView: View {
         Button(action: action) {
             ZStack {
                 Circle()
-                    .frame(width: Constants.widthOne)
+                    //.frame(width: Constants.widthOne)
                     .foregroundStyle(.appBlack)
                 
                 Image(systemName: "plus")

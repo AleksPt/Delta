@@ -10,6 +10,8 @@ import UISystem
 
 struct TagPickerView: View {
     @Environment(CategoryService.self) private var categoryService
+    @Environment(Router.self) private var router
+    
     @Binding var selectedTags: [Tag]
     
     var body: some View {
@@ -22,19 +24,14 @@ struct TagPickerView: View {
                 
                 ScrollView(.horizontal) {
                     HStack(spacing: 10) {
-                        ForEach(categoryService.tags) { tag in
-                            TagCapsuleView(
-                                tag: tag,
-                                isSelected: selectedTags.contains(where: { $0.id == tag.id })
-                            ) {
-                                if selectedTags.contains(where: { $0.id == tag.id }) {
-                                    selectedTags.removeAll(where: { $0.id == tag.id })
-                                } else {
-                                    selectedTags.append(tag)
-                                }
-                            }
-                            .id(tag.id)
+                        ForEach(selectedTags) { tag in
+                            showTag(tag: tag)
                         }
+                        
+                        PlusButtonView {
+                            router.presentModal(.tags(tags: $selectedTags))
+                        }
+                        .frame(width: 40)
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -46,9 +43,23 @@ struct TagPickerView: View {
             .cornerRadius(16)
         }
     }
+    
+    @ViewBuilder
+    private func showTag(tag: Tag) -> some View {
+        VStack(alignment: .center) {
+            Text(tag.name)
+                .font(.subheading1())
+                .foregroundStyle(AppGradient.appWhite.value)
+        }
+        .padding()
+        .frame(height: 40)
+        .background(AppGradient.appBlack.value)
+        .clipShape(Capsule())
+    }
 }
 
 #Preview {
     TagPickerView(selectedTags: .constant(CategoryService().tags))
         .environment(CategoryService())
+        .environment(Router.shared)
 }

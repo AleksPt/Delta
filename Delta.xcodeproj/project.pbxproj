@@ -24,6 +24,7 @@
 		1A2A33A22CAE9DAD008F6414 /* CustomSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33A12CAE9DAD008F6414 /* CustomSegmentedControlView.swift */; };
 		1A2A33A42CAFEA95008F6414 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33A32CAFEA95008F6414 /* CategoryService.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
+		1AB555162CF0CB590074C861 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB555152CF0CB590074C861 /* TagsView.swift */; };
 		1AB8A7462CBD2B2B0080D148 /* ExpenseSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A7452CBD2B260080D148 /* ExpenseSettingsView.swift */; };
 		1AB8A74A2CC8E9BA0080D148 /* SeeAllAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A7492CC8E9BA0080D148 /* SeeAllAccounts.swift */; };
 		1AB8A74C2CD36E1B0080D148 /* TransactionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A74B2CD36E1B0080D148 /* TransactionFieldView.swift */; };
@@ -106,6 +107,7 @@
 		1A2A33A12CAE9DAD008F6414 /* CustomSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControlView.swift; sourceTree = "<group>"; };
 		1A2A33A32CAFEA95008F6414 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
+		1AB555152CF0CB590074C861 /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
 		1AB8A7452CBD2B260080D148 /* ExpenseSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSettingsView.swift; sourceTree = "<group>"; };
 		1AB8A7492CC8E9BA0080D148 /* SeeAllAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllAccounts.swift; sourceTree = "<group>"; };
 		1AB8A74B2CD36E1B0080D148 /* TransactionFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFieldView.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			children = (
 				64FB5C542C4BF52500BBADB1 /* TransferView.swift */,
 				1AB8A7532CD4D3840080D148 /* AutoTransactionView.swift */,
+				1AB555152CF0CB590074C861 /* TagsView.swift */,
 			);
 			path = TransferView;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				648E092A2C8EBBE900ECA13D /* InfoMainView.swift in Sources */,
 				640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */,
 				1AB8A7522CD4BD9C0080D148 /* TagPickerView.swift in Sources */,
+				1AB555162CF0CB590074C861 /* TagsView.swift in Sources */,
 				647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */,
 				647A6F402C8123E100927749 /* ChevronButtonView.swift in Sources */,
 				64FB5C4B2C4BF4CC00BBADB1 /* AppDesignSettingsView.swift in Sources */,

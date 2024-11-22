@@ -52,6 +52,7 @@ struct IncomeScrollView: View {
                     PlusButtonView {
                         router.navigateTo(settingsRoute)
                     }
+                    .frame(width: Constants.widthOne)
                 }
             }
             .shadow()
@@ -104,6 +105,7 @@ struct ExpenseScrollView: View {
                     PlusButtonView {
                         router.navigateTo(settingsRoute)
                     }
+                    .frame(width: Constants.widthOne)
                 }
             }
             .shadow()

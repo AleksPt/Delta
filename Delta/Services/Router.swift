@@ -41,6 +41,8 @@ enum ModalRoute: Equatable {
             true
         case (.transfer(let lhsSource, let lhsDestination), .transfer(let rhsSource, let rhsDestination)):
             lhsSource == rhsSource && lhsDestination == rhsDestination
+        case (.tags(let lhsTags), .tags(let rhsTags)):
+            lhsTags.wrappedValue == rhsTags.wrappedValue
         default:
             false
         }
@@ -49,6 +51,7 @@ enum ModalRoute: Equatable {
     case seeAllAccounts(accounts: Binding<[Account]>)
     case seeAll
     case transfer(sourse: Account, destination: Account)
+    case tags(tags: Binding<[Tag]>)
 }
 
 @MainActor
@@ -115,8 +118,9 @@ final class Router {
             SeeAllView()
         case .transfer(let source, let destination):
             TransferView(fromAccount: source, toAccount: destination)
+        case .tags(let tags):
+            TagsView(selectedTags: tags)
         }
-
     }
     
     func navigateTo(_ appRoute: Route) {
