@@ -19,7 +19,7 @@ struct TransferView: View {
     
     @State private var title: String = ""
     @State private var repeatDate: Date = .now
-    @State private var endDate: Date = .distantFuture
+    @State private var endDate: Date = .now
     @State private var period: Period = .month
     @State private var isNotify: Bool = false
     

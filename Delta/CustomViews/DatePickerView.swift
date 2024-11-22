@@ -16,17 +16,18 @@ struct DatePickerView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Label(title, systemImage: "calendar")
-                    .labelStyle(CustomLabel(spacing: 4))
-                    .foregroundStyle(AppGradient.appBlack.value)
-                    .padding(.horizontal, 16)
-                Spacer()
-            }
+            Label(title, systemImage: "calendar")
+                .labelStyle(CustomLabel(spacing: 4))
+                .foregroundStyle(AppGradient.appBlack.value)
+                .padding(.leading, 16)
+                .padding(.vertical, 6)
+            
             
             DatePicker("", selection: $date, displayedComponents: .date)
                 .labelsHidden()
-                .padding(.horizontal, 16)
+                .padding(.leading, 16)
+                .transformEffect(.init(scaleX: 0.8, y: 0.8))
+            
         }
         .frame(height: 92)
         .background(background.value)
