@@ -484,7 +484,6 @@ enum CategoryType: String, CaseIterable, Codable {
     case groupOfAccounts = "GroupOfAccounts"
     case income = "Income"
     case expense = "Expense"
-    case shoppingCategory = "ShoppingCategory"
     //    case goal = "Goal"
     //    case loan = "Loan"
     //    case credit = "Credit"
@@ -909,6 +908,7 @@ final class Expense: Identifiable, Hashable, Transferable, Codable {
     var subCategories: [SubCategory] = []
     var transactions: [Transaction] = []
     var items: [ShoppingListItem] = []
+    var isShoppingList: Bool = false
     
     var plannedAmount: Double {
         subCategories.reduce(0) { $0 + $1.amount }
@@ -946,7 +946,8 @@ final class Expense: Identifiable, Hashable, Transferable, Codable {
         title: String,
         currency: Currency,
         categoryType: CategoryType,
-        items: [ShoppingListItem]
+        items: [ShoppingListItem],
+        isShoppingList: Bool
     ) {
         self.id = id
         self.title = title
@@ -958,6 +959,7 @@ final class Expense: Identifiable, Hashable, Transferable, Codable {
         self.subCategories = subCategories
         self.transactions = transactions
         self.items = items
+        self.isShoppingList = isShoppingList
     }
     
     // Добавляем required init для декодирования
@@ -973,6 +975,7 @@ final class Expense: Identifiable, Hashable, Transferable, Codable {
         self.subCategories = try container.decode([SubCategory].self, forKey: .subCategories)
         self.transactions = try container.decode([Transaction].self, forKey: .transactions)
         self.items = try container.decode([ShoppingListItem].self, forKey: .items)
+        self.isShoppingList = try container.decode(Bool.self, forKey: .isShoppingList)
     }
     
     // методы для построения графика "План"
@@ -1247,11 +1250,12 @@ extension Expense {
         try container.encode(subCategories, forKey: .subCategories)
         try container.encode(transactions, forKey: .transactions)
         try container.encode(items, forKey: .items)
+        try container.encode(isShoppingList, forKey: .isShoppingList)
     }
     
     // CodingKeys
     private enum CodingKeys: String, CodingKey {
-        case id, title, currency, categoryType, amount, image, repeatingType, subCategories, transactions, items
+        case id, title, currency, categoryType, amount, image, repeatingType, subCategories, transactions, items, isShoppingList
     }
     
     static func == (lhs: Expense, rhs: Expense) -> Bool {

@@ -30,7 +30,8 @@ struct ExpenseSettingsView: View {
         title: "",
         currency: .usd,
         categoryType: .expense,
-        items: []
+        items: [],
+        isShoppingList: false
     )) {
         self.expense = expense
     }
@@ -82,7 +83,8 @@ struct ExpenseSettingsView: View {
                             title: "",
                             currency: .usd,
                             categoryType: .expense,
-                            items: []
+                            items: [],
+                            isShoppingList: false
                         ))
                     }
                     categoryService.subCategories.removeAll()

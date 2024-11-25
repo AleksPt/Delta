@@ -88,7 +88,7 @@ final class CategoryService {
     }
     
     func getShoppingExpenses() -> [Expense] {
-        expenses.filter { $0.categoryType == .shoppingCategory }
+        expenses.filter { $0.isShoppingList == true }
     }
     
 //MARK: - SUBCATEGORIES
@@ -207,8 +207,9 @@ final class CategoryService {
             id: UUID(),
             title: name,
             currency: .usd,
-            categoryType: .shoppingCategory,
-            items: []
+            categoryType: .expense,
+            items: [],
+            isShoppingList: true
         )
         expenses.append(newCategory)
     }

@@ -334,7 +334,7 @@ struct ShoppingListView: View {
             }
         }
         .onAppear {
-            categories = categoryService.expenses.filter { $0.categoryType == .shoppingCategory }
+            categories = categoryService.expenses.filter { $0.isShoppingList == true }
             keyboardHeightObserver()
         }
         .sheet(isPresented: $isPresentedSwapCategories) {

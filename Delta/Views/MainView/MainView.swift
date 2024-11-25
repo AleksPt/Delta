@@ -52,8 +52,6 @@ struct MainView: View {
                     settingsRoute: .incomeCreate,
                     categoryRoute: .incomes
                 )
-            case .shoppingCategory:
-                EmptyView()
             }
             
 //            if activeTab == .income {

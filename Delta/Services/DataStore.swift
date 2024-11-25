@@ -134,7 +134,8 @@ final class DataStore {
             title: "Taxi",
             currency: .rub,
             categoryType: .expense,
-            items: []
+            items: [],
+            isShoppingList: false
         )
         
         let products = Expense(
@@ -146,13 +147,14 @@ final class DataStore {
             id: UUID(),
             title: "Products",
             currency: .rub,
-            categoryType: .shoppingCategory,
+            categoryType: .expense,
             items: [
                 ShoppingListItem(name: "Bread"),
                 ShoppingListItem(name: "Tomato"),
                 ShoppingListItem(name: "Pasta"),
                 ShoppingListItem(name: "Water")
-            ]
+            ],
+            isShoppingList: true
         )
         
         let home = Expense(
@@ -164,8 +166,9 @@ final class DataStore {
             id: UUID(),
             title: "Home",
             currency: .rub,
-            categoryType: .shoppingCategory,
-            items: [ShoppingListItem(name: "Table")]
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "Table")],
+            isShoppingList: true
         )
         
         let wear = Expense(
@@ -177,8 +180,9 @@ final class DataStore {
             id: UUID(),
             title: "Wear",
             currency: .rub,
-            categoryType: .shoppingCategory,
-            items: [ShoppingListItem(name: "T-Shirt")]
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "T-Shirt")],
+            isShoppingList: true
         )
         
         let shoes = Expense(
@@ -190,8 +194,9 @@ final class DataStore {
             id: UUID(),
             title: "Shoes",
             currency: .rub,
-            categoryType: .shoppingCategory,
-            items: [ShoppingListItem(name: "Nike")]
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "Nike")],
+            isShoppingList: true
         )
         
         let alcohol = Expense(
@@ -203,8 +208,9 @@ final class DataStore {
             id: UUID(),
             title: "Alcohol",
             currency: .rub,
-            categoryType: .shoppingCategory,
-            items: [ShoppingListItem(name: "Tekila")]
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "Tekila")],
+            isShoppingList: true
         )
         
         let toys = Expense(
@@ -216,8 +222,9 @@ final class DataStore {
             id: UUID(),
             title: "Toys",
             currency: .rub,
-            categoryType: .shoppingCategory,
-            items: [ShoppingListItem(name: "Lego")]
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "Lego")],
+            isShoppingList: true
         )
         
         let award = Income(
