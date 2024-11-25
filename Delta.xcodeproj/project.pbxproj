@@ -24,8 +24,14 @@
 		1A2A33A22CAE9DAD008F6414 /* CustomSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33A12CAE9DAD008F6414 /* CustomSegmentedControlView.swift */; };
 		1A2A33A42CAFEA95008F6414 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33A32CAFEA95008F6414 /* CategoryService.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
+		1AB555162CF0CB590074C861 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB555152CF0CB590074C861 /* TagsView.swift */; };
 		1AB8A7462CBD2B2B0080D148 /* ExpenseSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A7452CBD2B260080D148 /* ExpenseSettingsView.swift */; };
 		1AB8A74A2CC8E9BA0080D148 /* SeeAllAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A7492CC8E9BA0080D148 /* SeeAllAccounts.swift */; };
+		1AB8A74C2CD36E1B0080D148 /* TransactionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A74B2CD36E1B0080D148 /* TransactionFieldView.swift */; };
+		1AB8A74E2CD391D40080D148 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A74D2CD391D40080D148 /* DatePickerView.swift */; };
+		1AB8A7502CD4BC960080D148 /* TagCapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A74F2CD4BC960080D148 /* TagCapsuleView.swift */; };
+		1AB8A7522CD4BD9C0080D148 /* TagPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A7512CD4BD9C0080D148 /* TagPickerView.swift */; };
+		1AB8A7542CD4D3840080D148 /* AutoTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8A7532CD4D3840080D148 /* AutoTransactionView.swift */; };
 		640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */; };
 		640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */; };
 		640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4D2C7F742700244B24 /* InvestmentCategoryCardView.swift */; };
@@ -101,8 +107,14 @@
 		1A2A33A12CAE9DAD008F6414 /* CustomSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControlView.swift; sourceTree = "<group>"; };
 		1A2A33A32CAFEA95008F6414 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
+		1AB555152CF0CB590074C861 /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
 		1AB8A7452CBD2B260080D148 /* ExpenseSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSettingsView.swift; sourceTree = "<group>"; };
 		1AB8A7492CC8E9BA0080D148 /* SeeAllAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllAccounts.swift; sourceTree = "<group>"; };
+		1AB8A74B2CD36E1B0080D148 /* TransactionFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFieldView.swift; sourceTree = "<group>"; };
+		1AB8A74D2CD391D40080D148 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		1AB8A74F2CD4BC960080D148 /* TagCapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCapsuleView.swift; sourceTree = "<group>"; };
+		1AB8A7512CD4BD9C0080D148 /* TagPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPickerView.swift; sourceTree = "<group>"; };
+		1AB8A7532CD4D3840080D148 /* AutoTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTransactionView.swift; sourceTree = "<group>"; };
 		640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4D2C7F742700244B24 /* InvestmentCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentCategoryCardView.swift; sourceTree = "<group>"; };
@@ -249,6 +261,10 @@
 				1A2A33932C9440BD008F6414 /* ItemPickerView.swift */,
 				1A2A33952C9453B2008F6414 /* ShowHistoryView.swift */,
 				1A2A33A12CAE9DAD008F6414 /* CustomSegmentedControlView.swift */,
+				1AB8A74B2CD36E1B0080D148 /* TransactionFieldView.swift */,
+				1AB8A74D2CD391D40080D148 /* DatePickerView.swift */,
+				1AB8A7512CD4BD9C0080D148 /* TagPickerView.swift */,
+				1AB8A74F2CD4BC960080D148 /* TagCapsuleView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -303,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				64FB5C542C4BF52500BBADB1 /* TransferView.swift */,
+				1AB8A7532CD4D3840080D148 /* AutoTransactionView.swift */,
+				1AB555152CF0CB590074C861 /* TagsView.swift */,
 			);
 			path = TransferView;
 			sourceTree = "<group>";
@@ -570,12 +588,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AB8A74C2CD36E1B0080D148 /* TransactionFieldView.swift in Sources */,
 				1A2A33872C8893EB008F6414 /* GoalCategoryRowView.swift in Sources */,
+				1AB8A7542CD4D3840080D148 /* AutoTransactionView.swift in Sources */,
 				1AB8A74A2CC8E9BA0080D148 /* SeeAllAccounts.swift in Sources */,
 				1A2A33792C80B5A1008F6414 /* Router.swift in Sources */,
 				6415A0CE2C9CAA28004F1D26 /* ShoppingListAddView.swift in Sources */,
 				1A2A33A42CAFEA95008F6414 /* CategoryService.swift in Sources */,
 				648E09282C8DB91200ECA13D /* Constants.swift in Sources */,
+				1AB8A7502CD4BC960080D148 /* TagCapsuleView.swift in Sources */,
 				1A2A33942C9440BD008F6414 /* ItemPickerView.swift in Sources */,
 				64FB5C472C4BF4BB00BBADB1 /* SettingsView.swift in Sources */,
 				1A2A33A02CAE9523008F6414 /* IncomeSettingsView.swift in Sources */,
@@ -597,6 +618,8 @@
 				64D644D52CC01C71003A42FD /* AccountsAndGroupsScrollView.swift in Sources */,
 				648E092A2C8EBBE900ECA13D /* InfoMainView.swift in Sources */,
 				640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */,
+				1AB8A7522CD4BD9C0080D148 /* TagPickerView.swift in Sources */,
+				1AB555162CF0CB590074C861 /* TagsView.swift in Sources */,
 				647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */,
 				647A6F402C8123E100927749 /* ChevronButtonView.swift in Sources */,
 				64FB5C4B2C4BF4CC00BBADB1 /* AppDesignSettingsView.swift in Sources */,
@@ -617,6 +640,7 @@
 				64DF62FF2CB0149C001D7E12 /* GroupCardView.swift in Sources */,
 				649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */,
 				1A2A339A2C946025008F6414 /* View +.swift in Sources */,
+				1AB8A74E2CD391D40080D148 /* DatePickerView.swift in Sources */,
 				640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */,
 				64FB5C4D2C4BF4DD00BBADB1 /* AccountSettingsView.swift in Sources */,
 				64D4F49D2C8F66C7002C18BF /* DataManager.swift in Sources */,

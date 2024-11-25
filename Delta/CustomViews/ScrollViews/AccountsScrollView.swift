@@ -25,6 +25,7 @@ struct AccountsScrollView: View {
                 PlusButtonView {
                     router.navigateTo(.accountCreate)
                 }
+                .frame(width: Constants.widthOne)
                 .simultaneousGesture(
                     TapGesture().onEnded {
                         router.navigateTo(.accountCreate)

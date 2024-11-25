@@ -44,14 +44,14 @@ struct AccountCardView: View {
         
         // TODO: - drag and drop
         
-        .dropDestination(for: Account.self) { droppedCategories, location in
-            router.navigateTo(.incomes)
-            return true
-        } isTargeted: { isTargeted in
-            // change appearance
-        }
-        
-        .draggable(account)
+//        .dropDestination(for: Account.self) { droppedCategories, location in
+//            router.navigateTo(.incomes)
+//            return true
+//        } isTargeted: { isTargeted in
+//            // change appearance
+//        }
+//        
+//        .draggable(account)
     }
 }
 

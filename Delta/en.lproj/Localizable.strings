@@ -33,6 +33,7 @@
 "Currency" = "Currency";
 "Choose date" = "Choose date";
 "Choose accounts for group" = "Choose accounts for group";
+"Choose tags" = "Choose tags";
 "Delete account" = "Delete account";
 "Delete group" = "Delete group";
 "Expense" = "Expense";
@@ -51,6 +52,7 @@
 "My balance" = "My balance";
 "New expense" = "New expense";
 "New income" = "New income";
+"No group" = "No Group";
 "Notifications" = "Notifications";
 "Plan" = "Plan";
 "Random" = "Random";
