@@ -98,6 +98,9 @@ struct TransferView: View {
                     print(toAccount.title, toAccount.amount)
                 }
             }
+            ToolbarItem(placement: .topBarLeading) {
+                NavBarBackButtonView(dismiss)
+            }
         }
     }
     

@@ -16,7 +16,7 @@ struct DatePickerView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Label(title, systemImage: "calendar")
+            Label(LocalizedStringKey(title), systemImage: "calendar")
                 .labelStyle(CustomLabel(spacing: 4))
                 .foregroundStyle(AppGradient.appBlack.value)
                 .padding(.leading, 16)

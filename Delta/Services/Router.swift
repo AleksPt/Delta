@@ -117,6 +117,7 @@ final class Router {
                 .navigationBarBackButtonHidden()
         case .transfer(let source, let destination):
             TransferView(fromAccount: source, toAccount: destination)
+                .navigationBarBackButtonHidden()
         }
     }
     
