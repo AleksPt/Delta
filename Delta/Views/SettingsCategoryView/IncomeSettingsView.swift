@@ -93,6 +93,9 @@ struct IncomeSettingsView: View {
                     }
                 }
             }
+            ToolbarItem(placement: .topBarLeading) {
+                NavBarBackButtonView(dismiss)
+            }
         }
         .background(.appBackground)
         .onTapGesture {

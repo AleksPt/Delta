@@ -87,27 +87,37 @@ final class Router {
                 .navigationBarBackButtonHidden()
         case .accountSettings(let account):
             AccountSettingsView(account: account)
+                .navigationBarBackButtonHidden()
         case .accountGroupSettings(let group):
             AccountGroupSettingsView(groupOfAccounts: group)
+                .navigationBarBackButtonHidden()
         case .seeAll:
             SeeAllView()
                 .navigationBarBackButtonHidden()
         case .incomes:
             IncomesView()
+                .navigationBarBackButtonHidden()
         case .incomeSettings(let income):
             IncomeSettingsView(income: income)
+                .navigationBarBackButtonHidden()
         case .expenseSettings(let expense):
             ExpenseSettingsView(expense: expense)
+                .navigationBarBackButtonHidden()
         case .accountCreate:
             AccountSettingsView()
+                .navigationBarBackButtonHidden()
         case .accountGroupCreate:
             AccountGroupSettingsView()
+                .navigationBarBackButtonHidden()
         case .incomeCreate:
             IncomeSettingsView()
+                .navigationBarBackButtonHidden()
         case .expenseCreate:
             ExpenseSettingsView()
+                .navigationBarBackButtonHidden()
         case .transfer(let source, let destination):
             TransferView(fromAccount: source, toAccount: destination)
+                .navigationBarBackButtonHidden()
         }
     }
     

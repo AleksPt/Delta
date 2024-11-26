@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnalyticsView: View {
+    @Environment(LanguageManager.self) private var languageManager
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }

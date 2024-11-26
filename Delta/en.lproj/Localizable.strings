@@ -6,6 +6,12 @@
   
 */
 "Switch language" = "Switch language";
+"Alcohol" = "Alcohol";
+"Products" = "Products";
+"Home" = "Home";
+"Wear" = "Wear";
+"Shoes" = "Shoes";
+"Toys" = "Toys";
 
 "Add" = "Add";
 "Add category" = "Add category";
@@ -22,6 +28,7 @@
 "Award" = "Award";
 "Autotransaction" = "Autotransaction";
 "Basic" = "Basic";
+"Back" = "Back";
 "Buy" = "Buy";
 "Completed" = "Completed";
 "Cash" = "Cash";
@@ -36,6 +43,8 @@
 "Choose tags" = "Choose tags";
 "Delete account" = "Delete account";
 "Delete group" = "Delete group";
+"Destination" = "Destination";
+"Date" = "Date";
 "Expense" = "Expense";
 "Expenses" = "Expenses";
 "Expense source" = "Expense source";
@@ -48,6 +57,7 @@
 "Income source" = "Income source";
 "Income title" = "Income title";
 "Income main info" = "Income main info";
+"Input amount" = "Input amount";
 "Main" = "Main";
 "My balance" = "My balance";
 "New expense" = "New expense";
@@ -56,6 +66,7 @@
 "Notifications" = "Notifications";
 "Plan" = "Plan";
 "Random" = "Random";
+"Repeat" = "Repeat";
 "Save" = "Save";
 "Salary" = "Salary";
 "Sber bank" = "Sber bank";
@@ -65,9 +76,13 @@
 "Save accounts" = "Save accounts";
 "Settings" = "Settings";
 "Swap categories" = "Swap categories";
+"Source" = "Source";
+"Title" = "Title";
+"Tags" = "Tags";
 "Taxi" = "Taxi";
 "Total balance" = "Total balance";
 "Transaction" = "Transaction";
+"Transfer" = "Transfer";
 "Your account" = "Your account";
 "Your title" = "Your title";
 

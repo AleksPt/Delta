@@ -159,7 +159,7 @@ struct AccountSettingsView: View {
         .buttonStyle(.borderless)
         .listSectionSpacing(.compact)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button(LocalizedStringKey("Save")) {
                     account?.title = name
                     account?.currency = currency
@@ -188,6 +188,9 @@ struct AccountSettingsView: View {
                         print(account.title)
                     }
                 }
+            }
+            ToolbarItem(placement: .topBarLeading) {
+                NavBarBackButtonView(dismiss)
             }
         }
         .scrollContentBackground(.hidden)

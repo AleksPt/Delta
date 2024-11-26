@@ -152,6 +152,9 @@ struct AccountGroupSettingsView: View {
                     }
                 }
             }
+            ToolbarItem(placement: .topBarLeading) {
+                NavBarBackButtonView(dismiss)
+            }
         }
         .scrollContentBackground(.hidden)
         .background(.appBackground)
