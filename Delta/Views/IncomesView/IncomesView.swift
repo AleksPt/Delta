@@ -10,6 +10,7 @@ import UISystem
 
 struct IncomesView: View {
     @Environment(CategoryService.self) private var categoryService
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
@@ -31,6 +32,11 @@ struct IncomesView: View {
 //        .toolbarBackground(.visible, for: .navigationBar)
 //        .toolbarBackground(Color.appBackgroundMini, for: .navigationBar)
         .background(.appBackground)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavBarBackButtonView(dismiss)
+            }
+        }
     }
 }
 

@@ -13,7 +13,7 @@ struct SettingsView: View {
     var body: some View {
         Button("Switch language") {
             if languageManager.locale.identifier == "ru_RU" {
-                languageManager.changeLanguage(to: "en_EN")
+                languageManager.changeLanguage(to: "en_US")
             } else {
                 languageManager.changeLanguage(to: "ru_RU")
             }

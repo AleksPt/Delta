@@ -96,6 +96,9 @@ struct ExpenseSettingsView: View {
                     }
                 }
             }
+            ToolbarItem(placement: .topBarLeading) {
+                NavBarBackButtonView(dismiss)
+            }
         }
         .background(.appBackground)
         .onTapGesture {
