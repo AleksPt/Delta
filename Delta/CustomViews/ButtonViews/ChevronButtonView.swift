@@ -14,7 +14,7 @@ struct ChevronButtonView: View {
     
     var body: some View {
         Button(action: action) {
-        Label(title, systemImage: image)
+            Label(LocalizedStringKey(title), systemImage: image)
             .font(.bodyText2())
             .labelStyle(IconTrailingLabelStyle())
             .foregroundStyle(.appBlack)

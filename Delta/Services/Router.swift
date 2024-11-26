@@ -115,7 +115,6 @@ final class Router {
         case .seeAll:
             SeeAllView()
         }
-
     }
     
     func navigateTo(_ appRoute: Route) {
