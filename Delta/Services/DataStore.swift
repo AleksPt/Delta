@@ -18,6 +18,7 @@ final class DataStore {
     var accounts: [Account] = []
     var incomes: [Income] = []
     var expenses: [Expense] = []
+    var tags: [Tag] = []
     
     private init() {
         initializeTestData()
@@ -132,7 +133,98 @@ final class DataStore {
             id: UUID(),
             title: "Taxi",
             currency: .rub,
-            categoryType: .expense
+            categoryType: .expense,
+            items: [],
+            isShoppingList: false
+        )
+        
+        let products = Expense(
+            amount: 0,
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Products",
+            currency: .rub,
+            categoryType: .expense,
+            items: [
+                ShoppingListItem(name: "Bread"),
+                ShoppingListItem(name: "Tomato"),
+                ShoppingListItem(name: "Pasta"),
+                ShoppingListItem(name: "Water")
+            ],
+            isShoppingList: true
+        )
+        
+        let home = Expense(
+            amount: 0,
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Home",
+            currency: .rub,
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "Table")],
+            isShoppingList: true
+        )
+        
+        let wear = Expense(
+            amount: 0,
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Wear",
+            currency: .rub,
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "T-Shirt")],
+            isShoppingList: true
+        )
+        
+        let shoes = Expense(
+            amount: 0,
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Shoes",
+            currency: .rub,
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "Nike")],
+            isShoppingList: true
+        )
+        
+        let alcohol = Expense(
+            amount: 0,
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Alcohol",
+            currency: .rub,
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "Tekila")],
+            isShoppingList: true
+        )
+        
+        let toys = Expense(
+            amount: 0,
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Toys",
+            currency: .rub,
+            categoryType: .expense,
+            items: [ShoppingListItem(name: "Lego")],
+            isShoppingList: true
         )
         
         let award = Income(
@@ -171,6 +263,25 @@ final class DataStore {
         
         incomes.append(award)
         incomes.append(salary)
+        
         expenses.append(taxi)
+        expenses.append(products)
+        expenses.append(home)
+        expenses.append(wear)
+        expenses.append(shoes)
+        expenses.append(alcohol)
+        expenses.append(toys)
+        
+        let food = Tag(name: "Food")
+        let farmacy = Tag(name: "Farmacy")
+        let clothes = Tag(name: "Clothes")
+        let pets = Tag(name: "Pets")
+        let hobbies = Tag(name: "Hobbies")
+        
+        tags.append(food)
+        tags.append(farmacy)
+        tags.append(clothes)
+        tags.append(pets)
+        tags.append(hobbies)
     }
 }

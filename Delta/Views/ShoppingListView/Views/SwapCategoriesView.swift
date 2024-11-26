@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct SwapCategoriesView: View {
-    @Binding var categories: [ShoppingListCategory]
+    @Binding var categories: [Expense]
     @State private var editMode: EditMode = .active
     @Environment(\.dismiss) var dismiss
 
@@ -18,7 +18,7 @@ struct SwapCategoriesView: View {
         NavigationStack {
             List {
                 ForEach(categories, id: \.self) {
-                    Text($0.name.capitalized)
+                    Text($0.title.capitalized)
                 }
                 .onMove(perform: moveSection)
             }

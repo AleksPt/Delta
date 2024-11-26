@@ -201,6 +201,7 @@ struct CertainIncomesView: View {
             PlusButtonView {
                 categoryService.createSubIncome()
             }
+            .frame(width: Constants.widthOne)
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
             .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))

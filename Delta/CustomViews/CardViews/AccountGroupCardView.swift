@@ -16,6 +16,7 @@ struct AccountGroupCardView: View {
     
     @State private var isExpanded = false
     @State private var isDragging: Bool = false
+    @State private var droppedAccount: Account?
     
     var countOfAccounts: Int {
         accountsGroup.accounts.count
@@ -56,6 +57,15 @@ struct AccountGroupCardView: View {
                             account: account,
                             size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                         )
+                        .draggable(account)
+                        .dropDestination(for: Account.self) { droppedAccounts, location in
+                            droppedAccount = droppedAccounts.first
+                            guard let droppedAccount else { return false }
+                            router.navigateTo(.transfer(sourse: droppedAccount, destination: account))
+                            return true
+                        } isTargeted: { isTargeted in
+                            // change appearance
+                        }
                     }
                 }
                 .padding()
@@ -78,17 +88,17 @@ struct AccountGroupCardView: View {
         
         // TODO: - drag and drop
         
-        .dropDestination(for: GroupOfAccounts.self) { droppedCategories, location in
-            isExpanded.toggle()
-            return true
-        } isTargeted: { isTargeted in
-            isDragging = isTargeted
-        }
-        .onChange(of: isDragging) { _, isDragging in
-            if isDragging {
-                isExpanded = true
-            }
-        }
+//        .dropDestination(for: GroupOfAccounts.self) { droppedCategories, location in
+//            isExpanded.toggle()
+//            return true
+//        } isTargeted: { isTargeted in
+//            isDragging = isTargeted
+//        }
+//        .onChange(of: isDragging) { _, isDragging in
+//            if isDragging {
+//                isExpanded = true
+//            }
+//        }
     }
 }
 
