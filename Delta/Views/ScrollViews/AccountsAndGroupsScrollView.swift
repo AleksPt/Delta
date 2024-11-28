@@ -13,7 +13,7 @@ struct AccountsAndGroupsScrollView: View {
     
     @State private var selectedGroup: GroupOfAccounts?
     @State private var isExpanded = false
-    @State private var droppedAccount: Account?
+    @State private var droppedItem: DragDropItem?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -30,14 +30,11 @@ struct AccountsAndGroupsScrollView: View {
                                     size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                                 )
                                 .draggable(account)
-                                .dropDestination(for: Account.self) { droppedAccounts, location in
-                                    droppedAccount = droppedAccounts.first
-                                    guard let droppedAccount else { return false }
-                                    router.navigateTo(.transfer(sourse: droppedAccount, destination: account))
-                                    return true
-                                } isTargeted: { isTargeted in
-                                    // change appearance
+
+                                .dropDestination(for: DragDropItem.self) { droppedItems, location in
+                                    return dropTransfer(items: droppedItems, destination: account)
                                 }
+                                
                             } else if let group = item as? GroupOfAccounts {
                                 AccountGroupCardView(accountsGroup: group, onSelect: {
                                     selectedGroup = nil
@@ -68,8 +65,35 @@ struct AccountsAndGroupsScrollView: View {
             categoryService.getAccountsAndGroups()
         }
     }
+    
+    private func dropTransfer(items: [DragDropItem], destination: Account) -> Bool {
+        let item = items.first!
+        
+        switch item {
+        case .income(let income):
+            
+            // TODO: add link for income transfer
+            
+            router.navigateTo(.incomes)
+            print(income.title)
+            
+            return true
+            
+        case .accountAndGroups(let accountsAndGroups):
+            print("Type of accountsAndGroups:", type(of: accountsAndGroups)) // Покажет текущий тип
+            print(accountsAndGroups.title)
+            
+            guard let account = accountsAndGroups as? Account else {
+                print("error: accountsAndGroups is not Account, but \(type(of: accountsAndGroups))")
+                return false
+            }
+            
+            print("Account dragged:", account.title)
+            router.navigateTo(.transfer(sourse: account, destination: destination))
+            return true
+        }
+    }
 }
-
 
 //#Preview {
 //    let groups = CategoryService().groupsOfAccounts
