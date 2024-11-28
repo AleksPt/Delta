@@ -41,17 +41,6 @@ struct AccountCardView: View {
         .onTapGesture {
             router.navigateTo(.accountSettings(account: account))
         }
-        
-        // TODO: - drag and drop
-        
-//        .dropDestination(for: Account.self) { droppedCategories, location in
-//            router.navigateTo(.incomes)
-//            return true
-//        } isTargeted: { isTargeted in
-//            // change appearance
-//        }
-//        
-//        .draggable(account)
     }
 }
 
