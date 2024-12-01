@@ -31,9 +31,9 @@ struct AutoTransactionView: View {
                 
                 HStack(spacing: 16) {
                     DatePickerView(date: $repeatDate, title: "Repeat date", background: AppGradient.appGray)
-                        .padding(.leading, 16)
+                        //.padding(.leading, 16)
                     DatePickerView(date: $endDate, title: "End date", background: AppGradient.appGray)
-                        .padding(.trailing, 16)
+                        //.padding(.trailing, 16)
                 }
                 .padding(.vertical, 8)
                 

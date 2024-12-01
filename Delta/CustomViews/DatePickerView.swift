@@ -16,11 +16,14 @@ struct DatePickerView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Label(title, systemImage: "calendar")
-                .labelStyle(CustomLabel(spacing: 4))
-                .foregroundStyle(AppGradient.appBlack.value)
-                .padding(.leading, 16)
-                .padding(.vertical, 6)
+            HStack {
+                Label(title, systemImage: "calendar")
+                    .labelStyle(CustomLabel(spacing: 4))
+                    .foregroundStyle(AppGradient.appBlack.value)
+                    .padding(.leading, 16)
+                    .padding(.vertical, 6)
+                Spacer()
+            }
             
             
             DatePicker("", selection: $date, displayedComponents: .date)
