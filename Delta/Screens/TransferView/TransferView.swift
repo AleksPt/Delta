@@ -11,6 +11,7 @@ import UISystem
 struct TransferView: View {
     @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
+    @Environment(CategoryService.self) private var categoryService
     
     @State private var amount: String = ""
     @State private var date: Date = Date()
@@ -23,9 +24,13 @@ struct TransferView: View {
     @State private var period: Period = .month
     @State private var isNotify: Bool = false
     
-    var fromAccount: Account
+    var fromAccountID: UUID
     var toAccount: Account
     
+    var fromAccount: Account? {
+        return categoryService.accounts.first { $0.id == fromAccountID }
+    }
+
     var body: some View {
         VStack {
             TransactionFieldView(type: .source, account: fromAccount)
@@ -82,15 +87,15 @@ struct TransferView: View {
                         id: UUID(),
                         amount: Double(amount) ?? 0,
                         date: date,
-                        sourceID: fromAccount.id,
+                        sourceID: fromAccountID,
                         destinationID: toAccount.id,
                         tags: tags.map { $0.name },
-                        currency: fromAccount.currency,
+                        currency: fromAccount?.currency ?? .usd,
                         person: nil,
                         autoTransaction: isRepeatable ? autoTransaction : nil
                     )
                     
-                    fromAccount.transactions.append(transaction)
+                    fromAccount?.transactions.append(transaction)
                     toAccount.transactions.append(transaction)
                     
                     dismiss()
@@ -124,7 +129,7 @@ struct TransferView: View {
 }
 
 #Preview {
-    TransferView(fromAccount: CategoryService().accounts.first!, toAccount: CategoryService().accounts.last!)
+    TransferView(fromAccountID: CategoryService().accounts.first!.id, toAccount: CategoryService().accounts.last!)
         .environment(CategoryService())
         .environment(Router.shared)
 }

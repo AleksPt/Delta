@@ -23,7 +23,7 @@ enum Route: Hashable {
     case expenseSettings(expense: Expense)
     case incomeCreate
     case expenseCreate
-    case transfer(sourse: Account, destination: Account)
+    case transfer(sourse: UUID, destination: Account)
 }
 
 enum TabRoute: Hashable {
@@ -115,8 +115,8 @@ final class Router {
         case .expenseCreate:
             ExpenseSettingsView()
                 .navigationBarBackButtonHidden()
-        case .transfer(let source, let destination):
-            TransferView(fromAccount: source, toAccount: destination)
+        case .transfer(let sourceID, let destination):
+            TransferView(fromAccountID: sourceID, toAccount: destination)
                 .navigationBarBackButtonHidden()
         }
     }

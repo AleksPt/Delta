@@ -80,16 +80,7 @@ struct AccountsAndGroupsScrollView: View {
             return true
             
         case .accountAndGroups(let accountsAndGroups):
-            print("Type of accountsAndGroups:", type(of: accountsAndGroups)) // Покажет текущий тип
-            print(accountsAndGroups.title)
-            
-            guard let account = accountsAndGroups as? Account else {
-                print("error: accountsAndGroups is not Account, but \(type(of: accountsAndGroups))")
-                return false
-            }
-            
-            print("Account dragged:", account.title)
-            router.navigateTo(.transfer(sourse: account, destination: destination))
+            router.navigateTo(.transfer(sourse: accountsAndGroups.id, destination: destination))
             return true
         }
     }
