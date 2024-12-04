@@ -21,7 +21,7 @@ final class GroupOfAccounts: AccountsAndGroups {
         image: String,
         color: String,
         accounts: [Account],
-        categoryType: CategoryType
+        categoryType: CategoryType = .groupOfAccounts
     ) {
         self.accounts = accounts
         super.init(

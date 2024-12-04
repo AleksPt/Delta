@@ -23,7 +23,7 @@ enum Route: Hashable {
     case expenseSettings(expense: Expense)
     case incomeCreate
     case expenseCreate
-    case transfer(sourse: Account, destination: Account)
+    case transfer(sourse: UUID, destination: Account)
 }
 
 enum TabRoute: Hashable {
@@ -115,8 +115,8 @@ final class Router {
         case .expenseCreate:
             ExpenseSettingsView()
                 .navigationBarBackButtonHidden()
-        case .transfer(let source, let destination):
-            TransferView(fromAccount: source, toAccount: destination)
+        case .transfer(let sourceID, let destination):
+            TransferView(fromAccountID: sourceID, toAccount: destination)
                 .navigationBarBackButtonHidden()
         }
     }
@@ -154,4 +154,26 @@ final class Router {
     }
     
     private init() {}
+}
+
+// MARK: - Public Methods for DragAndDrop
+extension Router {
+    func dropTransfer(items: [DragDropItem], destination: Account) -> Bool {
+        let item = items.first!
+        
+        switch item {
+        case .income(let income):
+            
+            // TODO: add link for income transfer
+            
+            navigateTo(.incomes)
+            print(income.title)
+            
+            return true
+            
+        case .accountAndGroups(let accountsAndGroups):
+            navigateTo(.transfer(sourse: accountsAndGroups.id, destination: destination))
+            return true
+        }
+    }
 }

@@ -19,6 +19,10 @@ final class CategoryService {
     
     var tags: [Tag] = DataStore.shared.tags
     
+    init() {
+        getAccountsAndGroups()
+    }
+    
 //MARK: - INCOMES
     func createIncome(_ draftIncome: Income) {
         incomes.append(draftIncome)

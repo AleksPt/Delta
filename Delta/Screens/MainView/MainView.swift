@@ -13,16 +13,15 @@ struct MainView: View {
     
     let categoryTypes = CategoryType.getCategoryTypes()
 
-    @State private var accounts: [Account] = []
-    @State private var groups: [GroupOfAccounts] = []
     @State private var activeTab = CategoryType.expense
+    @State private var expandedGroupID: UUID?
     
     var body: some View {
         VStack {
             InfoMainView()
             Spacer()
             
-            AccountsAndGroupsScrollView()
+            AccountsAndGroupsScrollView(expandedGroupID: $expandedGroupID)
                 .safeAreaPadding(.horizontal)
             Spacer()
             
@@ -53,26 +52,14 @@ struct MainView: View {
                     categoryRoute: .incomes
                 )
             }
-            
-//            if activeTab == .income {
-//                IncomeScrollView(categories: categoryService.getCategories(with: .income))
-//                    .safeAreaPadding(.horizontal)
-//                
-//                ForEach(categoryTypes, id: \.self) { category in
-//                    if category == activeTab {
-//                        HeaderMainView(text: category.rawValue, action: {})
-//                        CategoriesScrollView(categories: categoryService.getCategories(with: category))
-//                            .frame(height: Constants.heightTwo)
-//                            .safeAreaPadding(.horizontal)
-//                    }
-//                }
-//            }
         }
         .padding(.vertical)
         .background(AppGradient.appBackground.value)
-        .onAppear {
-            accounts = categoryService.accounts
-            groups = categoryService.groupsOfAccounts
+
+        .onTapGesture {
+            withAnimation(.spring()) {
+                expandedGroupID = nil
+            }
         }
     }
 }

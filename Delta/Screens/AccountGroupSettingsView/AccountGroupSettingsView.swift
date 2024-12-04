@@ -29,8 +29,7 @@ struct AccountGroupSettingsView: View {
         currency: .usd,
         image: "dollarsign.circle",
         color: AppGradient.blueGradient.name,
-        accounts: DataStore.shared.accounts,
-        categoryType: .groupOfAccounts
+        accounts: DataStore.shared.accounts
     )) {
         self.groupOfAccounts = groupOfAccounts
         _name = State(initialValue: groupOfAccounts.title)
@@ -140,8 +139,7 @@ struct AccountGroupSettingsView: View {
                             currency: .usd,
                             image: "dollarsign.circle",
                             color: AppGradient.blueGradient.name,
-                            accounts: categoryService.accounts,
-                            categoryType: .groupOfAccounts
+                            accounts: categoryService.accounts
                         ))
                     }
                     
@@ -195,8 +193,7 @@ struct AccountGroupSettingsView: View {
             currency: .usd,
             image: "dollarsign.circle",
             color: AppGradient.blueGradient.name,
-            accounts: DataStore.shared.accounts,
-            categoryType: .account
+            accounts: DataStore.shared.accounts
         )
     )
     .environment(Router.shared)

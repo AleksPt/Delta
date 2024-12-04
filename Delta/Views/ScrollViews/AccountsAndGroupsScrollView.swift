@@ -10,10 +10,8 @@ import SwiftUI
 struct AccountsAndGroupsScrollView: View {
     @Environment(CategoryService.self) private var categoryService
     @Environment(Router.self) private var router
-    
-    @State private var selectedGroup: GroupOfAccounts?
-    @State private var isExpanded = false
-    @State private var droppedItem: DragDropItem?
+
+    @Binding var expandedGroupID: UUID?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -30,22 +28,26 @@ struct AccountsAndGroupsScrollView: View {
                                     size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                                 )
                                 .draggable(account)
-
-                                .dropDestination(for: DragDropItem.self) { droppedItems, location in
-                                    return dropTransfer(items: droppedItems, destination: account)
+                                
+                                .dropDestination(for: DragDropItem.self) { droppedItems, _ in
+                                    return router.dropTransfer(items: droppedItems, destination: account)
                                 }
                                 
                             } else if let group = item as? GroupOfAccounts {
-                                AccountGroupCardView(accountsGroup: group, onSelect: {
-                                    selectedGroup = nil
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                        selectedGroup = group
-                                    }
-                                })
-                                .onChange(of: selectedGroup) { _, newValue in
-                                    if let selectedGroup = newValue {
+                                
+                                AccountGroupCardView(
+                                    accountsGroup: group,
+                                    isExpanded: Binding(
+                                        get: { expandedGroupID == group.id },
+                                        set: { isExpanded in
+                                            expandedGroupID = isExpanded ? group.id : nil
+                                        }
+                                    )
+                                )
+                                .onChange(of: expandedGroupID) { _, newValue in
+                                    if let expandedGroupID = newValue {
                                         withAnimation {
-                                            proxy.scrollTo(selectedGroup.id, anchor: .leading)
+                                            proxy.scrollTo(expandedGroupID, anchor: .leading)
                                         }
                                     }
                                 }
@@ -61,42 +63,12 @@ struct AccountsAndGroupsScrollView: View {
             }
             .shadow()
         }
-        .onAppear {
-            categoryService.getAccountsAndGroups()
-        }
-    }
-    
-    private func dropTransfer(items: [DragDropItem], destination: Account) -> Bool {
-        let item = items.first!
-        
-        switch item {
-        case .income(let income):
-            
-            // TODO: add link for income transfer
-            
-            router.navigateTo(.incomes)
-            print(income.title)
-            
-            return true
-            
-        case .accountAndGroups(let accountsAndGroups):
-            print("Type of accountsAndGroups:", type(of: accountsAndGroups)) // Покажет текущий тип
-            print(accountsAndGroups.title)
-            
-            guard let account = accountsAndGroups as? Account else {
-                print("error: accountsAndGroups is not Account, but \(type(of: accountsAndGroups))")
-                return false
-            }
-            
-            print("Account dragged:", account.title)
-            router.navigateTo(.transfer(sourse: account, destination: destination))
-            return true
-        }
     }
 }
 
-//#Preview {
-//    let groups = CategoryService().groupsOfAccounts
-//    let accounts = CategoryService().accounts
-//    return AccountsAndGroupsScrollView(accounts: accounts, groups: groups).environment(Router.shared)
-//}
+#Preview {
+    let someUUID = UUID()
+    AccountsAndGroupsScrollView(expandedGroupID: .constant(someUUID))
+        .environment(CategoryService())
+        .environment(Router.shared)
+}

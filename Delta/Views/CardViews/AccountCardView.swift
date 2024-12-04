@@ -38,6 +38,8 @@ struct AccountCardView: View {
             color: account.color,
             size: CGSize(width: size.width, height: size.height)
         )
+        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 16), eoFill: true)
+        
         .onTapGesture {
             router.navigateTo(.accountSettings(account: account))
         }
@@ -51,4 +53,5 @@ struct AccountCardView: View {
         account: account,
         size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
     )
+    .environment(Router.shared)
 }
