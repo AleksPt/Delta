@@ -100,4 +100,5 @@ struct AccountGroupCardView: View {
 #Preview {
     let group = CategoryService().groupsOfAccounts.first!
     return AccountGroupCardView(accountsGroup: group, onSelect: {})
+        .environment(Router.shared)
 }

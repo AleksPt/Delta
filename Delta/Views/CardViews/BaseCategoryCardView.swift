@@ -61,6 +61,7 @@ struct BaseCategoryCardView: View {
             color: AppGradient.appBackgroundMini.name,
             size: CGSize(width: Constants.widthTwo, height: Constants.heightTwo)
         )
+        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 16), eoFill: true)
     }
 }
 
