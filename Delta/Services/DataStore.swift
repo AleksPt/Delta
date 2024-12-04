@@ -34,7 +34,6 @@ final class DataStore {
             color: AppGradient.redGradient.name,
             users: [],
             transactions: [],
-            categoryType: .account,
             groupOfAccounts: "Main"
         )
         
@@ -46,7 +45,6 @@ final class DataStore {
             color: AppGradient.blueGradient.name,
             users: [],
             transactions: [],
-            categoryType: .account,
             groupOfAccounts: "Main"
         )
         
@@ -58,7 +56,6 @@ final class DataStore {
             color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
-            categoryType: .account,
             groupOfAccounts: ""
         )
         
@@ -70,7 +67,6 @@ final class DataStore {
             color: AppGradient.purpleGradient.name,
             users: [],
             transactions: [],
-            categoryType: .account,
             groupOfAccounts: "Sber bank"
         )
         
@@ -99,8 +95,7 @@ final class DataStore {
             currency: .rub,
             image: "building.columns",
             color: AppGradient.appGreen.name,
-            accounts: [currency],
-            categoryType: .groupOfAccounts
+            accounts: [currency]
         )
         
         let group2 = GroupOfAccounts(
@@ -109,8 +104,7 @@ final class DataStore {
             currency: .usd,
             image: "building.columns",
             color: AppGradient.blueGradient.name,
-            accounts: [cash, alfabank],
-            categoryType: .groupOfAccounts
+            accounts: [cash, alfabank]
         )
         
         people.append(person1)

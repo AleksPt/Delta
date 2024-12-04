@@ -33,7 +33,7 @@ final class Account: AccountsAndGroups {
         color: String,
         users: [Person],
         transactions: [Transaction],
-        categoryType: CategoryType,
+        categoryType: CategoryType = .account,
         groupOfAccounts: String
     ) {
         self.users = users

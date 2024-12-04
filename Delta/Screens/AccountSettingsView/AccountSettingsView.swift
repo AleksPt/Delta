@@ -32,7 +32,6 @@ struct AccountSettingsView: View {
             color: "blueGradient",
             users: DataStore.shared.people,
             transactions: [],
-            categoryType: .account,
             groupOfAccounts: "Main"
         )) {
         self.account = account
@@ -176,7 +175,6 @@ struct AccountSettingsView: View {
                             color: "blueGradient",
                             users: DataStore.shared.people,
                             transactions: [],
-                            categoryType: .account,
                             groupOfAccounts: "Main"
                         ))
                     }
@@ -214,7 +212,6 @@ struct AccountSettingsView: View {
             color: AppGradient.redGradient.name,
             users: [],
             transactions: [],
-            categoryType: .account,
             groupOfAccounts: "Main"
         )
     )
