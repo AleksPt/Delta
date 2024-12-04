@@ -63,9 +63,6 @@ struct AccountsAndGroupsScrollView: View {
             }
             .shadow()
         }
-        .onAppear {
-            categoryService.getAccountsAndGroups()
-        }
     }
 }
 

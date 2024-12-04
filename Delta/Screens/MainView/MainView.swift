@@ -13,8 +13,6 @@ struct MainView: View {
     
     let categoryTypes = CategoryType.getCategoryTypes()
 
-    @State private var accounts: [Account] = []
-    @State private var groups: [GroupOfAccounts] = []
     @State private var activeTab = CategoryType.expense
     @State private var expandedGroupID: UUID?
     
@@ -57,11 +55,7 @@ struct MainView: View {
         }
         .padding(.vertical)
         .background(AppGradient.appBackground.value)
-        .onAppear {
-            accounts = categoryService.accounts
-            groups = categoryService.groupsOfAccounts
-        }
-        
+
         .onTapGesture {
             withAnimation(.spring()) {
                 expandedGroupID = nil
