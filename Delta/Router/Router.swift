@@ -155,3 +155,25 @@ final class Router {
     
     private init() {}
 }
+
+// MARK: - Public Methods for DragAndDrop
+extension Router {
+    func dropTransfer(items: [DragDropItem], destination: Account) -> Bool {
+        let item = items.first!
+        
+        switch item {
+        case .income(let income):
+            
+            // TODO: add link for income transfer
+            
+            navigateTo(.incomes)
+            print(income.title)
+            
+            return true
+            
+        case .accountAndGroups(let accountsAndGroups):
+            navigateTo(.transfer(sourse: accountsAndGroups.id, destination: destination))
+            return true
+        }
+    }
+}

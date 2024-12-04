@@ -30,9 +30,9 @@ struct AccountsAndGroupsScrollView: View {
                                     size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                                 )
                                 .draggable(account)
-
+                                
                                 .dropDestination(for: DragDropItem.self) { droppedItems, location in
-                                    return dropTransfer(items: droppedItems, destination: account)
+                                    return router.dropTransfer(items: droppedItems, destination: account)
                                 }
                                 
                             } else if let group = item as? GroupOfAccounts {
@@ -63,25 +63,6 @@ struct AccountsAndGroupsScrollView: View {
         }
         .onAppear {
             categoryService.getAccountsAndGroups()
-        }
-    }
-    
-    private func dropTransfer(items: [DragDropItem], destination: Account) -> Bool {
-        let item = items.first!
-        
-        switch item {
-        case .income(let income):
-            
-            // TODO: add link for income transfer
-            
-            router.navigateTo(.incomes)
-            print(income.title)
-            
-            return true
-            
-        case .accountAndGroups(let accountsAndGroups):
-            router.navigateTo(.transfer(sourse: accountsAndGroups.id, destination: destination))
-            return true
         }
     }
 }

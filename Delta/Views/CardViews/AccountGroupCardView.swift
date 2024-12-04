@@ -58,14 +58,10 @@ struct AccountGroupCardView: View {
                             size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                         )
                         .draggable(account)
-//                        .dropDestination(for: Account.self) { droppedAccounts, location in
-//                            droppedAccount = droppedAccounts.first
-//                            guard let droppedAccount else { return false }
-//                            router.navigateTo(.transfer(sourse: droppedAccount, destination: account))
-//                            return true
-//                        } isTargeted: { isTargeted in
-//                            // change appearance
-//                        } //TODO: - !!!
+                        
+                        .dropDestination(for: DragDropItem.self) { droppedItems, location in
+                            return router.dropTransfer(items: droppedItems, destination: account)
+                        }
                     }
                 }
                 .padding()
