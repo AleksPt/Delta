@@ -12,11 +12,11 @@ struct AccountGroupCardView: View {
     @Environment(Router.self) private var router
     
     let accountsGroup: GroupOfAccounts
-    let onSelect: () -> Void
     
-    @State private var isExpanded = false
+    @Binding var isExpanded: Bool
+    
     @State private var isDragging: Bool = false
-    @State private var droppedAccount: Account? //TODO: - !!!
+    @State private var isHovering: Bool = false
     
     var countOfAccounts: Int {
         accountsGroup.accounts.count
@@ -59,8 +59,10 @@ struct AccountGroupCardView: View {
                         )
                         .draggable(account)
                         
-                        .dropDestination(for: DragDropItem.self) { droppedItems, location in
+                        .dropDestination(for: DragDropItem.self) { droppedItems, _ in
                             return router.dropTransfer(items: droppedItems, destination: account)
+                        } isTargeted: { isTargeted in
+                            isHovering = isTargeted
                         }
                     }
                 }
@@ -70,7 +72,6 @@ struct AccountGroupCardView: View {
                     .onTapGesture {
                         withAnimation(.spring()) {
                             isExpanded.toggle()
-                            onSelect()
                         }
                     }
             }
@@ -82,23 +83,31 @@ struct AccountGroupCardView: View {
         .cornerRadius(isExpanded ? 24 : 16)
         .animation(.spring(), value: isExpanded)
         
+        .dropDestination(for: DragDropItem.self) { _, _ in
+            return false
+        } isTargeted: { isTargeted in
+            isHovering = isTargeted
+            isExpanded = true
+        }
+        
+        .onChange(of: isHovering) { _, isHovering in
+            if !isHovering && !isDragging {
+                withAnimation(.spring()) {
+                    isExpanded = false
+                }
+            }
+        }
+        
         .onChange(of: isDragging) { _, isDragging in
             if isDragging {
                 isExpanded = true
             }
-        }
-        
-        .dropDestination(for: DragDropItem.self) { droppedCategories, location in
-            isExpanded.toggle()
-            return true
-        } isTargeted: { isTargeted in
-            isDragging = isTargeted
         }
     }
 }
 
 #Preview {
     let group = CategoryService().groupsOfAccounts.first!
-    return AccountGroupCardView(accountsGroup: group, onSelect: {})
+    AccountGroupCardView(accountsGroup: group, isExpanded: .constant(false))
         .environment(Router.shared)
 }
