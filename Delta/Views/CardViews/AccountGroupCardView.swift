@@ -15,8 +15,8 @@ struct AccountGroupCardView: View {
     
     @Binding var isExpanded: Bool
     
-    @State private var isDragging: Bool = false
-    @State private var isHovering: Bool = false
+    @State private var isHoveringOnGroup = false
+    @State private var isHoveringOnAccount = false
     
     var countOfAccounts: Int {
         accountsGroup.accounts.count
@@ -62,7 +62,7 @@ struct AccountGroupCardView: View {
                         .dropDestination(for: DragDropItem.self) { droppedItems, _ in
                             return router.dropTransfer(items: droppedItems, destination: account)
                         } isTargeted: { isTargeted in
-                            isHovering = isTargeted
+                            isHoveringOnAccount = isTargeted
                         }
                     }
                 }
@@ -86,21 +86,22 @@ struct AccountGroupCardView: View {
         .dropDestination(for: DragDropItem.self) { _, _ in
             return false
         } isTargeted: { isTargeted in
-            isHovering = isTargeted
+            isHoveringOnGroup = isTargeted
             isExpanded = true
         }
         
-        .onChange(of: isHovering) { _, isHovering in
-            if !isHovering && !isDragging {
-                withAnimation(.spring()) {
-                    isExpanded = false
-                }
-            }
+        .onChange(of: isHoveringOnAccount) { _, _ in
+            updateExpandedState()
         }
-        
-        .onChange(of: isDragging) { _, isDragging in
-            if isDragging {
-                isExpanded = true
+        .onChange(of: isHoveringOnGroup) { _, _ in
+            updateExpandedState()
+        }
+    }
+    
+    private func updateExpandedState() {
+        if !isHoveringOnAccount && !isHoveringOnGroup {
+            withAnimation(.spring()) {
+                isExpanded = false
             }
         }
     }
