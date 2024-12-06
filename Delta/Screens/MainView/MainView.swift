@@ -61,6 +61,10 @@ struct MainView: View {
                 expandedGroupID = nil
             }
         }
+        
+        .onChange(of: activeTab) {
+            expandedGroupID = nil
+        }
     }
 }
 
