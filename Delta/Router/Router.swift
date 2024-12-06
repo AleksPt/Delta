@@ -172,8 +172,12 @@ extension Router {
             return true
             
         case .accountAndGroups(let accountsAndGroups):
-            navigateTo(.transfer(sourse: accountsAndGroups.id, destination: destination))
-            return true
+            if accountsAndGroups.id == destination.id {
+                return false
+            } else {
+                navigateTo(.transfer(sourse: accountsAndGroups.id, destination: destination))
+                return true
+            }
         }
     }
 }
