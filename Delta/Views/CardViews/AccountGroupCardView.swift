@@ -124,7 +124,9 @@ struct AccountGroupCardView: View {
             return false
         } isTargeted: { isTargeted in
             isHoveringOnGroup = isTargeted
-            isExpanded = true
+            withAnimation(.spring()) {
+                isExpanded = true
+            }
         }
         
         .onChange(of: isHoveringOnAccount) { _, _ in
