@@ -18,8 +18,9 @@ struct AccountsScrollView: View {
                 ForEach(accounts) { account in
                     AccountCardView(
                         account: account,
-                        size: CGSize(width: Constants.widthTwo, height: Constants.heightThree))
-                    
+                        size: CGSize(width: Constants.widthTwo, height: Constants.heightThree),
+                        isGroupNotExpanded: .constant(true)
+                    )
                 }
                 
                 PlusButtonView {

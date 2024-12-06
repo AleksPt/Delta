@@ -27,7 +27,8 @@ struct SeeAllAccounts: View {
                     HStack {
                         AccountCardView(
                             account: account,
-                            size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
+                            size: CGSize(width: Constants.widthTwo, height: Constants.heightThree),
+                            isGroupNotExpanded: .constant(true)
                         )
                         Spacer()
                         Image(systemName: accounts.contains(account) ? "checkmark.circle.fill" : "circle")
