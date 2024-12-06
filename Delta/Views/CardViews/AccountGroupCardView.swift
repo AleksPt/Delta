@@ -59,7 +59,7 @@ struct AccountGroupCardView: View {
                     Spacer(minLength: 0)
                 }
                 
-                HStack(alignment: !isExpanded ? .bottom : .center) {
+                HStack(alignment: .center) {
                     ForEach(accountsGroup.accounts) { account in
                         HStack(spacing: 8) {
                             AccountCardView(

@@ -63,7 +63,9 @@ struct MainView: View {
         }
         
         .onChange(of: activeTab) {
-            expandedGroupID = nil
+            withAnimation(.spring()) {
+                expandedGroupID = nil
+            }
         }
     }
 }
