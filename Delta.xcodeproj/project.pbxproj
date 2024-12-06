@@ -80,7 +80,6 @@
 		64DC73712CF8A000005BDBD4 /* AutoTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DC73702CF8A000005BDBD4 /* AutoTransaction.swift */; };
 		64DC73732CF8A02D005BDBD4 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DC73722CF8A02D005BDBD4 /* Tag.swift */; };
 		64DC73752CF8A112005BDBD4 /* ShoppingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DC73742CF8A112005BDBD4 /* ShoppingListItem.swift */; };
-		64DF62FF2CB0149C001D7E12 /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DF62FE2CB0149C001D7E12 /* GroupCardView.swift */; };
 		64E00AF02CA45915000092CB /* AccountCapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E00AEF2CA45915000092CB /* AccountCapsuleView.swift */; };
 		64E00AF22CA599B7000092CB /* AccountGroupCapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E00AF12CA599B7000092CB /* AccountGroupCapsuleView.swift */; };
 		64E00AF62CA59C40000092CB /* GroupCapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E00AF52CA59C40000092CB /* GroupCapsuleView.swift */; };
@@ -184,7 +183,6 @@
 		64DC73702CF8A000005BDBD4 /* AutoTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTransaction.swift; sourceTree = "<group>"; };
 		64DC73722CF8A02D005BDBD4 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		64DC73742CF8A112005BDBD4 /* ShoppingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListItem.swift; sourceTree = "<group>"; };
-		64DF62FE2CB0149C001D7E12 /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
 		64E00AEF2CA45915000092CB /* AccountCapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCapsuleView.swift; sourceTree = "<group>"; };
 		64E00AF12CA599B7000092CB /* AccountGroupCapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGroupCapsuleView.swift; sourceTree = "<group>"; };
 		64E00AF52CA59C40000092CB /* GroupCapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCapsuleView.swift; sourceTree = "<group>"; };
@@ -546,7 +544,6 @@
 				640F9F412C7CFEAE007C7E7E /* ExpenseIncomeView.swift */,
 				640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */,
 				64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */,
-				64DF62FE2CB0149C001D7E12 /* GroupCardView.swift */,
 				640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */,
 				640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */,
 				640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */,
@@ -722,7 +719,6 @@
 				64FB5C572C4BF56400BBADB1 /* MyBalanceView.swift in Sources */,
 				64FB5C432C4BF4A600BBADB1 /* AnalyticsView.swift in Sources */,
 				640F9F4C2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift in Sources */,
-				64DF62FF2CB0149C001D7E12 /* GroupCardView.swift in Sources */,
 				649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */,
 				1A2A339A2C946025008F6414 /* View +.swift in Sources */,
 				1AB8A74E2CD391D40080D148 /* DatePickerView.swift in Sources */,

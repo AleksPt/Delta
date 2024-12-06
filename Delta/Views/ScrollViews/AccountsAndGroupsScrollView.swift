@@ -25,7 +25,8 @@ struct AccountsAndGroupsScrollView: View {
                             if let account = item as? Account {
                                 AccountCardView(
                                     account: account,
-                                    size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
+                                    size: CGSize(width: Constants.widthTwo, height: Constants.heightThree),
+                                    isGroupNotExpanded: .constant(true)
                                 )
                                 .draggable(account)
                                 
@@ -37,6 +38,7 @@ struct AccountsAndGroupsScrollView: View {
                                 
                                 AccountGroupCardView(
                                     accountsGroup: group,
+                                    size: CGSize(width: Constants.widthTwo, height: Constants.heightThree),
                                     isExpanded: Binding(
                                         get: { expandedGroupID == group.id },
                                         set: { isExpanded in
@@ -59,6 +61,7 @@ struct AccountsAndGroupsScrollView: View {
                         }
                         .frame(width: Constants.widthOne)
                     }
+                    .frame(height: Constants.heightOne + 24)
                 }
             }
             .shadow()
