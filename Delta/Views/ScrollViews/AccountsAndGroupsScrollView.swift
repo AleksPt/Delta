@@ -56,10 +56,21 @@ struct AccountsAndGroupsScrollView: View {
                             }
                         }
                     
-                        PlusButtonView {
-                            router.navigateTo(.accountCreate)
+                        Menu {
+                            Button(action: {
+                                router.navigateTo(.accountCreate)
+                            }) {
+                                Label("Add account", systemImage: "creditcard")
+                            }
+                            Button(action: {
+                                router.navigateTo(.accountGroupCreate)
+                            }) {
+                                Label("Add group", systemImage: "rectangle.stack")
+                            }
+                        } label: {
+                            PlusButtonView {}
+                                .frame(width: Constants.widthOne)
                         }
-                        .frame(width: Constants.widthOne)
                     }
                     .frame(height: Constants.heightOne + 24)
                 }
