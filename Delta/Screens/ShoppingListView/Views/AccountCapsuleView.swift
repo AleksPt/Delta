@@ -30,7 +30,7 @@ struct AccountCapsuleView: View {
         }
         .padding()
         .frame(height: 60)
-        .background(AppGradient.getColor(from: account.color)?.value)
+        .background(AppGradient.getAppGradient(from: account.color)?.value)
         .clipShape(Capsule())
         .onTapGesture {
             withAnimation(.interactiveSpring) {

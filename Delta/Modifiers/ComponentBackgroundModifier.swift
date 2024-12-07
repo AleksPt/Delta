@@ -13,7 +13,7 @@ struct ComponentBackgroundModifier: ViewModifier {
     let size: CGSize
     
     init(color: String, size: CGSize) {
-        self.color = AppGradient.getColor(from: color) ?? .appWhite
+        self.color = AppGradient.getAppGradient(from: color) ?? .appWhite
         self.size = size
     }
     

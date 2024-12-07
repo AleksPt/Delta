@@ -20,7 +20,8 @@ struct AccountCardView: View {
         if isGroupNotExpanded {
             account.color
         } else {
-            account.color == AppGradient.appBlack.name ? AppGradient.appWhite.name : AppGradient.appBlack.name
+            AppGradient.getAppGradient(from: account.color)?.accentColor ?? AppGradient.appWhite.name
+           // account.color == AppGradient.appBlack.name ? AppGradient.appWhite.name : AppGradient.appBlack.name
         }
     }
     
@@ -44,7 +45,7 @@ struct AccountCardView: View {
                     .font(.bodyText2())
             }
         }
-        .foregroundStyle(account.color == AppGradient.appBlack.name ? .appWhite : .black)
+        .foregroundStyle(AppGradient.getColor(from: account.color))
         .padding()
         .componentBackground(
             color: backgroundColor,

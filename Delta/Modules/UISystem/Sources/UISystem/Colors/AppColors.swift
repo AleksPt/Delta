@@ -19,6 +19,8 @@ public struct AppColors {
     public let textGray = Color("textGray")
     public let appBackground = Color("appBackground")
     public let appBackgroundMini = Color("appBackgroundMini")
+    public let accentBlack = Color("accentBlack")
+    public let accentWhite = Color("accentWhite")
     
     //Accent Colors
     public let appBlue = Color("appBlue")
@@ -28,6 +30,29 @@ public struct AppColors {
     public let appPurple = Color("appPurple")
     public let appRed = Color("appRed")
     public let appYellow = Color("appYellow")
+    
+    public static func getColor(for name: String) -> Color? {
+        switch name {
+        case "appWhite":
+            return Color.theme.appWhite
+        case "appBlack":
+            return Color.theme.appBlack
+        case "appGray":
+            return Color.theme.appGray
+        case "textGray":
+            return Color.theme.textGray
+        case "appBackground":
+            return Color.theme.appBackground
+        case "appBackgroundMini":
+            return Color.theme.appBackgroundMini
+        case "accentBlack":
+            return Color.theme.accentBlack
+        case "accentWhite":
+            return Color.theme.accentWhite
+        default:
+            return Color.theme.accentWhite
+        }
+    }
     
 }
 
@@ -223,51 +248,28 @@ public enum AppGradient: CaseIterable, Hashable {
         }
     }
     
-    public static func getColor(from stringColor: String) -> AppGradient? {
+    public var accentColor: String {
+        switch self {
+        case .blueGradient, .purpleGradient, .pinkGradient, .redGradient, .yellowGradient, .greenGradient, .mintGradient, .appBlue, .appGreen, .appMint, .appPink, .appPurple, .appRed, .appYellow:
+            "accentBlack"
+        case .appWhite, .appGray, .appBackground, .appBackgroundMini:
+            "appBlack"
+        case .appBlack:
+            "appWhite"
+        case .textGray:
+            "accentWhite"
+        }
+    }
+    
+    public static func getAppGradient(from stringColor: String) -> AppGradient? {
         AppGradient.allCases.first { $0.name == stringColor }
     }
+    
+    public static func getColor(from stringColor: String) -> Color {
+        let gradient = AppGradient.allCases.first { $0.name == stringColor }
+        
+        guard let gradient else { return Color.red }
+        
+        return AppColors.getColor(for: gradient.accentColor) ?? Color.red
+    }
 }
-
-//public extension LinearGradient {
-//    static var blueGradient = LinearGradient(
-//        gradient: Gradient(colors: [Color.theme.appBlue, Color.theme.appPurple]),
-//        startPoint: .topLeading,
-//        endPoint: .bottomTrailing
-//    )
-//
-//    static var purpleGradient = LinearGradient(
-//        gradient: Gradient(colors: [Color.theme.appPurple, Color.theme.appPink]),
-//        startPoint: .topLeading,
-//        endPoint: .bottomTrailing
-//    )
-//    
-//    static var pinkGradient = LinearGradient(
-//        gradient: Gradient(colors: [Color.theme.appPink, Color.theme.appRed]),
-//        startPoint: .topLeading,
-//        endPoint: .bottomTrailing
-//    )
-//    
-//    static var redGradient = LinearGradient(
-//        gradient: Gradient(colors: [Color.theme.appRed, Color.theme.appYellow]),
-//        startPoint: .topLeading,
-//        endPoint: .bottomTrailing
-//    )
-//    
-//    static var yellowGradient = LinearGradient(
-//        gradient: Gradient(colors: [Color.theme.appYellow, Color.theme.appGreen]),
-//        startPoint: .topLeading,
-//        endPoint: .bottomTrailing
-//    )
-//    
-//    static var greenGradient = LinearGradient(
-//        gradient: Gradient(colors: [Color.theme.appGreen, Color.theme.appMint]),
-//        startPoint: .topLeading,
-//        endPoint: .bottomTrailing
-//    )
-//    
-//    static var mintGradient = LinearGradient(
-//        gradient: Gradient(colors: [Color.theme.appMint, Color.theme.appBlue]),
-//        startPoint: .topLeading,
-//        endPoint: .bottomTrailing
-//    )
-//}

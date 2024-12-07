@@ -24,7 +24,7 @@ struct GroupCapsuleView: View {
         }
         .padding()
         .frame(height: 60)
-        .background(AppGradient.getColor(from: group.color)?.value)
+        .background(AppGradient.getAppGradient(from: group.color)?.value)
         .clipShape(Capsule())
     }
 }

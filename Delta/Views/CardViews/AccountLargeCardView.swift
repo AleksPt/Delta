@@ -41,7 +41,7 @@ struct AccountLargeCardView: View {
         }
         .padding()
         .frame(width: size.width, height: size.height)
-        .background(AppGradient.getColor(from: color)?.value)
+        .background(AppGradient.getAppGradient(from: color)?.value)
         .cornerRadius(24)
         .shadow(color: colorScheme == .light ? Color.gray.opacity(0.4) : Color.black.opacity(0.4), radius: 6, x: 2, y: 4)
     }
