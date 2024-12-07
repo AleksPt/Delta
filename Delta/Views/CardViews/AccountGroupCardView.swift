@@ -24,7 +24,7 @@ struct AccountGroupCardView: View {
     }
     
     var backgroundColor: LinearGradient {
-        AppGradient.getColor(from: accountsGroup.color)?.value ?? AppGradient.appWhite.value
+        AppGradient.getAppGradient(from: accountsGroup.color)?.value ?? AppGradient.appWhite.value
     }
     
     var body: some View {
@@ -104,7 +104,7 @@ struct AccountGroupCardView: View {
                     }
                 }
             }
-            .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
+            .foregroundStyle(AppGradient.getColor(from: accountsGroup.color))
             .padding()
             
             .frame(minWidth: size.width)

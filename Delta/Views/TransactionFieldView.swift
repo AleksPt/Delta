@@ -80,7 +80,7 @@ struct TransactionFieldView: View {
         HStack {
             Circle()
                 .frame(width: 30)
-                .foregroundStyle(AppGradient.getColor(from: color)?.value ?? AppGradient.appBlue.value)
+                .foregroundStyle(AppGradient.getAppGradient(from: color)?.value ?? AppGradient.appBlue.value)
             Text(title)
                 .font(.subheading2())
                 .foregroundStyle(AppGradient.appBlack.value)
