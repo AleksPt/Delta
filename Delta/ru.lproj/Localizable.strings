@@ -6,6 +6,12 @@
   
 */
 "Switch language" = "Переключить язык";
+"Alcohol" = "Алкоголь";
+"Products" = "Продукты";
+"Home" = "Дом";
+"Wear" = "Одежда";
+"Shoes" = "Обувь";
+"Toys" = "Игрушки";
 
 "Add" = "Добавить";
 "Add category" = "Добавить категорию";
@@ -22,6 +28,7 @@
 "Award" = "Премия";
 "Autotransaction" = "Повтор транзации";
 "Basic" = "Основной";
+"Back" = "Назад";
 "Buy" = "Купить";
 "Close" = "Закрыть";
 "Completed" = "Завершено";
@@ -36,6 +43,8 @@
 "Choose tags" = "Выберите тэги";
 "Delete account" = "Удалить аккаунт";
 "Delete group" = "Удалить группу";
+"Destination" = "Куда";
+"Date" = "Дата";
 "Expense" = "Расход";
 "Expenses" = "Расходы";
 "Expense source" = "Источник расхода";
@@ -48,6 +57,7 @@
 "Income source" = "Источник дохода";
 "Income title" = "Заголовок дохода";
 "Income main info" = "Информация о доходе";
+"Input amount" = "Введите сумму";
 "Main" = "Главный";
 "My balance" = "Мой баланс";
 "New expense" = "Новый расход";
@@ -56,6 +66,7 @@
 "Notifications" = "Уведомления";
 "Plan" = "План";
 "Random" = "Случайные";
+"Repeat" = "Повторять";
 "Save" = "Сохранить";
 "Save accounts" = "Сохранить счета";
 "Salary" = "Зарплата";
@@ -65,8 +76,12 @@
 "See all" = "Подробнее";
 "Settings" = "Настройки";
 "Swap categories" = "Переместить категории";
-"Total balance" = "Всего баланс";
+"Source" = "Откуда";
+"Title" = "Введите название";
+"Tags" = "Теги";
+"Total balance" = "Общий баланс";
 "Taxi" = "Такси";
 "Transaction" = "Транзакция";
+"Transfer" = "Создать транзакцию";
 "Your account" = "Ваш счет";
 "Your title" = "Ваш заголовок";

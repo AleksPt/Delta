@@ -38,6 +38,20 @@
 				<string>com.public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
+			<string>AccountsAndGroups</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>com.delta.accountsAndGroups</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
 			<string>Account</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
