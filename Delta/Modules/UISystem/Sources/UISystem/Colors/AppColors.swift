@@ -77,6 +77,8 @@ public enum AppGradient: CaseIterable, Hashable {
     case appPurple
     case appRed
     case appYellow
+    case accentBlack
+    case accentWhite
     
     public var name: String {
         switch self {
@@ -120,6 +122,10 @@ public enum AppGradient: CaseIterable, Hashable {
             "appRed"
         case .appYellow:
             "appYellow"
+        case .accentBlack:
+            "accentBlack"
+        case .accentWhite:
+            "accentWhite"
         }
     }
     
@@ -245,18 +251,30 @@ public enum AppGradient: CaseIterable, Hashable {
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
+        case .accentBlack:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.theme.accentBlack, Color.theme.accentBlack]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .accentWhite:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.theme.accentWhite, Color.theme.accentWhite]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
         }
     }
     
     public var accentColor: String {
         switch self {
-        case .blueGradient, .purpleGradient, .pinkGradient, .redGradient, .yellowGradient, .greenGradient, .mintGradient, .appBlue, .appGreen, .appMint, .appPink, .appPurple, .appRed, .appYellow:
+        case .blueGradient, .purpleGradient, .pinkGradient, .redGradient, .yellowGradient, .greenGradient, .mintGradient, .appBlue, .appGreen, .appMint, .appPink, .appPurple, .appRed, .appYellow, .accentWhite:
             "accentBlack"
         case .appWhite, .appGray, .appBackground, .appBackgroundMini:
             "appBlack"
         case .appBlack:
             "appWhite"
-        case .textGray:
+        case .textGray, .accentBlack:
             "accentWhite"
         }
     }

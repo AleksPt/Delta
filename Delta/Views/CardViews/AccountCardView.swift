@@ -13,15 +13,15 @@ struct AccountCardView: View {
     
     let account: Account
     let size: CGSize
+    var groupColor: String?
     
     @Binding var isGroupNotExpanded: Bool
     
     var backgroundColor: String {
         if isGroupNotExpanded {
-            account.color
+           account.color
         } else {
-            AppGradient.getAppGradient(from: account.color)?.accentColor ?? AppGradient.appWhite.name
-           // account.color == AppGradient.appBlack.name ? AppGradient.appWhite.name : AppGradient.appBlack.name
+            AppGradient.getAppGradient(from: groupColor ?? account.color)?.accentColor ?? AppGradient.appBlack.name
         }
     }
     
@@ -68,6 +68,7 @@ struct AccountCardView: View {
     AccountCardView(
         account: account,
         size: CGSize(width: Constants.widthTwo, height: Constants.heightThree),
+        groupColor: "textGray",
         isGroupNotExpanded: .constant(true)
     )
     .environment(Router.shared)
