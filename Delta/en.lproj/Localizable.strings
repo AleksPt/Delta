@@ -12,24 +12,35 @@
 "Wear" = "Wear";
 "Shoes" = "Shoes";
 "Toys" = "Toys";
+"Draco Malfoy" = "Draco Malfoy";
+"Alfa bank" = "Alfa bank";
+"Sber bank" = "Sber bank";
+"Taxi" = "Taxi";
+"Avance" = "Avance";
+"Award" = "Award";
 
+// MARK: - A
 "Add" = "Add";
 "Add category" = "Add category";
+"About app" = "About app";
 "Analytics" = "Analytics";
 "Actual" = "Actual";
 "Accounts" = "Accounts";
 "Account settings" = "Account settings";
 "Account balance" = "Account balance";
 "Account name" = "Account name";
-"Alfa bank" = "Alfa bank";
+"Allow widgets" = "Allow widgets";
 "Amount" = "Amount";
 "Amount for" = "Amount for";
-"Avance" = "Avance";
-"Award" = "Award";
 "Autotransaction" = "Autotransaction";
+
+// MARK: - B
 "Basic" = "Basic";
 "Back" = "Back";
 "Buy" = "Buy";
+"Budget period" = "Budget period";
+
+// MARK: - C
 "Completed" = "Completed";
 "Cash" = "Cash";
 "Certain" = "Certain";
@@ -37,20 +48,35 @@
 "Certain income" = "Certain income";
 "Close" = "Close";
 "Color" = "Color";
+"Code" = "Code";
 "Currency" = "Currency";
 "Choose date" = "Choose date";
 "Choose accounts for group" = "Choose accounts for group";
 "Choose tags" = "Choose tags";
+"Create a copy" = "Create a copy";
+
+// MARK: - D
+"Design" = "Design";
 "Delete account" = "Delete account";
 "Delete group" = "Delete group";
+"Delete demo data" = "Delete demo data";
 "Destination" = "Destination";
 "Date" = "Date";
+"Data" = "Data";
+
+// MARK: - E
+"Export" = "Export";
 "Expense" = "Expense";
 "Expenses" = "Expenses";
 "Expense source" = "Expense source";
 "Expense title" = "Expense title";
 "Expense main info" = "Expense main info";
+
+// MARK: - H
+"Help" = "Помощь";
 "History" = "History";
+
+// MARK: - I
 "Income" = "Income";
 "Incomes" = "Incomes";
 "Icon" = "Icon";
@@ -58,31 +84,58 @@
 "Income title" = "Income title";
 "Income main info" = "Income main info";
 "Input amount" = "Input amount";
+
+// MARK: - L
+"Language" = "Language";
+
+// MARK: - M
 "Main" = "Main";
-"My balance" = "My balance";
+"Main currency" = "Main currency";
+"My profile" = "My profile";
+
+// MARK: - N
 "New expense" = "New expense";
 "New income" = "New income";
 "No group" = "No Group";
 "Notifications" = "Notifications";
+
+// MARK: - P
 "Plan" = "Plan";
+"PRO - account" = "PRO - account";
+
+// MARK: - R
 "Random" = "Random";
+"Rate in App Store" = "Rate in App Store";
 "Repeat" = "Repeat";
+"Removing" = "Removing";
+"Restore from copy" = "Restore from copy";
+
+// MARK: - S
 "Save" = "Save";
 "Salary" = "Salary";
-"Sber bank" = "Sber bank";
+"Security" = "Security";
 "Show" = "Show";
 "Shopping List" = "Shopping list";
+"Share with friends" = "Share with friends";
 "See all" = "See all";
 "Save accounts" = "Save accounts";
 "Settings" = "Settings";
 "Swap categories" = "Swap categories";
 "Source" = "Source";
+"Start of period" = "Start of period";
+"Synchronization" = "Synchronization";
+
+// MARK: - T
 "Title" = "Title";
 "Tags" = "Tags";
-"Taxi" = "Taxi";
 "Total balance" = "Total balance";
 "Transaction" = "Transaction";
 "Transfer" = "Transfer";
+
+// MARK: - U
+"Users" = "Users";
+
+// MARK: - Y
 "Your account" = "Your account";
 "Your title" = "Your title";
 

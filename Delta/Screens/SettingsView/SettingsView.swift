@@ -50,14 +50,14 @@ struct SettingsView: View {
                     languageManager.changeLanguage(to: newValue)
                 }
                 Picker("Main currency", selection: $selectedLanguage) {
-                    Text("Chocolate").tag(LocaleIdentifier.en)
-                    Text("Vanilla").tag(LocaleIdentifier.en)
-                    Text("Strawberry").tag(LocaleIdentifier.en)
+                    Text("1").tag(LocaleIdentifier.en)
+                    Text("2").tag(LocaleIdentifier.en)
+                    Text("3").tag(LocaleIdentifier.en)
                 }
                 Picker("Budget period", selection: $selectedLanguage) {
-                    Text("Chocolate").tag(LocaleIdentifier.en)
-                    Text("Vanilla").tag(LocaleIdentifier.en)
-                    Text("Strawberry").tag(LocaleIdentifier.en)
+                    Text("1").tag(LocaleIdentifier.en)
+                    Text("2").tag(LocaleIdentifier.en)
+                    Text("3").tag(LocaleIdentifier.en)
                 }
                 DatePicker(
                     "Start of period",
@@ -98,42 +98,42 @@ struct SettingsView: View {
                 }
             }
             Section {
-                NavigationLink("Оценить в App Store") {
+                NavigationLink("Rate in App Store") {
                     EmptyView()
                 }
-                NavigationLink("Поделиться с друзьями") {
+                NavigationLink("Share with friends") {
                     EmptyView()
                 }
-                NavigationLink("Помощь") {
+                NavigationLink("Help") {
                     EmptyView()
                 }
-                NavigationLink("О приложении") {
+                NavigationLink("About app") {
                     EmptyView()
                 }
             }
             Section {
                 HStack {
-                    Text("Экспорт")
+                    Text("Export")
                     Spacer()
                     Button("Button") {
                         
                     }
                 }
                 HStack {
-                    Text("Создание копии")
+                    Text("Create a copy")
                     Spacer()
                     Button("Button") {
                         
                     }
                 }
                 HStack {
-                    Text("Восстановить из копии")
+                    Text("Restore from copy")
                     Spacer()
                     Button("Button") {
                         
                     }
                 }
-                NavigationLink("Теги") {
+                NavigationLink("Tags") {
                     EmptyView()
                 }
             }

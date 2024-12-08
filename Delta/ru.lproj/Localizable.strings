@@ -12,24 +12,35 @@
 "Wear" = "Одежда";
 "Shoes" = "Обувь";
 "Toys" = "Игрушки";
+"Draco Malfoy" = "Драко Малфой";
+"Alfa bank" = "Альфа Банк";
+"Sber bank" = "Сбер";
+"Taxi" = "Такси";
+"Avance" = "Аванс";
+"Award" = "Премия";
 
-"Add" = "Добавить";
-"Add category" = "Добавить категорию";
-"Analytics" = "Аналитика";
+// MARK: - A
+"About app" = "О приложении";
 "Actual" = "Факт";
 "Accounts" = "Счета";
 "Account settings" = "Настройки счета";
 "Account balance" = "Баланс счета";
 "Account name" = "Имя счета";
-"Alfa bank" = "Альфа Банк";
+"Add" = "Добавить";
+"Add category" = "Добавить категорию";
+"Allow widgets" = "Разрешить виджеты";
 "Amount" = "Сумма";
 "Amount for" = "Количество для";
-"Avance" = "Аванс";
-"Award" = "Премия";
+"Analytics" = "Аналитика";
 "Autotransaction" = "Повтор транзации";
+
+// MARK: - B
 "Basic" = "Основной";
 "Back" = "Назад";
 "Buy" = "Купить";
+"Budget period" = "Период бюджетирования";
+
+// MARK: - C
 "Close" = "Закрыть";
 "Completed" = "Завершено";
 "Cash" = "Наличные";
@@ -37,20 +48,35 @@
 "Certain expense" = "Регулярный расход";
 "Certain income" = "Регулярный доход";
 "Color" = "Цвет";
+"Code" = "Код";
 "Currency" = "Валюта";
 "Choose date" = "Выберите дату";
 "Choose accounts for group" = "Выберите счета для группы";
 "Choose tags" = "Выберите тэги";
+"Create a copy" = "Создание копии";
+
+// MARK: - D
+"Design" = "Оформление";
 "Delete account" = "Удалить аккаунт";
 "Delete group" = "Удалить группу";
+"Delete demo data" = "Удалить демо-данные";
 "Destination" = "Куда";
 "Date" = "Дата";
+"Data" = "Данные";
+
+// MARK: - E
 "Expense" = "Расход";
+"Export" = "Экспорт";
 "Expenses" = "Расходы";
 "Expense source" = "Источник расхода";
 "Expense title" = "Название расхода";
 "Expense main info" = "Информация о расходе";
+
+// MARK: - H
 "History" = "История";
+"Help" = "Помощь";
+
+// MARK: - I
 "Income" = "Доход";
 "Incomes" = "Доходы";
 "Icon" = "Иконка";
@@ -58,30 +84,58 @@
 "Income title" = "Заголовок дохода";
 "Income main info" = "Информация о доходе";
 "Input amount" = "Введите сумму";
+
+// MARK: - L
+"Language" = "Язык";
+
+// MARK: - M
 "Main" = "Главный";
+"Main currency" = "Основная валюта";
 "My balance" = "Мой баланс";
+"My profile" = "Мой профиль";
+
+// MARK: - N
 "New expense" = "Новый расход";
 "New income" = "Новый доход";
 "No group" = "Без группы";
 "Notifications" = "Уведомления";
+
+// MARK: - P
 "Plan" = "План";
+"PRO - account" = "PRO - аккаунт";
+
+// MARK: - R
 "Random" = "Случайные";
+"Rate in App Store" = "Оценить в App Store";
 "Repeat" = "Повторять";
+"Removing" = "Удаление";
+"Restore from copy" = "Восстановить из копии";
+
+// MARK: - S
 "Save" = "Сохранить";
 "Save accounts" = "Сохранить счета";
 "Salary" = "Зарплата";
-"Sber bank" = "Сбер";
+"Security" = "Безопасность";
 "Show" = "Показать";
 "Shopping List" = "Список покупок";
+"Share with friends" = "Поделиться с друзьями";
 "See all" = "Подробнее";
 "Settings" = "Настройки";
 "Swap categories" = "Переместить категории";
 "Source" = "Откуда";
-"Title" = "Введите название";
+"Start of period" = "Начало периода";
+"Synchronization" = "Синхронизация";
+
+// MARK: - T
 "Tags" = "Теги";
+"Title" = "Введите название";
 "Total balance" = "Общий баланс";
-"Taxi" = "Такси";
 "Transaction" = "Транзакция";
 "Transfer" = "Создать транзакцию";
+
+// MARK: - U
+"Users" = "Пользователи";
+
+// MARK: - Y
 "Your account" = "Ваш счет";
 "Your title" = "Ваш заголовок";
