@@ -13,6 +13,7 @@
 "Shoes" = "Обувь";
 "Toys" = "Игрушки";
 "Draco Malfoy" = "Драко Малфой";
+"Malfoy" = "Малфой";
 "Alfa bank" = "Альфа Банк";
 "Sber bank" = "Сбер";
 "Taxi" = "Такси";
@@ -29,6 +30,7 @@
 "Add" = "Добавить";
 "Add category" = "Добавить категорию";
 "Allow widgets" = "Разрешить виджеты";
+"Age" = "Возраст";
 "Amount" = "Сумма";
 "Amount for" = "Количество для";
 "Analytics" = "Аналитика";
@@ -87,9 +89,11 @@
 
 // MARK: - L
 "Language" = "Язык";
+"Logout" = "Выйти";
 
 // MARK: - M
 "Main" = "Главный";
+"Mail" = "Почта";
 "Main currency" = "Основная валюта";
 "My balance" = "Мой баланс";
 "My profile" = "Мой профиль";
@@ -99,10 +103,13 @@
 "New income" = "Новый доход";
 "No group" = "Без группы";
 "Notifications" = "Уведомления";
+"Name" = "Имя";
 
 // MARK: - P
 "Plan" = "План";
+"Password" = "Пароль";
 "PRO - account" = "PRO - аккаунт";
+"Phone" = "Телефон";
 
 // MARK: - R
 "Random" = "Случайные";

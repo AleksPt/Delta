@@ -50,14 +50,14 @@ struct SettingsView: View {
                     languageManager.changeLanguage(to: newValue)
                 }
                 Picker("Main currency", selection: $selectedLanguage) {
-                    Text("1").tag(LocaleIdentifier.en)
-                    Text("2").tag(LocaleIdentifier.en)
-                    Text("3").tag(LocaleIdentifier.en)
+                    Text("₽").tag(LocaleIdentifier.en)
+                    Text("€").tag(LocaleIdentifier.en)
+                    Text("$").tag(LocaleIdentifier.en)
                 }
                 Picker("Budget period", selection: $selectedLanguage) {
-                    Text("1").tag(LocaleIdentifier.en)
-                    Text("2").tag(LocaleIdentifier.en)
-                    Text("3").tag(LocaleIdentifier.en)
+                    Text("?").tag(LocaleIdentifier.en)
+                    Text("?").tag(LocaleIdentifier.en)
+                    Text("?").tag(LocaleIdentifier.en)
                 }
                 DatePicker(
                     "Start of period",
