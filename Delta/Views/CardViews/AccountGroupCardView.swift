@@ -65,6 +65,7 @@ struct AccountGroupCardView: View {
                             AccountCardView(
                                 account: account,
                                 size: CGSize(width: Constants.widthTwo, height: Constants.heightThree),
+                                groupColor: accountsGroup.color,
                                 isGroupNotExpanded: $isExpanded
                             )
                             .draggable(account)
@@ -97,7 +98,6 @@ struct AccountGroupCardView: View {
                             }) {
                                 Image(systemName: "gearshape")
                                     .font(.subheadline)
-                                    .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
                                     .padding(.top)
                             }
                         }
