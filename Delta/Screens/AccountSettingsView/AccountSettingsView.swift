@@ -32,7 +32,7 @@ struct AccountSettingsView: View {
             color: "blueGradient",
             users: DataStore.shared.people,
             transactions: [],
-            groupOfAccounts: "Main"
+            groupOfAccounts: "No group"
         )) {
         self.account = account
         _name = State(initialValue: account.title)

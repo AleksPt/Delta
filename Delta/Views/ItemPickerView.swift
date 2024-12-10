@@ -16,7 +16,7 @@ struct GroupPickerView: View {
     var body: some View {
         HStack {
             Picker("", selection: $selectedGroup) {
-                Text("No group").tag("")
+                Text("No group").tag("No group")
                 ForEach(groups) { group in
                     Text(LocalizedStringKey(group.title)).tag(group.title)
                 }
