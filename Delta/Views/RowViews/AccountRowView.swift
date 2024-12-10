@@ -9,6 +9,7 @@ import SwiftUI
 import UISystem
 
 struct AccountRowView: View {
+    @Environment(Router.self) private var router
     
     let account: Account
     
@@ -40,10 +41,15 @@ struct AccountRowView: View {
         .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 16), eoFill: true)
         
         .draggable(account)
+        
+        .onTapGesture {
+            router.navigateTo(.accountSettings(account: account))
+        }
     }
 }
 
 #Preview {
     let account = DataStore.shared.accounts.first!
     AccountRowView(account: account)
+        .environment(Router.shared)
 }

@@ -14,7 +14,7 @@ struct AddAccountOrGroupView: View {
         ZStack {
             Rectangle()
                 .fill(.clear)
-                .frame(height: isTargeted ? 32 : 16)
+                .frame(height: isTargeted ? 64 : 16)
             
             RoundedRectangle(cornerRadius: 16)
                 .frame(

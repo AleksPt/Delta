@@ -9,6 +9,8 @@ import SwiftUI
 import UISystem
 
 struct GroupRowView: View {
+    @Environment(Router.self) private var router
+    
     let group: GroupOfAccounts
     
     @State private var isTargetedAccountIDs: [UUID: Bool] = [:]
@@ -40,6 +42,7 @@ struct GroupRowView: View {
             VStack(spacing: 0) {
                 ForEach(group.accounts) { account in
                     
+                    // Вставить счет в группу
                     AddAccountOrGroupView(
                         isTargeted: Binding(
                             get: { isTargetedAccountIDs[account.id] ?? false },
@@ -47,40 +50,65 @@ struct GroupRowView: View {
                         )
                     )
                     
-                    .dropDestination(for: Account.self) { items, location in
+                    .dropDestination(for: DragDropItem.self) { items, location in
                         for item in items {
-                            print("Drop \(item.title)")
+                            
+                            // TODO: - setup logic
+                            
+                            print(item.accountAndGroups?.title ?? "Unknown")
+                            print(account.title)
                         }
                         
                         return true
                     } isTargeted: { isTargeted in
-                        isTargetedAccountIDs[account.id] = isTargeted
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                isTargetedAccountIDs[account.id] = isTargeted
+                            }
+                        }
                     }
                     
                     AccountRowView(account: account)
                 }
                 
+                // Вставить последний счет группу
                 AddAccountOrGroupView(isTargeted: $isLastAccount)
                 
-                    .dropDestination(for: Account.self) { items, location in
+                    .dropDestination(for: DragDropItem.self) { items, location in
                         for item in items {
-                            print("Drop \(item.title)")
+                            
+                            // TODO: - setup logic
+                            
+                            print(item.accountAndGroups?.title ?? "Unknown")
+                            print(group.title)
                         }
                         
                         return true
                     } isTargeted: { isTargeted in
-                        isLastAccount = isTargeted
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                isLastAccount = isTargeted
+                            }
+                        }
                     }
+                Spacer(minLength: 16)
             }
         }
         .padding()
         .background(.appBackgroundMini)
         .cornerRadius(16)
         .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 16), eoFill: true)
+        
+        .draggable(group)
+        
+        .onTapGesture {
+            router.navigateTo(.accountGroupSettings(group: group))
+        }
     }
 }
 
 #Preview {
     let group = DataStore.shared.groupsOfAccounts.last!
     GroupRowView(group: group)
+        .environment(Router.shared)
 }
