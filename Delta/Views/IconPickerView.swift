@@ -11,7 +11,6 @@ import UISystem
 struct ColorPickerView: View {
     @Binding var selectedItem: AppGradient
     
-    let items: [AppGradient]
     let title: String
     
     var body: some View {
@@ -23,14 +22,14 @@ struct ColorPickerView: View {
             ScrollViewReader { proxy in
                 ScrollView(.horizontal) {
                     HStack(spacing: 12) {
-                        ForEach(items, id: \.self) { color in
+                        ForEach(AppGradient.userColors, id: \.self) { color in
                             Circle()
                                 .fill(color.value)
                                 .frame(width: 35)
                                 //.shadow(color: selectedItem == color ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
                                 .overlay(
                                     Circle()
-                                        .stroke(selectedItem == color ? Color.appBlack : Color.clear, lineWidth: 2)
+                                        .stroke(selectedItem == color ? AppGradient.setStrokeColor(for: color) : Color.clear, lineWidth: 2)
                                 )
                                 .simultaneousGesture(
                                     TapGesture().onEnded {
@@ -57,6 +56,7 @@ struct ColorPickerView: View {
         .background(AppGradient.appBackgroundMini.value)
         .cornerRadius(16)
     }
+    
 }
 
 struct IconPickerView: View {

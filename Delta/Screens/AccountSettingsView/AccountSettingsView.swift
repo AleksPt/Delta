@@ -98,7 +98,6 @@ struct AccountSettingsView: View {
                     
                     ColorPickerView(
                         selectedItem: $selectedColor,
-                        items: AppGradient.allCases,
                         title: "Color"
                     )
                 }

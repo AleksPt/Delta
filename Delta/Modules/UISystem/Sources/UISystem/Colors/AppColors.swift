@@ -279,6 +279,10 @@ public enum AppGradient: CaseIterable, Hashable {
         }
     }
     
+    public static var userColors: [AppGradient] {
+        [.blueGradient, .purpleGradient, .pinkGradient, .redGradient, .yellowGradient, .greenGradient, .mintGradient, .appBlue, .appGreen, .appMint, .appPink, .appPurple, .appRed, .appYellow, .appBlack]
+    }
+    
     public static func getAppGradient(from stringColor: String) -> AppGradient? {
         AppGradient.allCases.first { $0.name == stringColor }
     }
@@ -289,5 +293,17 @@ public enum AppGradient: CaseIterable, Hashable {
         guard let gradient else { return Color.red }
         
         return AppColors.getColor(for: gradient.accentColor) ?? Color.red
+    }
+    
+    
+    public static func setStrokeColor(for color: AppGradient) -> Color {
+        switch color {
+        case .appWhite:
+            return Color.theme.appBlack
+        case .appBlack:
+            return Color.theme.appRed
+        default:
+            return Color.theme.appBlack
+        }
     }
 }
