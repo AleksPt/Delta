@@ -19,7 +19,7 @@ struct AccountGroupCapsuleView: View {
     }
     
     var backgroundColor: LinearGradient {
-        AppGradient.getColor(from: accountsGroup.color)?.value ?? AppGradient.appWhite.value
+        AppGradient.getAppGradient(from: accountsGroup.color)?.value ?? AppGradient.appWhite.value
     }
     
     var body: some View {

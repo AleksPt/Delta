@@ -36,7 +36,7 @@ struct AccountGroupSettingsView: View {
         _currency = State(initialValue: groupOfAccounts.currency)
         _balance = State(initialValue: String(groupOfAccounts.totalAmount))
         _selectedIcon = State(initialValue: Icon.getIcon(from: groupOfAccounts.image) ?? .dollar)
-        _selectedColor = State(initialValue: AppGradient.getColor(from: groupOfAccounts.color) ?? .blueGradient)
+        _selectedColor = State(initialValue: AppGradient.getAppGradient(from: groupOfAccounts.color) ?? .blueGradient)
         _accounts = State(initialValue: groupOfAccounts.accounts)
     }
     
