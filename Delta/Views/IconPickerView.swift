@@ -11,7 +11,6 @@ import UISystem
 struct ColorPickerView: View {
     @Binding var selectedItem: AppGradient
     
-    let items: [AppGradient]
     let title: String
     
     var body: some View {
@@ -20,34 +19,44 @@ struct ColorPickerView: View {
                 .font(.subheading2())
                 .padding(.horizontal, 16)
             
-            ScrollView(.horizontal) {
-                HStack(spacing: 12) {
-                    ForEach(items, id: \.self) { color in
-                        Circle()
-                            .fill(color.value)
-                            .frame(width: 35)
-                            //.shadow(color: selectedItem == color ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
-                            .overlay(
-                                Circle()
-                                    .stroke(selectedItem == color ? Color.appBlack : Color.clear, lineWidth: 2)
-                            )
-                            .simultaneousGesture(
-                                TapGesture().onEnded {
-                                    selectedItem = color
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal) {
+                    HStack(spacing: 12) {
+                        ForEach(AppGradient.userColors, id: \.self) { color in
+                            Circle()
+                                .fill(color.value)
+                                .frame(width: 35)
+                                //.shadow(color: selectedItem == color ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
+                                .overlay(
+                                    Circle()
+                                        .stroke(selectedItem == color ? AppGradient.setStrokeColor(for: color) : Color.clear, lineWidth: 2)
+                                )
+                                .simultaneousGesture(
+                                    TapGesture().onEnded {
+                                        selectedItem = color
+                                    }
+                                )
+                                .onChange(of: selectedItem) { _, newValue in
+                                    if selectedItem == newValue {
+                                        withAnimation {
+                                            proxy.scrollTo(selectedItem, anchor: .leading)
+                                        }
+                                    }
                                 }
-                            )
+                        }
+                        .frame(height: 40)
                     }
-                    .frame(height: 40)
+                    .padding(.vertical, 4)
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 4)
+                .scrollIndicators(.hidden)
             }
-            .scrollIndicators(.hidden)
+            .safeAreaPadding(.horizontal)
         }
         .frame(height: 106)
         .background(AppGradient.appBackgroundMini.value)
         .cornerRadius(16)
     }
+    
 }
 
 struct IconPickerView: View {
@@ -62,33 +71,42 @@ struct IconPickerView: View {
                 .font(.subheading2())
                 .padding(.horizontal, 16)
             
-            ScrollView(.horizontal) {
-                HStack(spacing: 12) {
-                    ForEach(items, id: \.self) { icon in
-                        ZStack {
-                            Circle()
-                                .fill(.appGray)
-                                .frame(width: 35)
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal) {
+                    HStack(spacing: 12) {
+                        ForEach(items, id: \.self) { icon in
+                            ZStack {
+                                Circle()
+                                    .fill(.appGray)
+                                    .frame(width: 35)
                                 //.shadow(color: selectedItem == icon ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
-                                .overlay(
-                                    Circle()
-                                        .stroke(selectedItem == icon ? Color.appBlack : Color.clear, lineWidth: 2)
-                                )
-                            Image(systemName: icon.name)
-                                .foregroundStyle(.appBlack)
-                        }
-                        .frame(height: 40)
-                        .simultaneousGesture(
-                            TapGesture().onEnded {
-                                selectedItem = icon
+                                    .overlay(
+                                        Circle()
+                                            .stroke(selectedItem == icon ? Color.appBlack : Color.clear, lineWidth: 2)
+                                    )
+                                Image(systemName: icon.name)
+                                    .foregroundStyle(.appBlack)
                             }
-                        )
+                            .frame(height: 40)
+                            .simultaneousGesture(
+                                TapGesture().onEnded {
+                                    selectedItem = icon
+                                }
+                            )
+                            .onChange(of: selectedItem) { _, newValue in
+                                if selectedItem == newValue {
+                                    withAnimation {
+                                        proxy.scrollTo(selectedItem, anchor: .leading)
+                                    }
+                                }
+                            }
+                        }
                     }
+                    .padding(.vertical, 4)
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 4)
+                .scrollIndicators(.hidden)
             }
-            .scrollIndicators(.hidden)
+            .safeAreaPadding(.horizontal)
         }
         .frame(height: 106)
         .background(AppGradient.appBackgroundMini.value)

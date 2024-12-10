@@ -149,7 +149,7 @@ final class CategoryService {
     
 //MARK: - ACCOUNTS AND GROUPS
     func getAccountsAndGroups() {
-        accountsAndGroups = groupsOfAccounts + accounts.filter { $0.groupOfAccounts == "" }
+        accountsAndGroups = groupsOfAccounts + accounts.filter { $0.groupOfAccounts == "No group" }
     }
     
 //MARK: - TAGS

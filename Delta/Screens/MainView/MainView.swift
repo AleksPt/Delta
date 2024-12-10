@@ -15,13 +15,14 @@ struct MainView: View {
 
     @State private var activeTab = CategoryType.expense
     @State private var expandedGroupID: UUID?
+    @State private var accountsAndGroups: [AccountsAndGroups] = []
     
     var body: some View {
         VStack {
             InfoMainView()
             Spacer()
             
-            AccountsAndGroupsScrollView(expandedGroupID: $expandedGroupID)
+            AccountsAndGroupsScrollView(expandedGroupID: $expandedGroupID, accountsAndGroups: $accountsAndGroups)
                 .safeAreaPadding(.horizontal)
             Spacer()
             
@@ -55,7 +56,10 @@ struct MainView: View {
         }
         .padding(.vertical)
         .background(AppGradient.appBackground.value)
-
+        .onAppear {
+            categoryService.getAccountsAndGroups()
+            accountsAndGroups = categoryService.accountsAndGroups
+        }
         .onTapGesture {
             withAnimation(.spring()) {
                 expandedGroupID = nil
