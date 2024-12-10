@@ -16,7 +16,7 @@ struct AccountsAndGroupsScrollView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HeaderMainView(text: "Accounts", action: {
-                // TODO: - add See all
+                router.navigateTo(.seeAllAccountsAndGroups)
             })
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {

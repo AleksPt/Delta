@@ -43,6 +43,8 @@
 		64445A8D2C8FA63600D35F1A /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64445A8C2C8FA63600D35F1A /* CircularProgressView.swift */; };
 		6457CA4D2C517D54008C56DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CA4C2C517D54008C56DE /* User.swift */; };
 		6457CA4F2C518375008C56DE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CA4E2C518375008C56DE /* Settings.swift */; };
+		64726C262D06132B006B5EC7 /* AccountRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64726C252D06132B006B5EC7 /* AccountRowView.swift */; };
+		64726C282D061496006B5EC7 /* SeeAllAccountsAndGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64726C272D061496006B5EC7 /* SeeAllAccountsAndGroupsView.swift */; };
 		647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */; };
 		647A6F3C2C811E4900927749 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647A6F3B2C811E4900927749 /* PlusButtonView.swift */; };
 		647A6F3E2C8120C000927749 /* CapsuleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647A6F3D2C8120C000927749 /* CapsuleButtonView.swift */; };
@@ -57,6 +59,8 @@
 		649FF6982C3C58520081BC63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6972C3C58520081BC63 /* MainView.swift */; };
 		649FF69A2C3C58520081BC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF6992C3C58520081BC63 /* Assets.xcassets */; };
 		649FF69D2C3C58520081BC63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */; };
+		64A7B8B92D089A8700FD89BB /* AddAccountOrGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B8B82D089A8700FD89BB /* AddAccountOrGroupView.swift */; };
+		64B683EB2D0646A400C79B99 /* GroupRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B683EA2D0646A400C79B99 /* GroupRowView.swift */; };
 		64BA80F62CA71C86003AE566 /* ShoppingListAmountRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA80F52CA71C86003AE566 /* ShoppingListAmountRowView.swift */; };
 		64D4F49D2C8F66C7002C18BF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4F49C2C8F66C7002C18BF /* DataManager.swift */; };
 		64D644D52CC01C71003A42FD /* AccountsAndGroupsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D644D42CC01C71003A42FD /* AccountsAndGroupsScrollView.swift */; };
@@ -144,6 +148,8 @@
 		64445A8C2C8FA63600D35F1A /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		6457CA4C2C517D54008C56DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6457CA4E2C518375008C56DE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		64726C252D06132B006B5EC7 /* AccountRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowView.swift; sourceTree = "<group>"; };
+		64726C272D061496006B5EC7 /* SeeAllAccountsAndGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllAccountsAndGroupsView.swift; sourceTree = "<group>"; };
 		647A6F3B2C811E4900927749 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
 		647A6F3D2C8120C000927749 /* CapsuleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButtonView.swift; sourceTree = "<group>"; };
 		647A6F3F2C8123E100927749 /* ChevronButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronButtonView.swift; sourceTree = "<group>"; };
@@ -158,6 +164,8 @@
 		649FF6972C3C58520081BC63 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		649FF6992C3C58520081BC63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		64A7B8B82D089A8700FD89BB /* AddAccountOrGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountOrGroupView.swift; sourceTree = "<group>"; };
+		64B683EA2D0646A400C79B99 /* GroupRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRowView.swift; sourceTree = "<group>"; };
 		64BA80F52CA71C86003AE566 /* ShoppingListAmountRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListAmountRowView.swift; sourceTree = "<group>"; };
 		64D4F49C2C8F66C7002C18BF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		64D644D42CC01C71003A42FD /* AccountsAndGroupsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsAndGroupsScrollView.swift; sourceTree = "<group>"; };
@@ -228,6 +236,9 @@
 				1A2A33862C8893EB008F6414 /* GoalCategoryRowView.swift */,
 				1A2A33882C88983F008F6414 /* InvestmentCategoryRowView.swift */,
 				1A2A339D2CA57D19008F6414 /* TextFieldRowView.swift */,
+				64726C252D06132B006B5EC7 /* AccountRowView.swift */,
+				64B683EA2D0646A400C79B99 /* GroupRowView.swift */,
+				64A7B8B82D089A8700FD89BB /* AddAccountOrGroupView.swift */,
 			);
 			path = RowViews;
 			sourceTree = "<group>";
@@ -379,6 +390,7 @@
 			children = (
 				64FB5C522C4BF51700BBADB1 /* SeeAllView.swift */,
 				1AB8A7492CC8E9BA0080D148 /* SeeAllAccounts.swift */,
+				64726C272D061496006B5EC7 /* SeeAllAccountsAndGroupsView.swift */,
 			);
 			path = SeeAllView;
 			sourceTree = "<group>";
@@ -678,6 +690,8 @@
 				1A2A33942C9440BD008F6414 /* ItemPickerView.swift in Sources */,
 				FA9D00142CF5EBDF00EDAB18 /* NavBarBackButtonView.swift in Sources */,
 				64FB5C472C4BF4BB00BBADB1 /* SettingsView.swift in Sources */,
+				64726C262D06132B006B5EC7 /* AccountRowView.swift in Sources */,
+				64B683EB2D0646A400C79B99 /* GroupRowView.swift in Sources */,
 				1A2A33A02CAE9523008F6414 /* IncomeSettingsView.swift in Sources */,
 				64DC73512CF89919005BDBD4 /* ExpenseScrollView.swift in Sources */,
 				64DC73522CF89919005BDBD4 /* IncomeScrollView.swift in Sources */,
@@ -743,11 +757,13 @@
 				1A2A337B2C80ED06008F6414 /* TabBarView.swift in Sources */,
 				64DC734E2CF86D93005BDBD4 /* UTType +.swift in Sources */,
 				64DC73602CF89E41005BDBD4 /* GroupOfAccounts.swift in Sources */,
+				64726C282D061496006B5EC7 /* SeeAllAccountsAndGroupsView.swift in Sources */,
 				64DC73612CF89E41005BDBD4 /* RepeatingType.swift in Sources */,
 				64DC73622CF89E41005BDBD4 /* Expense.swift in Sources */,
 				64DC73632CF89E41005BDBD4 /* CategoryType.swift in Sources */,
 				64DC73642CF89E41005BDBD4 /* Income.swift in Sources */,
 				64DC73652CF89E41005BDBD4 /* AccountsAndGroups.swift in Sources */,
+				64A7B8B92D089A8700FD89BB /* AddAccountOrGroupView.swift in Sources */,
 				64DC73662CF89E41005BDBD4 /* Currency.swift in Sources */,
 				64DC73672CF89E41005BDBD4 /* SubCategory.swift in Sources */,
 				64DC73682CF89E41005BDBD4 /* Account.swift in Sources */,
