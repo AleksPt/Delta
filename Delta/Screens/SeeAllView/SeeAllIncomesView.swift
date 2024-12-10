@@ -8,7 +8,7 @@
 import SwiftUI
 import UISystem
 
-struct IncomesView: View {
+struct SeeAllIncomesView: View {
     @Environment(CategoryService.self) private var categoryService
     @Environment(\.dismiss) private var dismiss
     
@@ -41,6 +41,6 @@ struct IncomesView: View {
 }
 
 #Preview {
-    IncomesView()
+    SeeAllIncomesView()
         .environment(CategoryService())
 }
