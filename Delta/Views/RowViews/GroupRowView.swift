@@ -9,106 +9,155 @@ import SwiftUI
 import UISystem
 
 struct GroupRowView: View {
+    
+    @Environment(CategoryService.self) private var categoryService
     @Environment(Router.self) private var router
     
     let group: GroupOfAccounts
+    @Binding var isTargeted: Bool
     
     @State private var isTargetedAccountIDs: [UUID: Bool] = [:]
-    @State private var isLastAccount: Bool = false
     
     var body: some View {
         VStack(spacing: 16) {
-            HStack(spacing: 12) {
-                ZStack {
-                    Circle()
-                        .frame(width: 38)
-                        .foregroundStyle(AppGradient.getAppGradient(from: group.color)!.value)
-                    
-                    Image(systemName: group.image)
-                        .resizable()
-                        .frame(width: 18, height: 16)
-                        .foregroundStyle(AppGradient.getColor(from: group.color))
-                }
+            if isTargeted {
                 
-                Text(LocalizedStringKey(group.title))
-                    .font(.subheading2())
+                // Вставить счет в группу по индексу
                 
-                Spacer()
-                
-                Text("\(group.totalAmount.formattedAmount(for: group.currency))")
-                    .font(.bodyText1())
+                AddAccountOrGroupView(isTargeted: $isTargeted)
             }
             
-            VStack(spacing: 0) {
-                ForEach(group.accounts) { account in
-                    
-                    // Вставить счет в группу
-                    AddAccountOrGroupView(
-                        isTargeted: Binding(
-                            get: { isTargetedAccountIDs[account.id] ?? false },
-                            set: { isTargetedAccountIDs[account.id] = $0 }
-                        )
-                    )
-                    
-                    .dropDestination(for: DragDropItem.self) { items, location in
-                        for item in items {
-                            
-                            // TODO: - setup logic
-                            
-                            print(item.accountAndGroups?.title ?? "Unknown")
-                            print(account.title)
-                        }
+            VStack(spacing: 16) {
+                HStack(spacing: 12) {
+                    ZStack {
+                        Circle()
+                            .frame(width: 38)
+                            .foregroundStyle(AppGradient.getAppGradient(from: group.color)!.value)
                         
-                        return true
-                    } isTargeted: { isTargeted in
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                isTargetedAccountIDs[account.id] = isTargeted
-                            }
-                        }
+                        Image(systemName: group.image)
+                            .resizable()
+                            .frame(width: 18, height: 16)
+                            .foregroundStyle(AppGradient.getColor(from: group.color))
                     }
                     
-                    AccountRowView(account: account)
+                    Text(LocalizedStringKey(group.title))
+                        .font(.subheading2())
+                    
+                    Spacer()
+                    
+                    Text("\(group.totalAmount.formattedAmount(for: group.currency))")
+                        .font(.bodyText1())
                 }
                 
-                // Вставить последний счет группу
-                AddAccountOrGroupView(isTargeted: $isLastAccount)
-                
-                    .dropDestination(for: DragDropItem.self) { items, location in
-                        for item in items {
-                            
-                            // TODO: - setup logic
-                            
-                            print(item.accountAndGroups?.title ?? "Unknown")
-                            print(group.title)
-                        }
+                VStack(spacing: 16) {
+                    ForEach(group.accounts) { account in
                         
-                        return true
-                    } isTargeted: { isTargeted in
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                isLastAccount = isTargeted
+                        AccountRowView(
+                            account: account,
+                            isTargeted: Binding(
+                                get: { isTargetedAccountIDs[account.id] ?? false },
+                                set: { isTargetedAccountIDs[account.id] = $0 }
+                            )
+                        )
+                        
+                        .dropDestination(for: DragDropItem.self) { items, _ in
+                            var result = true
+                            let item = items.first!
+                            
+                            // Приводим DragDropItem к AccountAndGroups
+                            guard let droppedItem = item.accountAndGroups else {
+                                print("Invalid item")
+                                result = false
+                                return result
+                            }
+                            
+                            // 1. Получить UUID входящего элемента
+                            let droppedItemUUID = droppedItem.id
+                            
+                            // 2. Проверить не совпадают ли UUID
+                            if droppedItemUUID == account.id {
+                                print("Dragged item matches target, no action needed.")
+                                result = false
+                            }
+                                
+                            // 3. Проверить не является ли источник группой
+                            if categoryService.groupsOfAccounts.contains(where: { $0.id == droppedItemUUID }) {
+                                result = false
+                                print(result)
+                            } else {
+                                
+                                // 4. Удалить входящий элемент, не зависимо от уровня
+                                print(categoryService.accounts)
+                                print(result)
+                                
+                                categoryService.removeAccount(by: droppedItemUUID)
+                                
+                                print(categoryService.accounts)
+                                
+                                result = true
+                                print(result)
+                            }
+                            
+                            
+                            return result
+                            
+                        } isTargeted: { isTargeted in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation(.spring()) {
+                                    isTargetedAccountIDs[account.id] = isTargeted
+                                }
                             }
                         }
                     }
-                Spacer(minLength: 16)
+                    
+                    // Вставить последний в группу
+                    
+                    AddAccountOrGroupView(isTargeted: .constant(true))
+                        .dropDestination(for: DragDropItem.self) { items, location in
+                            for item in items {
+                                
+                                // TODO: - setup logic
+                                
+                                // 0. Проверить не совпадают ли UUID
+                                
+                                // 1. Получить UUID входящего элемента
+                                // 2. Определить источник входящего элемента
+                                // 3. Проверить не является ли источник группой
+                                // 4. Удалить из источника входящий элемент
+                                
+                                // 5. Получить UUID назначения
+                                // 6. Поместить входящий элемент в конец
+                                
+                                print(item.accountAndGroups?.title ?? "Unknown")
+                                print(group.title)
+                            }
+                            
+                            return true
+                        }
+                        .onTapGesture {
+                            router.navigateTo(.accountCreate)
+                        }
+                }
+            }
+            .padding()
+            .background(.appBackgroundMini)
+            .cornerRadius(16)
+            .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 16), eoFill: true)
+            
+            .draggable(group)
+            
+            .onTapGesture {
+                router.navigateTo(.accountGroupSettings(group: group))
             }
         }
-        .padding()
-        .background(.appBackgroundMini)
-        .cornerRadius(16)
-        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 16), eoFill: true)
         
-        .draggable(group)
-        
-        .onTapGesture {
-            router.navigateTo(.accountGroupSettings(group: group))
-        }
+        .contentShape(Rectangle())
     }
 }
 
 #Preview {
     let group = DataStore.shared.groupsOfAccounts.last!
-    GroupRowView(group: group)
+    GroupRowView(group: group, isTargeted: .constant(true))
+        .environment(CategoryService())
         .environment(Router.shared)
 }

@@ -12,21 +12,12 @@ struct AddAccountOrGroupView: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(.clear)
-                .frame(height: isTargeted ? 64 : 16)
-            
             RoundedRectangle(cornerRadius: 16)
-                .frame(
-                    maxWidth: .infinity,
-                    maxHeight: isTargeted ? 32 : 16
-                )
-                .foregroundColor(.clear)
+                .stroke(isTargeted ? .appBlack.opacity(0.3) : .clear, lineWidth: 1)
+                .frame(height: 50)
             
-            if isTargeted {
-                Image(systemName: "plus")
-                    .foregroundColor(.gray)
-            }
+            Image(systemName: "plus")
+                .foregroundColor(isTargeted ? .appBlack.opacity(0.3) : .clear)
         }
         .contentShape(Rectangle())
     }
