@@ -32,7 +32,12 @@ struct AccountRowView: View {
                         .foregroundStyle(AppGradient.getColor(from: account.color))
                 }
                 
-                Text(LocalizedStringKey(account.title))
+                VStack(alignment: .leading) {
+                    Text(LocalizedStringKey(account.title))
+                    Text(LocalizedStringKey("Счет"))
+                        .font(.metadata3())
+                        .foregroundStyle(.textGray)
+                }
                     .font(.subheading2())
                 
                 Spacer()

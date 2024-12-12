@@ -39,9 +39,13 @@ struct GroupRowView: View {
                             .frame(width: 18, height: 16)
                             .foregroundStyle(AppGradient.getColor(from: group.color))
                     }
-                    
-                    Text(LocalizedStringKey(group.title))
-                        .font(.subheading2())
+                    VStack(alignment: .leading) {
+                        Text(LocalizedStringKey(group.title))
+                            .font(.subheading2())
+                        Text(LocalizedStringKey("Группа"))
+                            .font(.metadata3())
+                            .foregroundStyle(.textGray)
+                    }
                     
                     Spacer()
                     
@@ -87,6 +91,12 @@ struct GroupRowView: View {
                             } else {
                                 
                                 // 4. Удалить входящий элемент, не зависимо от уровня
+                                for group in categoryService.groupsOfAccounts {
+                                    if group.accounts.contains(where: { $0.id == droppedItemUUID }) {
+                                        group.accounts.removeAll(where: { $0.id == droppedItemUUID })
+                                    }
+                                }
+                                
                                 print(categoryService.accounts)
                                 print(result)
                                 
