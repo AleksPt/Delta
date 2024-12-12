@@ -17,7 +17,6 @@ enum Route: Hashable {
     case accountGroupSettings(group: GroupOfAccounts)
     case accountCreate
     case accountGroupCreate
-    case seeAll
     case incomes
     case incomeSettings(income: Income)
     case expenseSettings(expense: Expense)
@@ -39,8 +38,6 @@ enum ModalRoute: Equatable {
         switch (lhs, rhs) {
         case (.seeAllAccounts(let lhsAccounts), .seeAllAccounts(let rhsAccounts)):
             lhsAccounts.wrappedValue == rhsAccounts.wrappedValue
-        case (.seeAll, .seeAll):
-            true
         case (.tags(let lhsTags), .tags(let rhsTags)):
             lhsTags.wrappedValue == rhsTags.wrappedValue
         default:
@@ -49,7 +46,6 @@ enum ModalRoute: Equatable {
     }
     
     case seeAllAccounts(accounts: Binding<[Account]>)
-    case seeAll
     
     case tags(tags: Binding<[Tag]>)
 }
@@ -92,11 +88,8 @@ final class Router {
         case .accountGroupSettings(let group):
             AccountGroupSettingsView(groupOfAccounts: group)
                 .navigationBarBackButtonHidden()
-        case .seeAll:
-            SeeAllView()
-                .navigationBarBackButtonHidden()
         case .incomes:
-            IncomesView()
+            SeeAllIncomesView()
                 .navigationBarBackButtonHidden()
         case .incomeSettings(let income):
             IncomeSettingsView(income: income)
@@ -128,8 +121,6 @@ final class Router {
         switch modalRoute {
         case .seeAllAccounts(let accounts):
             SeeAllAccounts(accounts: accounts)
-        case .seeAll:
-            SeeAllView()
         case .tags(let tags):
             TagsView(selectedTags: tags)
         }

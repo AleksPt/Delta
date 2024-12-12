@@ -29,7 +29,7 @@ struct AccountLargeCardView: View {
                     Text(Double(amount)?.formattedAmount(for: currency) ?? "1000")
                         .font(.subheading2())
                 }
-                .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
+                .foregroundStyle(AppGradient.getColor(from: color))
                 
                 Spacer(minLength: 0)
             }
@@ -37,7 +37,7 @@ struct AccountLargeCardView: View {
             
             Image(systemName: image)
                 .font(.heading2())
-                .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
+                .foregroundStyle(AppGradient.getColor(from: color))
         }
         .padding()
         .frame(width: size.width, height: size.height)

@@ -12,6 +12,7 @@ struct AccountsAndGroupsScrollView: View {
     @Environment(Router.self) private var router
 
     @Binding var expandedGroupID: UUID?
+    @Binding var accountsAndGroups: [AccountsAndGroups]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -21,7 +22,7 @@ struct AccountsAndGroupsScrollView: View {
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
-                        ForEach(categoryService.accountsAndGroups, id: \.id) { item in
+                        ForEach(accountsAndGroups, id: \.id) { item in
                             if let account = item as? Account {
                                 AccountCardView(
                                     account: account,
@@ -82,7 +83,7 @@ struct AccountsAndGroupsScrollView: View {
 
 #Preview {
     let someUUID = UUID()
-    AccountsAndGroupsScrollView(expandedGroupID: .constant(someUUID))
+    AccountsAndGroupsScrollView(expandedGroupID: .constant(someUUID), accountsAndGroups: .constant(CategoryService().accountsAndGroups))
         .environment(CategoryService())
         .environment(Router.shared)
 }

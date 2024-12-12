@@ -56,7 +56,7 @@ final class DataStore {
             color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
-            groupOfAccounts: ""
+            groupOfAccounts: "No group"
         )
         
         let currency = Account(
