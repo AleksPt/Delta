@@ -25,11 +25,11 @@ struct AccountGroupSettingsView: View {
     
     init(groupOfAccounts: GroupOfAccounts = GroupOfAccounts(
         id: UUID(),
-        title: "Alfa bank",
+        title: "",
         currency: .usd,
         image: "dollarsign.circle",
         color: AppGradient.blueGradient.name,
-        accounts: DataStore.shared.accounts
+        accounts: []
     )) {
         self.groupOfAccounts = groupOfAccounts
         _name = State(initialValue: groupOfAccounts.title)
