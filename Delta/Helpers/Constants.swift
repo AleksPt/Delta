@@ -27,8 +27,9 @@ struct Constants {
     static let widthOne = (screenWidth - 16 * 6) / 5
     static let widthTwo = (screenWidth - 16 * 6) / 5 * 2 + 16
     static let widthThree = (screenWidth - 16 * 6) / 5 * 3 + 32
+    static let widthFour = (screenWidth - 16 * 5) / 2
     static let widthFive = screenWidth - 32
-    static let widthHalfScreen = (screenWidth - 18 * 3) / 2
+    static let widthHalfScreen = (screenWidth - 16 * 3) / 2
     static let widthSix = screenWidth - 38
     
     static let heightOne = screenHeight * 0.09

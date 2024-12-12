@@ -32,39 +32,41 @@ struct TransferView: View {
     }
 
     var body: some View {
-        VStack {
-            TransactionFieldView(type: .source, account: fromAccount)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
-                .padding(.top, 20)
-            
-            TransactionFieldView(type: .destination, account: toAccount)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
-            
-            textfieldView
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
-            
-            HStack(spacing: 16) {
-                DatePickerView(date: $date, title: "Date", background: AppGradient.appBackgroundMini)
+        ScrollView {
+            VStack {
+                TransactionFieldView(type: .source, account: fromAccount)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+                    .padding(.top, 20)
                 
-                TagPickerView(selectedTags: $tags)
+                TransactionFieldView(type: .destination, account: toAccount)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+                
+                textfieldView
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+                
+                HStack(spacing: 16) {
+                    DatePickerView(date: $date, title: "Date", background: AppGradient.appBackgroundMini, size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightThree))
+                    
+                    TagPickerView(selectedTags: $tags)
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+                
+                AutoTransactionView(
+                    isRepeatable: $isRepeatable,
+                    title: $title,
+                    repeatDate: $repeatDate,
+                    endDate: $endDate,
+                    period: $period,
+                    isNotify: $isNotify
+                )
+                .padding(.horizontal, 16)
+                
+                Spacer()
             }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 8)
-            
-            AutoTransactionView(
-                isRepeatable: $isRepeatable,
-                title: $title,
-                repeatDate: $repeatDate,
-                endDate: $endDate,
-                period: $period,
-                isNotify: $isNotify
-            )
-            .padding(.horizontal, 16)
-            
-            Spacer()
         }
         .navigationTitle("Transfer")
         .background(.appBackground)
@@ -106,6 +108,7 @@ struct TransferView: View {
             ToolbarItem(placement: .topBarLeading) {
                 NavBarBackButtonView(dismiss)
             }
+            
         }
     }
     
@@ -121,8 +124,6 @@ struct TransferView: View {
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.center)
                     .keyboardType(.decimalPad)
-                
-                //Divider().padding(.horizontal, 16)
             }
         }
     }

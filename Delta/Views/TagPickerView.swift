@@ -39,7 +39,7 @@ struct TagPickerView: View {
                 .safeAreaPadding(.horizontal)
                 .padding(.top, -2)
             }
-            .frame(height: 92)
+            .frame(height: Constants.heightThree)
             .background(AppGradient.appBackgroundMini.value)
             .cornerRadius(16)
         }
@@ -49,7 +49,7 @@ struct TagPickerView: View {
     private func showTag(tag: Tag) -> some View {
         VStack(alignment: .center) {
             Text(tag.name)
-                .font(.subheading1())
+                .font(.bodyText2())
                 .foregroundStyle(AppGradient.appWhite.value)
         }
         .padding()

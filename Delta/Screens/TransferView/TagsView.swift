@@ -86,7 +86,9 @@ struct TagsView: View {
                         return result
                     })
             }
-        }.background(getViewHeight($viewHeight))
+        }
+        .background(getViewHeight($viewHeight))
+        .padding(.horizontal, 16)
     }
     
     private func getViewHeight(_ binding: Binding<CGFloat>) -> some View {

@@ -13,23 +13,22 @@ struct DatePickerView: View {
     
     let title: String
     let background: AppGradient
+    let size: CGSize
     
     var body: some View {
         VStack(alignment: .leading) {
             Label(LocalizedStringKey(title), systemImage: "calendar")
                 .labelStyle(CustomLabel(spacing: 4))
                 .foregroundStyle(AppGradient.appBlack.value)
-                .padding(.leading, 16)
                 .padding(.vertical, 6)
             
             
             DatePicker("", selection: $date, displayedComponents: .date)
                 .labelsHidden()
-                .padding(.leading, 16)
                 .transformEffect(.init(scaleX: 0.8, y: 0.8))
             
         }
-        .frame(height: 92)
+        .frame(width: size.width, height: size.height)
         .background(background.value)
         .cornerRadius(16)
     }
@@ -47,5 +46,5 @@ struct CustomLabel: LabelStyle {
 }
 
 #Preview {
-    DatePickerView(date: .constant(.now), title: "Date", background: AppGradient.appGray)
+    DatePickerView(date: .constant(.now), title: "Date", background: AppGradient.appGray, size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightThree))
 }

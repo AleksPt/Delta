@@ -17,16 +17,16 @@ struct TagCapsuleView: View {
         VStack(alignment: .center) {
             HStack {
                 Text(tag.name)
-                    .font(.subheading1())
+                    .font(.bodyText2())
                 
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .font(.title2)
+                    .font(.subheading1())
                     .contentShape(.rect)
             }
             .foregroundStyle(AppGradient.appWhite.value)
         }
         .padding()
-        .frame(height: 40)
+        .frame(height: 36)
         .background(AppGradient.appBlack.value)
         .clipShape(Capsule())
         .simultaneousGesture(

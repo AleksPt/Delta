@@ -66,7 +66,7 @@ struct TransactionFieldView: View {
                 )
             }
         }
-        .frame(height: 92)
+        .frame(height: Constants.heightThree)
         .background(AppGradient.appBackgroundMini.value)
         .cornerRadius(16)
     }
