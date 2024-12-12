@@ -53,7 +53,7 @@ struct GroupRowView: View {
                         .font(.bodyText1())
                 }
                 
-                VStack(spacing: 16) {
+                VStack(spacing: 8) {
                     ForEach(group.accounts) { account in
                         
                         AccountRowView(
@@ -65,52 +65,7 @@ struct GroupRowView: View {
                         )
                         
                         .dropDestination(for: DragDropItem.self) { items, _ in
-                            var result = true
-                            let item = items.first!
-                            
-                            // Приводим DragDropItem к AccountAndGroups
-                            guard let droppedItem = item.accountAndGroups else {
-                                print("Invalid item")
-                                result = false
-                                return result
-                            }
-                            
-                            // 1. Получить UUID входящего элемента
-                            let droppedItemUUID = droppedItem.id
-                            
-                            // 2. Проверить не совпадают ли UUID
-                            if droppedItemUUID == account.id {
-                                print("Dragged item matches target, no action needed.")
-                                result = false
-                            }
-                                
-                            // 3. Проверить не является ли источник группой
-                            if categoryService.groupsOfAccounts.contains(where: { $0.id == droppedItemUUID }) {
-                                result = false
-                                print(result)
-                            } else {
-                                
-                                // 4. Удалить входящий элемент, не зависимо от уровня
-                                for group in categoryService.groupsOfAccounts {
-                                    if group.accounts.contains(where: { $0.id == droppedItemUUID }) {
-                                        group.accounts.removeAll(where: { $0.id == droppedItemUUID })
-                                    }
-                                }
-                                
-                                print(categoryService.accounts)
-                                print(result)
-                                
-                                categoryService.removeAccount(by: droppedItemUUID)
-                                
-                                print(categoryService.accounts)
-                                
-                                result = true
-                                print(result)
-                            }
-                            
-                            
-                            return result
-                            
+                            categoryService.insertAccountToGroup(items, destinationAccount: account)
                         } isTargeted: { isTargeted in
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 withAnimation(.spring()) {

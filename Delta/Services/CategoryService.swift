@@ -135,6 +135,52 @@ final class CategoryService {
         groupsOfAccounts.contains { $0.id == id }
     }
     
+    func insertAccountToGroup(_ sourceAccounts: [DragDropItem], destinationAccount: Account) -> Bool {
+        let item = sourceAccounts.first!
+        guard let droppedItem = item.accountAndGroups else {
+            return false
+        }
+        
+        // Get Source and Destination UUIDs
+        let droppedItemUUID = droppedItem.id
+        let destinationAccountUUID = destinationAccount.id
+        
+        // Check if the UUIDs are the same
+        if droppedItemUUID == destinationAccountUUID {
+            return false
+        }
+        
+        // Check if the source is a group
+        if groupsOfAccounts.contains(where: { $0.id == droppedItemUUID }) {
+            return false
+        }
+        
+        // Remove an Account from a groupsOfAccounts or accountsAndGroups
+        for group in groupsOfAccounts {
+            if group.accounts.contains(where: { $0.id == droppedItemUUID }) {
+                group.accounts.removeAll(where: { $0.id == droppedItemUUID })
+            } else {
+                accountsAndGroups.removeAll(where: { $0.id == droppedItemUUID })
+            }
+        }
+    
+        // Add Account in a groupsOfAccounts or accountsAndGroups
+        guard let account = accounts.first(where: { $0.id == droppedItemUUID }) else {
+            return false
+        }
+        
+        for group in groupsOfAccounts {
+            if group.accounts.contains(where: { $0.id == destinationAccountUUID}) {
+                guard let destinationIndex = group.accounts.firstIndex(of: destinationAccount) else {
+                    return false
+                }
+                group.accounts.insert(account, at: destinationIndex)
+            }
+        }
+        
+        return true
+    }
+    
     func updateGroups() {
         groupsOfAccounts.forEach { group in
             group.accounts.removeAll()
