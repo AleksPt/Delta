@@ -22,7 +22,9 @@ enum Route: Hashable {
     case expenseSettings(expense: Expense)
     case incomeCreate
     case expenseCreate
-    case transfer(sourse: UUID, destination: Account)
+    case accountToAccountTransfer(sourse: UUID, destination: Account)
+    case accountToExpenseTransfer(sourse: UUID, destination: Expense)
+    case incomeToAccountTransfer(sourse: UUID, destination: Account)
 }
 
 enum TabRoute: Hashable {
@@ -108,8 +110,14 @@ final class Router {
         case .expenseCreate:
             ExpenseSettingsView()
                 .navigationBarBackButtonHidden()
-        case .transfer(let sourceID, let destination):
-            TransferView(fromAccountID: sourceID, toAccount: destination)
+        case .accountToAccountTransfer(let sourceID, let destination):
+            AccountToAccountTransferView(fromAccountID: sourceID, toAccount: destination)
+                .navigationBarBackButtonHidden()
+        case .accountToExpenseTransfer(let sourse, let destination):
+            AccountToExpenseTransferView(fromAccountID: sourse, toExpense: destination)
+                .navigationBarBackButtonHidden()
+        case .incomeToAccountTransfer(let sourse, let destination):
+            IncomeToAccountTransferView(fromIncomeID: sourse, toAccount: destination)
                 .navigationBarBackButtonHidden()
         }
     }
@@ -157,7 +165,7 @@ extension Router {
             
             // TODO: add link for income transfer
             
-            navigateTo(.incomes)
+            navigateTo(.incomeToAccountTransfer(sourse: income.id, destination: destination))
             print(income.title)
             
             return true
@@ -166,7 +174,7 @@ extension Router {
             if accountsAndGroups.id == destination.id {
                 return false
             } else {
-                navigateTo(.transfer(sourse: accountsAndGroups.id, destination: destination))
+                navigateTo(.accountToAccountTransfer(sourse: accountsAndGroups.id, destination: destination))
                 return true
             }
         }

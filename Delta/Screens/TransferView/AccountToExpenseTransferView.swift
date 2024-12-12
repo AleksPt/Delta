@@ -1,14 +1,14 @@
 //
-//  TransferView.swift
+//  AccountToExpenseTransferView.swift
 //  Delta
 //
-//  Created by Vladimir Dmitriev on 20.07.24.
+//  Created by Tatiana Lazarenko on 12/12/24.
 //
 
 import SwiftUI
 import UISystem
 
-struct TransferView: View {
+struct AccountToExpenseTransferView: View {
     @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
     @Environment(CategoryService.self) private var categoryService
@@ -25,12 +25,12 @@ struct TransferView: View {
     @State private var isNotify: Bool = false
     
     var fromAccountID: UUID
-    var toAccount: Account
+    var toExpense: Expense
     
     var fromAccount: Account? {
         return categoryService.accounts.first { $0.id == fromAccountID }
     }
-
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -39,11 +39,11 @@ struct TransferView: View {
                     .padding(.bottom, 8)
                     .padding(.top, 20)
                 
-                TransactionFieldView(type: .destination, account: toAccount)
+                TransactionFieldView(type: .destination, expense: toExpense)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 8)
                 
-                textfieldView
+                InputAmountView(amount: $amount)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 8)
                 
@@ -90,7 +90,7 @@ struct TransferView: View {
                         amount: Double(amount) ?? 0,
                         date: date,
                         sourceID: fromAccountID,
-                        destinationID: toAccount.id,
+                        destinationID: toExpense.id,
                         tags: tags.map { $0.name },
                         currency: fromAccount?.currency ?? .usd,
                         person: nil,
@@ -98,39 +98,22 @@ struct TransferView: View {
                     )
                     
                     fromAccount?.transactions.append(transaction)
-                    toAccount.transactions.append(transaction)
+                    toExpense.transactions.append(transaction)
                     
                     dismiss()
                     
-                    print(toAccount.title, toAccount.amount)
+                    print(toExpense.title, toExpense.amount)
                 }
             }
             ToolbarItem(placement: .topBarLeading) {
                 NavBarBackButtonView(dismiss)
-            }
-            
-        }
-    }
-    
-    private var textfieldView: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 16)
-                .frame(height: 60)
-                .foregroundStyle(.appBackgroundMini)
-            
-            VStack {
-                TextField("Input amount", text: $amount)
-                    .font(.subheading1())
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.center)
-                    .keyboardType(.decimalPad)
             }
         }
     }
 }
 
 #Preview {
-    TransferView(fromAccountID: CategoryService().accounts.first!.id, toAccount: CategoryService().accounts.last!)
+    AccountToExpenseTransferView(fromAccountID: CategoryService().accounts.first!.id, toExpense: CategoryService().expenses.last!)
         .environment(CategoryService())
         .environment(Router.shared)
 }
